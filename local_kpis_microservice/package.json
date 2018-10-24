@@ -1,0 +1,17 @@
+{
+  "name": "local_kpis_microservice",
+  "version": "0.1.0",
+  "scripts": {
+    "start": "node ./lib/main.js",
+    "build": "babel src/ -d lib/",
+    "flow": "flow"
+  },
+  "dependencies": {
+    "express": "^4.16.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-flow": "^6.23.0",
+    "flow-bin": "^0.58.0"
+  }
+}
