@@ -5,6 +5,10 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+
+# output babel
+local_kpis_microservice/lib
+
 # Runtime data
 pids
 *.pid
