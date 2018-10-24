@@ -9,6 +9,10 @@ yarn-error.log*
 # output babel
 local_kpis_microservice/lib
 
+# local file
+local_kpis_microservice/local_kpis.json
+
+
 # Runtime data
 pids
 *.pid

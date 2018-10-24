@@ -1,0 +1,13 @@
+{
+    "kpis": [
+        {
+            "name":"sample_kpi_1"
+        },
+        {
+            "name":"sample_kpi_2"
+        },
+        {
+            "name":"sample_kpi_3"
+        }
+    ]
+}
