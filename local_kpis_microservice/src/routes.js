@@ -18,7 +18,7 @@ function constructRouter(localKpiFile) {
     if (err) {
       return;
     }
-    // TODO: remove any KPI which does not have required fields, i.e. name
+    // TODO: remove any KPI which does not have required fields, i.e. name, id
     router.kpis = JSON.parse(data).kpis;
   });
 

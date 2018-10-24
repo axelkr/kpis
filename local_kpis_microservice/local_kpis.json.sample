@@ -1,13 +1,16 @@
 {
     "kpis": [
         {
-            "name":"sample_kpi_1"
+            "name":"sample_kpi_1",
+            "id" : 123
         },
         {
-            "name":"sample_kpi_2"
+            "name":"sample_kpi_2",
+            "id" : 345
         },
         {
-            "name":"sample_kpi_3"
+            "name":"sample_kpi_3",
+            "id" : 567
         }
     ]
 }
