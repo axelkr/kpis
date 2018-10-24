@@ -2,7 +2,6 @@
 'use strict';
 
 const express = require('express');
-const fs = require('fs');
 
 const config = require('./config');
 const constructRouter = require('./routes');
@@ -12,7 +11,7 @@ const KPI_FILE = config.KPI_FILE;
 
 const app = express();
 
-const routes = constructRouter();
+const routes = constructRouter(KPI_FILE);
 
 app.use('/',routes);
 
@@ -20,15 +19,6 @@ app.use('/',routes);
   app.get('*',function (req, res) {
     res.sendStatus(404);
 });
-
-
-fs.readFile(KPI_FILE, 'utf8', function (err,data) {
-  if (err) {
-    return console.log(err);
-  }
-  console.log(data);
-});
-
 
 app.listen(PORT, () => {
 });
