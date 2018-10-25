@@ -3,16 +3,13 @@
 
 const express = require('express');
 
-const kpis = require('./kpis');
-
 const HTTP_STATUS_OK = 200;
 const HTTP_STATUS_BAD_REQUEST = 400;
 const HTTP_STATUS_NOT_FOUND = 404;
 
-function constructRouter(localKpiFile) {
+function constructRouter(kpis) {
   const router = express.Router();
   router._kpis = kpis;
-  router._kpis.readFileSync(localKpiFile);
 
   router.get('/kpi', (req, res) => {
     var kpiNames = router._kpis.availableKPIs();
