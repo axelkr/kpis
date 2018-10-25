@@ -6,12 +6,12 @@ yarn-debug.log*
 yarn-error.log*
 
 
-# output babel
+# output
 local_kpis_microservice/lib
+visualization_app/bundle.js
 
 # local configurations
 local_kpis_microservice/config.json
-
 local_kpis.json
 
 
