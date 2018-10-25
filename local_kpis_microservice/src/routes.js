@@ -13,17 +13,31 @@ function constructRouter(localKpiFile) {
   router.kpis = [];
 
   var rawJSON = fs.readFileSync(localKpiFile, 'utf8');
-  // TODO: remove any KPI which does not have required fields, i.e. name, id
   router.kpis = JSON.parse(rawJSON).kpis;
 
-  router.get('/kpis', (req, res) => {
+  router.get('/kpi', (req, res) => {
     var kpiNames = [];
     router.kpis.forEach(function(element) {
-      kpiNames.push(element.name);
+      var aKPI = {
+        "id" : element.id,
+        "name" : element.name
+      };
+      kpiNames.push(aKPI);
     });
     res.status(HTTP_STATUS_OK).send(kpiNames);  
   });
-    
+  
+  router.get('/kpi/:id', (req, res) => {
+    var kpi = [];
+    const id = req.params.id;
+    router.kpis.forEach(function(element) {
+      if (element.id == id ) {
+        kpi = element;
+      }
+    });
+    res.status(HTTP_STATUS_OK).send(kpi);  
+  });
+
   return router;
 }
 
