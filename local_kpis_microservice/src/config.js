@@ -1,9 +1,9 @@
 // @flow
 'use strict';
 
-const config = {
-    "PORT" : 3001,
-    "KPI_FILE" : "local_kpis.json"
-};
+const fs = require('fs');
+
+var rawConfig = fs.readFileSync('config.json', 'utf8');
+var config = JSON.parse(rawConfig);
 
 module.exports = config;

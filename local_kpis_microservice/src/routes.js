@@ -12,15 +12,9 @@ function constructRouter(localKpiFile) {
   const router = express.Router();
   router.kpis = [];
 
-  
-
-  fs.readFile(localKpiFile, 'utf8', function (err,data) {
-    if (err) {
-      return;
-    }
-    // TODO: remove any KPI which does not have required fields, i.e. name, id
-    router.kpis = JSON.parse(data).kpis;
-  });
+  var rawJSON = fs.readFileSync(localKpiFile, 'utf8');
+  // TODO: remove any KPI which does not have required fields, i.e. name, id
+  router.kpis = JSON.parse(rawJSON).kpis;
 
   router.get('/kpis', (req, res) => {
     var kpiNames = [];
