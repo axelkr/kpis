@@ -3,10 +3,10 @@
         {
             "name":"sample_kpi_1",
             "id" : 123,
+            "type" : "continuous_without_deadline",
             "description": "an optional description",
             "tags": ["tag_1","tag_2"],
             "goal" : {
-                "type" : "continuous_without_deadline",
                 "target" : 0
             },
             "measurements": [
@@ -18,9 +18,9 @@
         {
             "name":"sample_kpi_2",
             "id" : 345,
+            "type" : "continuous_without_deadline",
             "tags": ["tag_1","tag_2"],
             "goal" : {
-                "type" : "continuous_without_deadline",
                 "target" : 0
             },
             "measurements": [
@@ -32,9 +32,9 @@
         {
             "name":"sample_kpi_3",
             "id" : 567,
+            "type" : "continuous_without_deadline",
             "tags": ["tag_1","tag_2"],
             "goal" : {
-                "type" : "continuous_without_deadline",
                 "target" : 0
             },
             "measurements": [
