@@ -1,16 +1,12 @@
 // @flow
 'use strict';
 
-const fs = require('fs');
-
-
 function constructKPI() {
   const kpis = {};
   kpis._kpis = [];
 
-  kpis.readFileSync = function(localKpiFile) {
-    var rawJSON = fs.readFileSync(localKpiFile, 'utf8');
-    kpis._kpis = JSON.parse(rawJSON).kpis; 
+  kpis.read = function(rawJSONofKPIs) {
+    kpis._kpis = rawJSONofKPIs.kpis; 
   }
 
   kpis.availableKPIs = function() {
