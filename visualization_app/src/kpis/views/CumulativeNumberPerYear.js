@@ -36,8 +36,8 @@ class CumulativeNumberPerYear extends React.Component<CumulativeNumberPerYearPro
 
   render(){
     var currentValue = this.cumulativeValueThisYear(this.props.KPI.measurements);
-    return (<div><label>{this.props.KPI.name}: {currentValue} (goal {this.props.KPI.goal.target})</label>
-    </div>
+    return (
+      <div>{currentValue}(goal {this.props.KPI.goal.target})</div>
     )
   }
 

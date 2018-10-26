@@ -20,7 +20,7 @@ class SingleNumberWithoutDeadline extends React.Component<SingleNumberWithoutDea
   }
 
   render(){
-    return (<label>{this.props.KPI.name}</label>)
+    return (<label>TBD</label>)
   }
 }
 
