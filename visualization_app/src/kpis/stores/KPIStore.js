@@ -36,10 +36,10 @@ class KPIStore extends ReduceStore<KPIAction, State> {
         return state.merge(action.ids.map(id => [id, LoadObject.loading()]));
 
       case 'KPI/loaded':
-        return state.update(action.KPI._id,LoadObject.withValue(action.KPI));
+        return state.merge([[action.KPI._id,LoadObject.withValue(action.KPI)]]);
 
       case 'KPI/load-error':
-        return state.update(action.id,LoadObject.withError(action.error));
+        return state.merge([[action.id,LoadObject.withError(action.error)]]);
 
       default:
         return state;
