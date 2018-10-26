@@ -21,8 +21,6 @@ type KPIListItemState = {
 class KPIListItem extends React.Component<KPIItemProps,KPIListItemState> {
   constructor(props:KPIItemProps){
     super(props);
-    this.state = {
-    };
   }
 
   render(){
