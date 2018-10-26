@@ -1,15 +1,15 @@
 // @flow
 'use strict';
 
+import React from 'react';
+import classnames from 'classnames';
+
 import type LoadObject from '../../utils/LoadObject';
 import type KPI from '../records/KPI';
 
-import FakeID from '../../utils/FakeID';
-import React from 'react';
+import LoadKPIItem from './LoadKPIItem';
 
-import classnames from 'classnames';
 import '../../App.css';
-
 
 type KPIItemProps = {
   KPILo: LoadObject<KPI>
@@ -37,7 +37,7 @@ class KPIListItem extends React.Component<KPIItemProps,KPIListItemState> {
           shimmer: KPILo.hasOperation(),
         })}>
           <div className="view">
-            <label>Loading...</label>
+            <LoadKPIItem />
           </div>
         </li>
       );
