@@ -12,4 +12,14 @@
     border-bottom: 1px solid grey;
     display:inline-block;
     text-align:center;
+    margin: 5px;
+    background-color : #333333;
+
+    -moz-box-shadow:    3px 3px 5px 6px rgb(46, 46, 46);
+    -webkit-box-shadow: 3px 3px 5px 6px rgb(46, 46, 46);
+    box-shadow:         3px 3px 5px 6px rgb(46, 46, 46);
+  }
+
+  .kpi_card_title {
+    background-color: #990000
   }
