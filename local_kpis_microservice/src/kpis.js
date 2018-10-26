@@ -35,4 +35,4 @@ function constructKPI() {
 }
 
 
-module.exports = constructKPI();
+module.exports = constructKPI;
