@@ -35,10 +35,28 @@ class SingleNumberPerYear extends React.Component<SingleNumberPerYearProps,Singl
 //    </svg>
 
   render(){
-    var currentValue = 'currentValue';
+    var currentValue = this.cumulativeValueThisYear(this.props.KPI.measurements);
     return (<div><label>{this.props.KPI.name}: {currentValue} (goal {this.props.KPI.goal.target})</label>
     </div>
     )
+  }
+
+  cumulativeValueThisYear(measurements) {
+    if (measurements.length == 0) {
+      return "-";
+    }
+    
+    var sumOfValuesThisYear = 0;
+    var parseTime = d3.timeParse("%d.%m.%y");
+    const currentYear = new Date().getFullYear();
+    
+    measurements.forEach(function(element) {
+      var yearOfMeasurement = parseTime(element.date).getFullYear();
+      if (yearOfMeasurement == currentYear) {
+        sumOfValuesThisYear = sumOfValuesThisYear + parseFloat(element.value);
+      }
+    })
+    return sumOfValuesThisYear;
   }
 
   createChart() {
