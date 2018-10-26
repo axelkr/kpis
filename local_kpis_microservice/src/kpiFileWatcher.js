@@ -31,7 +31,14 @@ function constructKPIFileWatcher(kpiFile) {
         if (writeOngoing) {
           return;
         }
-        var asJSON = JSON.parse(rawContent);
+        var asJSON = undefined;
+        try {
+          asJSON = JSON.parse(rawContent);
+        }
+        catch (e) {
+          return;
+        }
+
         fileWatcher._setOnUpdate.forEach(function(element) {
             element.read(asJSON);
         });
