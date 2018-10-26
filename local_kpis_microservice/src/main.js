@@ -1,24 +1,22 @@
 // @flow
 'use strict';
 
-const fs = require('fs');
 const express = require('express');
 
 const config = require('./config');
 const constructRouter = require('./routes');
-const kpis = require('./kpis');
+const constructKPIFileWatcher = require('./kpiFileWatcher');
+const kpiStore = require('./kpis');
 
 const PORT = config.PORT;
 const KPI_FILE = config.KPI_FILE;
 
 const app = express();
-const _kpis = kpis;
 
-var rawKPIFileContent = fs.readFileSync(KPI_FILE, 'utf8');
-const kpisJson = JSON.parse(rawKPIFileContent); 
-_kpis.read(kpisJson);
-
-const routes = constructRouter(_kpis);
+const fileWatcher = constructKPIFileWatcher(KPI_FILE);
+fileWatcher.callSetOnUpdate(kpiStore);
+fileWatcher.updated();
+const routes = constructRouter(kpiStore);
 
 app.use('/',routes);
 
