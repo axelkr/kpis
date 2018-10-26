@@ -8,7 +8,6 @@ import type LoadObjectState from '../../utils/LoadObjectState';
 import type KPI from '../records/KPI';
 import KPIListItem from './KPIListItem';
 
-import FakeID from '../../utils/FakeID';
 import React from 'react';
 
 import classnames from 'classnames';
