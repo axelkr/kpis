@@ -8,6 +8,7 @@ yarn-error.log*
 
 # output
 local_kpis_microservice/lib
+serverApiGateWay_microservice/lib
 visualization_app/bundle.js
 
 # local configurations
