@@ -45,9 +45,7 @@ class KPIList extends React.Component<MainProps> {
     });
     return (
       <section className="KPIList">
-        <ul>
-          {listItems.reverse()}
-        </ul>
+        {listItems.reverse()}
       </section>
     );
   }

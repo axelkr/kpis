@@ -45,14 +45,9 @@ class KPIListItem extends React.Component<KPIItemProps,KPIListItemState> {
 
     if (!KPILo.hasValue()) {
       return (
-        <li className={classnames({
-          hasError: KPILo.hasError(),
-          shimmer: KPILo.hasOperation(),
-        })}>
           <div className="kpi_card">
             <LoadKPIItem />
           </div>
-        </li>
       );
     }
 
@@ -60,14 +55,11 @@ class KPIListItem extends React.Component<KPIItemProps,KPIListItemState> {
     const KPIVisualization = this.selectComponent(KPI);
 
     return (
-      <li className={classnames({
-        hasError: KPILo.hasError(),
-        shimmer: KPILo.hasOperation(),
-      })}>
         <div className="kpi_card">
+          <div className="kpi_card_title">{KPI.name}</div>
+          <br/>
           {KPIVisualization}
         </div>
-      </li>
     );
   }
 }
