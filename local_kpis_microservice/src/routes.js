@@ -24,7 +24,7 @@ function constructRouter(kpis,lastUpdateOn) {
   
   router.get('/kpi/:id', (req, res) => {
     var kpi = router._kpis.getKPI(req.params.id);
-    const kpiFound = kpi.hasOwnProperty('id');
+    const kpiFound = kpi.hasOwnProperty('_id');
     if (kpiFound) {
       res.status(HTTP_STATUS_OK).send(kpi);  
     } else {
