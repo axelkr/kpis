@@ -8,6 +8,7 @@ import type LoadObject from '../../utils/LoadObject';
 import type KPI from '../records/KPI';
 
 import LoadKPIItem from './LoadKPIItem';
+import SingleNumberWithoutDeadline from './SingleNumberWithoutDeadline';
 
 import '../../App.css';
 
@@ -21,6 +22,14 @@ type KPIListItemState = {
 class KPIListItem extends React.Component<KPIItemProps,KPIListItemState> {
   constructor(props:KPIItemProps){
     super(props);
+  }
+
+  selectComponent(KPI) {
+    if (KPI.type === "continuous_without_deadline") {
+      return (<SingleNumberWithoutDeadline KPI={KPI}/>)
+    }
+    
+    return (<label/>)
   }
 
   render(){
@@ -42,6 +51,7 @@ class KPIListItem extends React.Component<KPIItemProps,KPIListItemState> {
     }
 
     const KPI = KPILo.getValueEnforcing();
+    const KPIVisualization = this.selectComponent(KPI);
 
     return (
       <li className={classnames({
@@ -49,7 +59,7 @@ class KPIListItem extends React.Component<KPIItemProps,KPIListItemState> {
         shimmer: KPILo.hasOperation(),
       })}>
         <div className="view">
-          <label>{KPI.name}</label>
+          {KPIVisualization}
         </div>
       </li>
     );
