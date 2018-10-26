@@ -9,9 +9,10 @@ import type KPI from '../records/KPI';
 
 import LoadKPIItem from './LoadKPIItem';
 import SingleNumberWithoutDeadline from './SingleNumberWithoutDeadline';
-import SingleNumberPerYear from './SingleNumberPerYear';
+import CumulativeNumberPerYear from './CumulativeNumberPerYear';
 
 import '../../App.css';
+import '../KPI.css';
 
 type KPIItemProps = {
   KPILo: LoadObject<KPI>
@@ -30,8 +31,8 @@ class KPIListItem extends React.Component<KPIItemProps,KPIListItemState> {
       return (<SingleNumberWithoutDeadline KPI={KPI}/>)
     }
     
-    if (KPI.type === "number_over_year") {
-      return (<SingleNumberPerYear KPI={KPI}/>)
+    if (KPI.type === "cumulative_number_over_year") {
+      return (<CumulativeNumberPerYear KPI={KPI}/>)
     }
     
     return (<label/>)
@@ -48,7 +49,7 @@ class KPIListItem extends React.Component<KPIItemProps,KPIListItemState> {
           hasError: KPILo.hasError(),
           shimmer: KPILo.hasOperation(),
         })}>
-          <div className="view">
+          <div className="kpi_card">
             <LoadKPIItem />
           </div>
         </li>
@@ -63,7 +64,7 @@ class KPIListItem extends React.Component<KPIItemProps,KPIListItemState> {
         hasError: KPILo.hasError(),
         shimmer: KPILo.hasOperation(),
       })}>
-        <div className="view">
+        <div className="kpi_card">
           {KPIVisualization}
         </div>
       </li>

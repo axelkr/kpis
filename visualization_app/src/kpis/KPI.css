@@ -1,0 +1,15 @@
+.kpi_card {
+    min-width : 320px;
+    max-width : 320px;
+    vertical-align: top;
+    width: 320px;
+    min-height : 210px;
+    max-height : 210px;
+    height: 210px;
+    border-top: 1px solid grey;
+    border-left: 1px solid grey;
+    border-right: 1px solid grey;
+    border-bottom: 1px solid grey;
+    display:inline-block;
+    text-align:center;
+  }

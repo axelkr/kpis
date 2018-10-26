@@ -7,17 +7,17 @@ import * as d3 from 'd3';
 import type KPI from '../records/KPI';
 
 import '../../App.css';
-import './SingleNumberPerYear.css';
+import './CumulativeNumberPerYear.css';
 
-type SingleNumberPerYearProps = {
+type CumulativeNumberPerYearProps = {
   KPI: KPI
 };
 
-type SingleNumberPerYearState = {
+type CumulativeNumberPerYearState = {
 };
 
-class SingleNumberPerYear extends React.Component<SingleNumberPerYearProps,SingleNumberPerYearState> {
-  constructor(props:SingleNumberPerYearProps){
+class CumulativeNumberPerYear extends React.Component<CumulativeNumberPerYearProps,CumulativeNumberPerYearState> {
+  constructor(props:CumulativeNumberPerYearProps){
     super(props);
     this.createChart = this.createChart.bind(this)
   }
@@ -196,4 +196,4 @@ function convertIndexToALeapYearDate(index) {
     return leapYearDate;
 }
 
-export default SingleNumberPerYear;
+export default CumulativeNumberPerYear;
