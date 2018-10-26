@@ -12,7 +12,7 @@ const app = express();
 
 var microServices : Array<microService>;
 var microServices = [];
-microServices.push(new microService('/kpi/*','http://localhost:3001'));
+microServices.push(new microService('/kpi*','http://localhost:3001'));
 // has to be last route, otherwise the other routes are not found
 microServices.push(new microService('/','http://localhost:3003'));
 
