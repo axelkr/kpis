@@ -1,0 +1,4 @@
+{
+    "PORT" : 3001,
+    "KPI_FILE" : "../local_kpis.json"
+}
