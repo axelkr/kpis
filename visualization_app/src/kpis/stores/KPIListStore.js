@@ -34,7 +34,7 @@ class KPIListStore extends ReduceStore<KPIAction, State> {
 
       case 'ids/loaded':
         return state.setLoadObject(LoadObject.withValue(
-          Immutable.List(action.ids)
+          Immutable.List(action.ids.map(x => x.id))
         ));
 
       case 'ids/load-error':
