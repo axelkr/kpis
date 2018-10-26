@@ -17,6 +17,10 @@ function constructKPIFileWatcher(kpiFile) {
     fileWatcher._setOnUpdate.push(anObject); 
   }
 
+  fileWatcher.lastUpdateOn = function() {
+    return fileWatcher._timeOfLastUpdate;
+  }
+
   fileWatcher.updated = function () {
     if (!fs.existsSync(fileWatcher._fileToWatch)) {
         console.log("file not available: "+fileWatcher._fileToWatch);
@@ -27,7 +31,6 @@ function constructKPIFileWatcher(kpiFile) {
         if (writeOngoing) {
           return;
         }
-        console.log("updated")
         var asJSON = JSON.parse(rawContent);
         fileWatcher._setOnUpdate.forEach(function(element) {
             element.read(asJSON);

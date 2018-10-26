@@ -7,10 +7,16 @@ const HTTP_STATUS_OK = 200;
 const HTTP_STATUS_BAD_REQUEST = 400;
 const HTTP_STATUS_NOT_FOUND = 404;
 
-function constructRouter(kpis) {
+function constructRouter(kpis,lastUpdateOn) {
   const router = express.Router();
   router._kpis = kpis;
+  router._getLastUpdateOn = lastUpdateOn;
 
+  router.get('/lastUpdateOn', (req, res) => {
+    var lastUpdate = router._getLastUpdateOn();
+    res.status(HTTP_STATUS_OK).send(lastUpdate);  
+  });
+  
   router.get('/kpi', (req, res) => {
     var kpiNames = router._kpis.availableKPIs();
     res.status(HTTP_STATUS_OK).send(kpiNames);  
