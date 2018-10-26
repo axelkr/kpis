@@ -9,6 +9,7 @@ import type KPI from '../records/KPI';
 
 import LoadKPIItem from './LoadKPIItem';
 import SingleNumberWithoutDeadline from './SingleNumberWithoutDeadline';
+import SingleNumberPerYear from './SingleNumberPerYear';
 
 import '../../App.css';
 
@@ -27,6 +28,10 @@ class KPIListItem extends React.Component<KPIItemProps,KPIListItemState> {
   selectComponent(KPI) {
     if (KPI.type === "continuous_without_deadline") {
       return (<SingleNumberWithoutDeadline KPI={KPI}/>)
+    }
+    
+    if (KPI.type === "number_over_year") {
+      return (<SingleNumberPerYear KPI={KPI}/>)
     }
     
     return (<label/>)
