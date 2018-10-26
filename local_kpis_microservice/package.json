@@ -13,7 +13,7 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-flow": "^6.23.0",
-    "flow-bin": "^0.58.0",
+    "flow-bin": "^0.84.0",
     "jasmine": "^3.3.0"
   }
 }
