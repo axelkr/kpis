@@ -1,6 +1,6 @@
 import xhr from 'xhr';
 
-const PREFIX = 'http://localhost:3001';
+const PREFIX = 'http://localhost:3000';
 
 const ServerAPI = {
   get(uri:string, data:mixed) {
