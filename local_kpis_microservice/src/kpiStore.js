@@ -7,11 +7,13 @@ type SingleKPI = {
   }; 
 
 class KPIStore {
+  _kpis : Array<SingleKPI>;
+  
   constructor() {
     this._kpis = [];
   }
 
-  read(rawJSONofKPIs:{kpis:[SingleKPI]}) {
+  read(rawJSONofKPIs:{kpis:Array<SingleKPI>}) {
     this._kpis = rawJSONofKPIs.kpis; 
   }
 
