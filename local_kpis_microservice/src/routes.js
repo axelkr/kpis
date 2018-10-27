@@ -7,7 +7,17 @@ const HTTP_STATUS_OK = 200;
 const HTTP_STATUS_BAD_REQUEST = 400;
 const HTTP_STATUS_NOT_FOUND = 404;
 
-function constructRouter(kpiStorage,lastUpdateOn:()=>Date) {
+type SingleKPI = {
+  _id:string;
+  type:string;
+  }; 
+
+type KPIStorage = {
+  availableKPIs : () => [SingleKPI];
+  getKPI: (string) => SingleKPI;
+}
+
+function constructRouter(kpiStorage:KPIStorage,lastUpdateOn:()=>Date) {
   const router = express.Router();
   router._kpiStorage = kpiStorage;
   router._getLastUpdateOn = lastUpdateOn;

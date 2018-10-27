@@ -14,7 +14,7 @@ function constructKPI() {
     kpis._kpis = rawJSONofKPIs.kpis; 
   }
 
-  kpis.availableKPIs = function() {
+  kpis.availableKPIs  = function() {
     var kpiNames = [];
     kpis._kpis.forEach(function(element) {
       var aKPI = {
