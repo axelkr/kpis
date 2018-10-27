@@ -1,8 +1,4 @@
 {
-    "presets": ["flow"],
-    "plugins": [
-      "syntax-flow",
-      "transform-flow-strip-types"
-    ]
-  }
+  "presets": ["@babel/preset-flow"]
+}
   
