@@ -14,7 +14,7 @@ const KPI_FILE = config.KPI_FILE;
 const app = express();
 
 const kpiStore = new KPIStore();
-const fileWatcher = KPIFileWatcher(KPI_FILE);
+const fileWatcher = new KPIFileWatcher(KPI_FILE);
 fileWatcher.startWatching();
 fileWatcher.callSetOnUpdate(kpiStore);
 fileWatcher.updated();
