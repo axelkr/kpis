@@ -4,7 +4,7 @@
 const express = require('express');
 
 const config = require('./config');
-const constructRouter = require('./routes');
+const constructRouter = require('./constructRouter');
 const KPIFileWatcher = require('./kpiFileWatcher');
 const KPIStore = require('./kpiStore');
 
@@ -18,9 +18,9 @@ const fileWatcher = new KPIFileWatcher(KPI_FILE);
 fileWatcher.startWatching();
 fileWatcher.callSetOnUpdate(kpiStore);
 fileWatcher.updated();
-const routes = constructRouter(kpiStore,()=>fileWatcher.lastUpdateOn());
+const router = constructRouter(kpiStore,()=>fileWatcher.lastUpdateOn());
 
-app.use('/',routes);
+app.use('/',router);
 
 // fallback
 app.get('*',function (req, res) {
