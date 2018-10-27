@@ -12,7 +12,7 @@ import CumulativeNumberPerYearDetails from './CumulativeNumberPerYearDetails';
 
 const kpiTypeToComponent = {};
 
-kpiTypeToComponent.selectComponent = function(KPI) {
+kpiTypeToComponent.selectComponent = function(KPI:KPI) {
     if (KPI.type === "continuous_without_deadline") {
         return (<SingleNumberWithoutDeadline KPI={KPI}/>)
     }
@@ -24,7 +24,7 @@ kpiTypeToComponent.selectComponent = function(KPI) {
     return null;
 }
 
-kpiTypeToComponent.selectDetailsComponent = function(KPI) {
+kpiTypeToComponent.selectDetailsComponent = function(KPI:KPI) {
     if (KPI.type === "cumulative_number_over_year") {
       return (<CumulativeNumberPerYearDetails KPI={KPI}/>)
     }
