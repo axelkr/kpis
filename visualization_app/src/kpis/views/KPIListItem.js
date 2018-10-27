@@ -10,6 +10,7 @@ import type KPI from '../records/KPI';
 import LoadKPIItem from './LoadKPIItem';
 import SingleNumberWithoutDeadline from './SingleNumberWithoutDeadline';
 import CumulativeNumberPerYear from './CumulativeNumberPerYear';
+import OverlayKPIDetails from './OverlayKPIDetails';
 
 import '../../App.css';
 import '../KPI.css';
@@ -59,6 +60,7 @@ class KPIListItem extends React.Component<KPIItemProps,KPIListItemState> {
           <div className="kpi_card_title">{KPI.name}</div>
           <br/>
           {KPIVisualization}
+          <OverlayKPIDetails {...this.props}/> 
         </div>
     );
   }
