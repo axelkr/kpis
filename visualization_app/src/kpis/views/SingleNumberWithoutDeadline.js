@@ -29,7 +29,7 @@ class SingleNumberWithoutDeadline extends React.Component<SingleNumberWithoutDea
 
     var currentValue = this.latestValue(KPI.measurements);
     return (
-      <div>{currentValue}(goal {KPI.goal.target})</div>
+      <div>{currentValue} (goal {KPI.goal.target})</div>
     )
   }
 
