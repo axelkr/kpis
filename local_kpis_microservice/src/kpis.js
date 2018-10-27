@@ -1,11 +1,16 @@
 // @flow
 'use strict';
 
+type SingleKPI = {
+  _id:string;
+  type:string;
+  }; 
+
 function constructKPI() {
   const kpis = {};
   kpis._kpis = [];
 
-  kpis.read = function(rawJSONofKPIs) {
+  kpis.read = function(rawJSONofKPIs:{kpis:[SingleKPI]}) {
     kpis._kpis = rawJSONofKPIs.kpis; 
   }
 
@@ -21,7 +26,7 @@ function constructKPI() {
     return kpiNames;
   }
 
-  kpis.getKPI = function(id) {
+  kpis.getKPI = function(id:string) {
     var kpi = {};
     kpis._kpis.forEach(function(element) {
       if (element._id == id ) {
