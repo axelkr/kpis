@@ -8,10 +8,8 @@ import type LoadObject from '../../utils/LoadObject';
 import type KPI from '../records/KPI';
 
 import LoadingKPI from './LoadingKPI';
-import SingleNumberWithoutDeadline from './SingleNumberWithoutDeadline';
-import CumulativeNumberPerYear from './CumulativeNumberPerYear';
-import CumulativeNumberPerYearDetails from './CumulativeNumberPerYearDetails';
 import OverlayKPIDetails from './OverlayKPIDetails';
+import kpiTypeToComponent from './kpiTypeToComponent';
 
 import '../../App.css';
 import '../KPI.css';
@@ -32,26 +30,6 @@ class KPIContainer extends React.Component<KPIContainerProps,KPIContainerState> 
     };
   }
 
-  selectComponent(KPI) {
-    if (KPI.type === "continuous_without_deadline") {
-      return (<SingleNumberWithoutDeadline KPI={KPI}/>)
-    }
-    
-    if (KPI.type === "cumulative_number_over_year") {
-      return (<CumulativeNumberPerYear KPI={KPI}/>)
-    }
-    
-    return null;
-  }
-
-  selectDetailsComponent(KPI) {
-    if (KPI.type === "cumulative_number_over_year") {
-      return (<CumulativeNumberPerYearDetails KPI={KPI}/>)
-    }
-    
-    return null;
-  }
-
   render(){
     const {
       KPILo,
@@ -66,8 +44,8 @@ class KPIContainer extends React.Component<KPIContainerProps,KPIContainerState> 
     }
 
     const KPI = KPILo.getValueEnforcing();
-    const KPIVisualization = this.selectComponent(KPI);
-    const KPIVisualizationDetails = this.selectDetailsComponent(KPI);
+    const KPIVisualization = kpiTypeToComponent.selectComponent(KPI);
+    const KPIVisualizationDetails = kpiTypeToComponent.selectDetailsComponent(KPI);
 
     return (
         <div className="kpi_card">
