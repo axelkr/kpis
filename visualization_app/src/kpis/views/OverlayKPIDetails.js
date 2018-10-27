@@ -11,7 +11,7 @@ import '../KPI.css';
 class OverlayKPIDetails extends React.Component {
   render(){    
     return (
-        <div className="overlay" id='overlay-kpi-details'>Details</div>
+        <div className="kpi-details-overlay">{this.props.children}</div>
     );
   }
 }

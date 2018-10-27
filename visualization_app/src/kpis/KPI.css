@@ -20,7 +20,7 @@
     background-color: #990000
   }
 
-  .overlay {
+  .kpi-details-overlay {
     position: fixed; /* Sit on top of the page content */
     z-index:999;
     width: 100%; /* Full width (cover the whole page) */

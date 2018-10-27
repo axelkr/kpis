@@ -57,7 +57,7 @@ class KPIContainer extends React.Component<KPIContainerProps,KPIContainerState> 
     if (this.state.detailsVisible) {
       var KPIVisualizationDetails = kpiTypeToComponent.selectDetailsComponent(KPI);
       if (KPIVisualizationDetails) {
-        overlay = (<div className="overlay">{KPIVisualizationDetails}</div> );
+        overlay = (<OverlayKPIDetails>{KPIVisualizationDetails}</OverlayKPIDetails> );
       }
     }
     return (
