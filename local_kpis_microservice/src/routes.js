@@ -3,6 +3,8 @@
 
 const express = require('express');
 
+import type KPIStore from './kpiStore';
+
 const HTTP_STATUS_OK = 200;
 const HTTP_STATUS_BAD_REQUEST = 400;
 const HTTP_STATUS_NOT_FOUND = 404;
