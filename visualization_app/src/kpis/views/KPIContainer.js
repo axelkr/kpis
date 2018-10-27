@@ -21,11 +21,15 @@ type KPIContainerProps = {
 };
 
 type KPIContainerState = {
+  detailsVisible : boolean
 };
 
 class KPIContainer extends React.Component<KPIContainerProps,KPIContainerState> {
   constructor(props:KPIContainerProps){
     super(props);
+    this.state = {
+      detailsVisible : false
+    };
   }
 
   selectComponent(KPI) {
@@ -37,7 +41,7 @@ class KPIContainer extends React.Component<KPIContainerProps,KPIContainerState> 
       return (<CumulativeNumberPerYear KPI={KPI}/>)
     }
     
-    return (<div/>)
+    return null;
   }
 
   selectDetailsComponent(KPI) {
@@ -45,7 +49,7 @@ class KPIContainer extends React.Component<KPIContainerProps,KPIContainerState> 
       return (<CumulativeNumberPerYearDetails KPI={KPI}/>)
     }
     
-    return (<div/>)
+    return null;
   }
 
   render(){
