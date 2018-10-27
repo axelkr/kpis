@@ -6,17 +6,18 @@ type SingleKPI = {
   type:string;
   }; 
 
-function constructKPI() {
-  const kpis = {};
-  kpis._kpis = [];
-
-  kpis.read = function(rawJSONofKPIs:{kpis:[SingleKPI]}) {
-    kpis._kpis = rawJSONofKPIs.kpis; 
+class KPIStore {
+  constructor() {
+    this._kpis = [];
   }
 
-  kpis.availableKPIs  = function() {
+  read(rawJSONofKPIs:{kpis:[SingleKPI]}) {
+    this._kpis = rawJSONofKPIs.kpis; 
+  }
+
+  availableKPIs() {
     var kpiNames = [];
-    kpis._kpis.forEach(function(element) {
+    this._kpis.forEach(function(element) {
       var aKPI = {
         "_id" : element._id,
         "type" : element.type
@@ -26,18 +27,16 @@ function constructKPI() {
     return kpiNames;
   }
 
-  kpis.getKPI = function(id:string) {
+  getKPI(id:string) {
     var kpi = {};
-    kpis._kpis.forEach(function(element) {
+    this._kpis.forEach(function(element) {
       if (element._id == id ) {
         kpi = element;
       }
     });
     return kpi;
   }
-  
-  return kpis;
 }
 
 
-module.exports = constructKPI;
+module.exports = KPIStore;
