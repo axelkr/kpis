@@ -18,7 +18,7 @@ type MainProps = {
   KPIs: LoadObjectMap<string, KPI>,
 };
 
-class KPIList extends React.Component<MainProps> {
+class KPIList extends React.Component<KPIListProps> {
   render(){
     const {
       ids,
@@ -44,9 +44,7 @@ class KPIList extends React.Component<MainProps> {
       );
     });
     return (
-      <section className="KPIList">
-        {listItems.reverse()}
-      </section>
+      <div>{listItems}</div>
     );
   }
 }
