@@ -21,12 +21,25 @@
   }
 
   .kpi-details-overlay {
+    background-color: rgba(0, 0, 0, 0.4);
     position: fixed; /* Sit on top of the page content */
-    z-index:999;
+    z-index:998;
     width: 100%; /* Full width (cover the whole page) */
     height: 100%; /* Full height (cover the whole page) */
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
+  }
+
+  .kpi-details {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    background-color: grey;
+    display:inline-block;
+    z-index:999;
+    width:auto;
+    height:auto;
+    margin: auto ;
   }
