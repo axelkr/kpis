@@ -7,7 +7,7 @@ const HTTP_STATUS_OK = 200;
 const HTTP_STATUS_BAD_REQUEST = 400;
 const HTTP_STATUS_NOT_FOUND = 404;
 
-function constructRouter(kpis,lastUpdateOn) {
+function constructRouter(kpis,lastUpdateOn:()=>Date) {
   const router = express.Router();
   router._kpis = kpis;
   router._getLastUpdateOn = lastUpdateOn;
