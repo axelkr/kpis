@@ -1,7 +1,7 @@
 {
   "name": "serverapigateway_microservice",
-  "description" :"Expose microservices under a joint port",
-  "license" : "GPL-3.0",
+  "description": "Expose microservices under a joint port",
+  "license": "GPL-3.0",
   "version": "0.1.0",
   "repository": {
     "type": "git",
@@ -17,8 +17,12 @@
     "request": "^2.88.0"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-flow": "^6.23.0",
-    "flow-bin": "^0.84.0"
+    "@babel/cli": "^7.1.2",
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-flow": "^7.0.0",
+    "babel-loader": "^8.0.4",
+    "flow-bin": "^0.84.0",
+    "webpack": "^4.23.1"
   }
 }
