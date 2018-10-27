@@ -13,7 +13,7 @@ type SingleKPI = {
   }; 
 
 type KPIStorage = {
-  availableKPIs : () => [SingleKPI];
+  availableKPIs : () => Array<SingleKPI>;
   getKPI: (string) => SingleKPI;
 }
 
