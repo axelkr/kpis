@@ -38,11 +38,13 @@ class KPIGroup extends React.Component<KPIGroupProps> {
     const listItems = [];
     list.forEach((id, i) => {
       const KPISummary = kpiTypeToComponent.selectSummaryComponent(id.type,KPIs.get(id._id));
+      const KPIDetails = kpiTypeToComponent.selectDetailsComponent(id.type,KPIs.get(id._id));
       listItems.push(
         <KPIContainer
           key={id._id}
           KPILo={KPIs.get(id._id)}
           summary={KPISummary}
+          details={KPIDetails}
         />
       );
     });
