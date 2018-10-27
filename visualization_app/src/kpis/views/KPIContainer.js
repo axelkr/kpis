@@ -52,7 +52,7 @@ class KPIContainer extends React.Component<KPIContainerProps,KPIContainerState> 
     }
 
     const KPI = KPILo.getValueEnforcing();
-    const KPISummary = kpiTypeToComponent.selectSummaryComponent(KPI);
+    const KPISummary = kpiTypeToComponent.selectSummaryComponent(KPI.type,KPILo);
     var overlayWithDetails = null;
     if (this.state.detailsVisible) {
       var KPIDetails = kpiTypeToComponent.selectDetailsComponent(KPI);

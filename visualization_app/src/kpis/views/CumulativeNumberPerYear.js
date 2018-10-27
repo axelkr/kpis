@@ -5,12 +5,13 @@ import React from 'react';
 import * as d3 from 'd3';
 
 import type KPI from '../records/KPI';
+import type LoadObject from '../../utils/LoadObject';
 
 import '../../App.css';
 import './CumulativeNumberPerYear.css';
 
 type CumulativeNumberPerYearProps = {
-  KPI: KPI
+  KPI: LoadObject<KPI>
 };
 
 type CumulativeNumberPerYearState = {
@@ -22,9 +23,13 @@ class CumulativeNumberPerYear extends React.Component<CumulativeNumberPerYearPro
   }
 
   render(){
-    var currentValue = this.cumulativeValueThisYear(this.props.KPI.measurements);
+    if (!this.props.KPI.hasValue()) {
+      return null;
+    }
+    var KPI = this.props.KPI.getValueEnforcing();
+    var currentValue = this.cumulativeValueThisYear(KPI.measurements);
     return (
-      <div>{currentValue} (goal {this.props.KPI.goal.target})</div>
+      <div>{currentValue} (goal {KPI.goal.target})</div>
     )
   }
 

@@ -5,11 +5,12 @@ import React from 'react';
 import * as d3 from 'd3';
 
 import type KPI from '../records/KPI';
+import type LoadObject from '../../utils/LoadObject';
 
 import '../../App.css';
 
 type SingleNumberWithoutDeadlineProps = {
-  KPI: KPI
+  KPI: LoadObject<KPI>
 };
 
 type SingleNumberWithoutDeadlineState = {
@@ -21,9 +22,14 @@ class SingleNumberWithoutDeadline extends React.Component<SingleNumberWithoutDea
   }
 
   render(){
-    var currentValue = this.latestValue(this.props.KPI.measurements);
+    if (!this.props.KPI.hasValue()) {
+      return null;
+    }
+    var KPI = this.props.KPI.getValueEnforcing();
+
+    var currentValue = this.latestValue(KPI.measurements);
     return (
-      <div>{currentValue}(goal {this.props.KPI.goal.target})</div>
+      <div>{currentValue}(goal {KPI.goal.target})</div>
     )
   }
 

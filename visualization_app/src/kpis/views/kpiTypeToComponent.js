@@ -5,6 +5,8 @@ import React from 'react';
 
 import type KPI from '../records/KPI';
 
+import type LoadObject from '../../utils/LoadObject';
+
 import SingleNumberWithoutDeadline from './SingleNumberWithoutDeadline';
 import CumulativeNumberPerYear from './CumulativeNumberPerYear';
 import CumulativeNumberPerYearDetails from './CumulativeNumberPerYearDetails';
@@ -12,13 +14,13 @@ import CumulativeNumberPerYearDetails from './CumulativeNumberPerYearDetails';
 
 const kpiTypeToComponent = {};
 
-kpiTypeToComponent.selectSummaryComponent = function(KPI:KPI) {
-    if (KPI.type === "continuous_without_deadline") {
-        return (<SingleNumberWithoutDeadline KPI={KPI}/>)
+kpiTypeToComponent.selectSummaryComponent = function(type:string,KPILo:LoadObject<KPI>) {
+    if (type === "continuous_without_deadline") {
+        return (<SingleNumberWithoutDeadline KPI={KPILo}/>)
     }
 
-    if (KPI.type === "cumulative_number_over_year") {
-        return (<CumulativeNumberPerYear KPI={KPI}/>)
+    if (type === "cumulative_number_over_year") {
+        return (<CumulativeNumberPerYear KPI={KPILo}/>)
     }
 
     return null;
