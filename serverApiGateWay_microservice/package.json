@@ -8,8 +8,8 @@
     "url": "https://github.com/axelkr/kpis.git"
   },
   "scripts": {
-    "start": "node ./lib/main.js",
-    "build": "babel src/ -d lib/",
+    "start": "node ./dist/main.js",
+    "build": "babel src/ -d dist/",
     "flow": "flow"
   },
   "dependencies": {

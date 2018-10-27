@@ -7,9 +7,10 @@ yarn-error.log*
 
 
 # output
-local_kpis_microservice/lib
-serverApiGateWay_microservice/lib
+local_kpis_microservice/dist
+serverApiGateWay_microservice/dist
 visualization_app/bundle.js
+visualization_app/dist
 
 # local configurations
 local_kpis_microservice/config.json
