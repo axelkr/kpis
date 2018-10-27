@@ -33,12 +33,12 @@ class KPIFileWatcher {
         console.log("file not available: "+this._fileToWatch);
         return;
     }
-    fs.readFile(this._fileToWatch, (err,rawContent) => {
+    fs.readFile(this._fileToWatch, (err,rawContent:any) => {
       var writeOngoing = (rawContent.length == 0);
         if (writeOngoing) {
           return;
         }
-        var asJSON = undefined;
+        var asJSON : any = undefined;
         try {
           asJSON = JSON.parse(rawContent);
         }
