@@ -15,6 +15,7 @@ const app = express();
 
 const kpiStore = new KPIStore();
 const fileWatcher = constructKPIFileWatcher(KPI_FILE);
+fileWatcher.startWatching();
 fileWatcher.callSetOnUpdate(kpiStore);
 fileWatcher.updated();
 const routes = constructRouter(kpiStore,()=>fileWatcher.lastUpdateOn());
