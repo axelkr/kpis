@@ -2,7 +2,7 @@
 'use strict';
 
 import React from 'react';
-import * as d3 from 'd3';
+import moment from 'moment';
 
 import type KPI from '../records/KPI';
 import type LoadObject from '../../utils/LoadObject';
@@ -38,12 +38,11 @@ class SingleNumberWithoutDeadline extends React.Component<SingleNumberWithoutDea
       return "-";
     }
     
-    var parseTime = d3.timeParse("%Y-%m-%d");
     var latestValue = measurements[0].value;
-    var latestDate  = parseTime(measurements[0].date);
+    var latestDate  = moment(measurements[0].date);
     
     measurements.forEach(function(element) {
-      var dateElement = parseTime(element.date);
+      var dateElement = moment(element.date);
       if (dateElement > latestDate) {
         latestDate = dateElement;
         latestValue = element.value;
