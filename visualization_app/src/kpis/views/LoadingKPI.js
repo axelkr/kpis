@@ -1,13 +1,11 @@
 // @flow
 'use strict';
 
-
 import React from 'react';
 
-import classnames from 'classnames';
 import '../../App.css';
 
-class LoadKPIItem extends React.Component {
+class LoadingKPI extends React.Component {
   render(){    
     return (
         <label>Loading...</label>
@@ -15,4 +13,4 @@ class LoadKPIItem extends React.Component {
   }
 }
 
-export default LoadKPIItem;
+export default LoadingKPI;

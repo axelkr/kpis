@@ -7,7 +7,7 @@ import classnames from 'classnames';
 import type LoadObject from '../../utils/LoadObject';
 import type KPI from '../records/KPI';
 
-import LoadKPIItem from './LoadKPIItem';
+import LoadingKPI from './LoadingKPI';
 import SingleNumberWithoutDeadline from './SingleNumberWithoutDeadline';
 import CumulativeNumberPerYear from './CumulativeNumberPerYear';
 import CumulativeNumberPerYearDetails from './CumulativeNumberPerYearDetails';
@@ -56,7 +56,7 @@ class KPIListItem extends React.Component<KPIItemProps,KPIListItemState> {
     if (!KPILo.hasValue()) {
       return (
           <div className="kpi_card">
-            <LoadKPIItem />
+            <LoadingKPI />
           </div>
       );
     }
