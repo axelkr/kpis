@@ -13,12 +13,12 @@ import React from 'react';
 import classnames from 'classnames';
 import '../../App.css';
 
-type MainProps = {
+type KPIGroupProps = {
   ids: LoadObjectState<Immutable.List<string>>,
   KPIs: LoadObjectMap<string, KPI>,
 };
 
-class KPIList extends React.Component<KPIListProps> {
+class KPIGroup extends React.Component<KPIGroupProps> {
   render(){
     const {
       ids,
@@ -49,4 +49,4 @@ class KPIList extends React.Component<KPIListProps> {
   }
 }
 
-export default KPIList;
+export default KPIGroup;

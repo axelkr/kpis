@@ -2,13 +2,13 @@
 
 import React, { Component } from 'react';
 import './App.css';
-import KPIList from './kpis/views/KPIList';
+import KPIGroup from './kpis/views/KPIGroup';
 
 function App(props){
   return (
     <div className="App">
       <h2>KPIs</h2>
-      <KPIList {...props}/>
+      <KPIGroup {...props}/>
     </div>
   );
 };
