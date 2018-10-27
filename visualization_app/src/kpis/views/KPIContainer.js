@@ -16,15 +16,15 @@ import OverlayKPIDetails from './OverlayKPIDetails';
 import '../../App.css';
 import '../KPI.css';
 
-type KPIItemProps = {
+type KPIContainerProps = {
   KPILo: LoadObject<KPI>
 };
 
-type KPIListItemState = {
+type KPIContainerState = {
 };
 
-class KPIListItem extends React.Component<KPIItemProps,KPIListItemState> {
-  constructor(props:KPIItemProps){
+class KPIContainer extends React.Component<KPIContainerProps,KPIContainerState> {
+  constructor(props:KPIContainerProps){
     super(props);
   }
 
@@ -77,4 +77,4 @@ class KPIListItem extends React.Component<KPIItemProps,KPIListItemState> {
   }
 }
 
-export default KPIListItem;
+export default KPIContainer;
