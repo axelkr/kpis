@@ -4,9 +4,7 @@ const fs = require('fs');
 
 const path = require('path');
 
-type KPIStore = {
-  read : (any) => void;
-}
+import type KPIStore from './kpiStore';
 
 class KPIFileWatcher {
   _setOnUpdate : Array<KPIStore>;
@@ -22,8 +20,8 @@ class KPIFileWatcher {
     this._fileToWatch = path.normalize(kpiFile);
   }
 
-  callSetOnUpdate(anObject) {
-    this._setOnUpdate.push(anObject); 
+  callSetOnUpdate(aKPIStore:KPIStore) {
+    this._setOnUpdate.push(aKPIStore); 
   }
 
   lastUpdateOn() {
