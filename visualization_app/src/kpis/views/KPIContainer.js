@@ -15,7 +15,8 @@ import '../../App.css';
 import '../KPI.css';
 
 type KPIContainerProps = {
-  KPILo: LoadObject<KPI>
+  KPILo: LoadObject<KPI>;
+  summary: React.Component;
 };
 
 type KPIContainerState = {
@@ -41,6 +42,7 @@ class KPIContainer extends React.Component<KPIContainerProps,KPIContainerState> 
   render(){
     const {
       KPILo,
+      summary
     } = this.props;
 
     if (!KPILo.hasValue()) {
@@ -52,10 +54,9 @@ class KPIContainer extends React.Component<KPIContainerProps,KPIContainerState> 
     }
 
     const KPI = KPILo.getValueEnforcing();
-    const KPISummary = kpiTypeToComponent.selectSummaryComponent(KPI.type,KPILo);
     var overlayWithDetails = null;
     if (this.state.detailsVisible) {
-      var KPIDetails = kpiTypeToComponent.selectDetailsComponent(KPI);
+      var KPIDetails = kpiTypeToComponent.selectDetailsComponent(KPI.type,KPILo);
       if (KPIDetails) {
         overlayWithDetails = (<OverlayKPIDetails>{KPIDetails}</OverlayKPIDetails> );
       }
@@ -64,7 +65,7 @@ class KPIContainer extends React.Component<KPIContainerProps,KPIContainerState> 
         <div className="kpi_card" onClick={this.handleClick}>
           <div className="kpi_card_title">{KPI.name}</div>
           <br/>
-          {KPISummary}
+          {summary}
           {overlayWithDetails}
         </div>
     );

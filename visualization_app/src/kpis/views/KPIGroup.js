@@ -7,6 +7,7 @@ import type LoadObjectMap from '../../utils/LoadObjectMap';
 import type LoadObjectState from '../../utils/LoadObjectState';
 import type KPI from '../records/KPI';
 import KPIContainer from './KPIContainer';
+import kpiTypeToComponent from './kpiTypeToComponent';
 
 import React from 'react';
 
@@ -36,10 +37,12 @@ class KPIGroup extends React.Component<KPIGroupProps> {
 
     const listItems = [];
     list.forEach((id, i) => {
+      const KPISummary = kpiTypeToComponent.selectSummaryComponent(id.type,KPIs.get(id._id));
       listItems.push(
         <KPIContainer
           key={id._id}
           KPILo={KPIs.get(id._id)}
+          summary={KPISummary}
         />
       );
     });

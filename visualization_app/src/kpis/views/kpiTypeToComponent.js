@@ -26,9 +26,9 @@ kpiTypeToComponent.selectSummaryComponent = function(type:string,KPILo:LoadObjec
     return null;
 }
 
-kpiTypeToComponent.selectDetailsComponent = function(KPI:KPI) {
-    if (KPI.type === "cumulative_number_over_year") {
-      return (<CumulativeNumberPerYearDetails KPI={KPI}/>)
+kpiTypeToComponent.selectDetailsComponent = function(type:string,KPILo:LoadObject<KPI>) {
+    if (type === "cumulative_number_over_year") {
+      return (<CumulativeNumberPerYearDetails KPI={KPILo}/>)
     }
     
     return null;

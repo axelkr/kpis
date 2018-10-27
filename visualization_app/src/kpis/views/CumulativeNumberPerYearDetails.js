@@ -5,12 +5,13 @@ import React from 'react';
 import * as d3 from 'd3';
 
 import type KPI from '../records/KPI';
+import type LoadObject from '../../utils/LoadObject';
 
 import '../../App.css';
 import './CumulativeNumberPerYear.css';
 
 type KPIDetailsCumulativeNumberPerYearDetailsProps = {
-  KPI: KPI
+  KPI: LoadObject<KPI>
 };
 
 type KPIDetailsCumulativeNumberPerYearDetailsState = {
@@ -31,6 +32,10 @@ class KPIDetailsCumulativeNumberPerYearDetails extends React.Component<KPIDetail
   }
 
   render(){
+    if (!this.props.KPI.hasValue()) {
+      return null;
+    }
+    var KPI = this.props.KPI.getValueEnforcing();
     return (
       <svg ref={node => this.node = node}
         width={960} height={500}> 
@@ -39,7 +44,12 @@ class KPIDetailsCumulativeNumberPerYearDetails extends React.Component<KPIDetail
   }
 
   createChart() {
-    var goalThisYear = this.props.KPI.goal.target;
+    if (!this.props.KPI.hasValue()) {
+      return;
+    }
+    var KPI = this.props.KPI.getValueEnforcing();
+
+    var goalThisYear = KPI.goal.target;
 
     var svg = d3.select("svg"),
         margin = {top: 20, right: 80, bottom: 30, left: 50},
@@ -58,11 +68,9 @@ class KPIDetailsCumulativeNumberPerYearDetails extends React.Component<KPIDetail
         .x(function(d) { return x(d.date); })
         .y(function(d) { return y(d.total); });
 
-    var data = this.props.KPI.measurements;
-
     var amountsPerDayPerYear = [];
 
-    data.forEach((anIncome) => {
+    KPI.measurements.forEach((anIncome) => {
         var aDate = parseTime(anIncome.date);
         var anAmount = parseFloat(anIncome.value);
         var id = aDate.getFullYear().toString();
