@@ -1,16 +1,6 @@
 // @flow
 'use strict';
 
-type SingleKPI = {
-  _id:string;
-  type:string;
-  }; 
-
-type KPIStore = {
-  availableKPIs : () => [SingleKPI];
-  getKPI: (string) => SingleKPI;
-}
-
 const express = require('express');
 
 const config = require('./config');
@@ -23,7 +13,7 @@ const KPI_FILE = config.KPI_FILE;
 
 const app = express();
 
-const kpiStore : KPIStore = new KPIStore();
+const kpiStore = new KPIStore();
 const fileWatcher = constructKPIFileWatcher(KPI_FILE);
 fileWatcher.callSetOnUpdate(kpiStore);
 fileWatcher.updated();
