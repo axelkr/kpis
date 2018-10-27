@@ -31,13 +31,13 @@ class CumulativeNumberPerYear extends React.Component<CumulativeNumberPerYearPro
   }
 
 //    <svg ref={node => this.node = node}
-//      width={960} height={500}>
+//      width={960} height={500}> 
 //    </svg>
 
   render(){
     var currentValue = this.cumulativeValueThisYear(this.props.KPI.measurements);
     return (
-      <div>{currentValue}(goal {this.props.KPI.goal.target})</div>
+      <div>{currentValue} (goal {this.props.KPI.goal.target})</div>
     )
   }
 
