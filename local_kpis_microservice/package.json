@@ -1,6 +1,12 @@
 {
   "name": "local_kpis_microservice",
+  "description" :"Serve content of KPI file through webservice.",
+  "license" : "GPL-3.0",
   "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/axelkr/kpis.git"
+  },
   "scripts": {
     "start": "node ./lib/main.js",
     "build": "babel src/ -d lib/",

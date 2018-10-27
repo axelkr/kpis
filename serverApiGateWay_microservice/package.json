@@ -1,7 +1,12 @@
 {
   "name": "serverapigateway_microservice",
+  "description" :"Expose microservices under a joint port",
+  "license" : "GPL-3.0",
   "version": "0.1.0",
-  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/axelkr/kpis.git"
+  },
   "scripts": {
     "start": "node ./lib/main.js",
     "build": "babel src/ -d lib/",
