@@ -10,6 +10,7 @@ import type KPI from '../records/KPI';
 import LoadKPIItem from './LoadKPIItem';
 import SingleNumberWithoutDeadline from './SingleNumberWithoutDeadline';
 import CumulativeNumberPerYear from './CumulativeNumberPerYear';
+import CumulativeNumberPerYearDetails from './CumulativeNumberPerYearDetails';
 import OverlayKPIDetails from './OverlayKPIDetails';
 
 import '../../App.css';
@@ -36,7 +37,15 @@ class KPIListItem extends React.Component<KPIItemProps,KPIListItemState> {
       return (<CumulativeNumberPerYear KPI={KPI}/>)
     }
     
-    return (<label/>)
+    return (<div/>)
+  }
+
+  selectDetailsComponent(KPI) {
+    if (KPI.type === "cumulative_number_over_year") {
+      return (<CumulativeNumberPerYearDetails KPI={KPI}/>)
+    }
+    
+    return (<div/>)
   }
 
   render(){
@@ -54,12 +63,14 @@ class KPIListItem extends React.Component<KPIItemProps,KPIListItemState> {
 
     const KPI = KPILo.getValueEnforcing();
     const KPIVisualization = this.selectComponent(KPI);
+    const KPIVisualizationDetails = this.selectDetailsComponent(KPI);
 
     return (
         <div className="kpi_card">
           <div className="kpi_card_title">{KPI.name}</div>
           <br/>
           {KPIVisualization}
+          {KPIVisualizationDetails}
           <OverlayKPIDetails {...this.props}/> 
         </div>
     );
