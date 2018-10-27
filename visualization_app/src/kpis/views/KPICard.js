@@ -13,18 +13,18 @@ import OverlayKPIDetails from './OverlayKPIDetails';
 import '../../App.css';
 import '../KPI.css';
 
-type KPIContainerProps = {
+type KPICardProps = {
   KPILo: LoadObject<KPI>;
   summary: React.Component;
   details: React.Component;
 };
 
-type KPIContainerState = {
+type KPICardState = {
   detailsVisible : boolean
 };
 
-class KPIContainer extends React.Component<KPIContainerProps,KPIContainerState> {
-  constructor(props:KPIContainerProps){
+class KPICard extends React.Component<KPICardProps,KPICardState> {
+  constructor(props:KPICardProps){
     super(props);
     this.state = {
       detailsVisible : false
@@ -71,4 +71,4 @@ class KPIContainer extends React.Component<KPIContainerProps,KPIContainerState> 
   }
 }
 
-export default KPIContainer;
+export default KPICard;

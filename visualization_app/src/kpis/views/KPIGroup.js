@@ -6,7 +6,7 @@ import type LoadObject from '../../utils/LoadObject';
 import type LoadObjectMap from '../../utils/LoadObjectMap';
 import type LoadObjectState from '../../utils/LoadObjectState';
 import type KPI from '../records/KPI';
-import KPIContainer from './KPIContainer';
+import KPICard from './KPICard';
 import kpiTypeToComponent from './kpiTypeToComponent';
 
 import React from 'react';
@@ -40,7 +40,7 @@ class KPIGroup extends React.Component<KPIGroupProps> {
       const KPISummary = kpiTypeToComponent.selectSummaryComponent(id.type,KPIs.get(id._id));
       const KPIDetails = kpiTypeToComponent.selectDetailsComponent(id.type,KPIs.get(id._id));
       listItems.push(
-        <KPIContainer
+        <KPICard
           key={id._id}
           KPILo={KPIs.get(id._id)}
           summary={KPISummary}
