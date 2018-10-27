@@ -28,6 +28,14 @@ class KPIContainer extends React.Component<KPIContainerProps,KPIContainerState> 
     this.state = {
       detailsVisible : false
     };
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(e) {
+    e.preventDefault();
+    this.setState(state => ({
+      detailsVisible: !state.detailsVisible
+    }));
   }
 
   render(){
@@ -45,15 +53,19 @@ class KPIContainer extends React.Component<KPIContainerProps,KPIContainerState> 
 
     const KPI = KPILo.getValueEnforcing();
     const KPIVisualization = kpiTypeToComponent.selectComponent(KPI);
-    const KPIVisualizationDetails = kpiTypeToComponent.selectDetailsComponent(KPI);
-
+    var overlay = null;
+    if (this.state.detailsVisible) {
+      var KPIVisualizationDetails = kpiTypeToComponent.selectDetailsComponent(KPI);
+      if (KPIVisualizationDetails) {
+        overlay = (<div className="overlay">{KPIVisualizationDetails}</div> );
+      }
+    }
     return (
-        <div className="kpi_card">
+        <div className="kpi_card" onClick={this.handleClick}>
           <div className="kpi_card_title">{KPI.name}</div>
           <br/>
           {KPIVisualization}
-          {KPIVisualizationDetails}
-          <OverlayKPIDetails {...this.props}/> 
+          {overlay}
         </div>
     );
   }
