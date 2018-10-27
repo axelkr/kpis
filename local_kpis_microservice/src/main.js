@@ -6,7 +6,7 @@ type SingleKPI = {
   type:string;
   }; 
 
-type KPIStorage = {
+type KPIStore = {
   availableKPIs : () => [SingleKPI];
   getKPI: (string) => SingleKPI;
 }
@@ -23,11 +23,11 @@ const KPI_FILE = config.KPI_FILE;
 
 const app = express();
 
-const kpiStorage : KPIStorage = constructKPIStore();
+const kpiStore : KPIStore = constructKPIStore();
 const fileWatcher = constructKPIFileWatcher(KPI_FILE);
-fileWatcher.callSetOnUpdate(kpiStorage);
+fileWatcher.callSetOnUpdate(kpiStore);
 fileWatcher.updated();
-const routes = constructRouter(kpiStorage,()=>fileWatcher.lastUpdateOn());
+const routes = constructRouter(kpiStore,()=>fileWatcher.lastUpdateOn());
 
 app.use('/',routes);
 
