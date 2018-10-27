@@ -14,7 +14,7 @@ function constructKPI() {
     kpis._kpis.forEach(function(element) {
       var aKPI = {
         "_id" : element._id,
-        "name" : element.name
+        "type" : element.type
       };
       kpiNames.push(aKPI);
     });
