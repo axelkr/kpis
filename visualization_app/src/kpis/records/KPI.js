@@ -8,7 +8,7 @@ declare class KPI {
   name: string;
   description:string;
   type:string;
-  tags:array;
+  tags:Array<string>;
   goal:any;
   measurements:any;
 
@@ -17,7 +17,7 @@ declare class KPI {
     name: string;
     description:string;
     type:string;
-    tags:array;
+    tags:Array<string>;
     goal:any;
     measurements:any;
   }): void;
@@ -26,7 +26,7 @@ declare class KPI {
   set(key: 'name', value: string): KPI;
   set(key: 'description', value: string): KPI;
   set(key: 'type', value: string): KPI;
-  set(key: 'tags', value: array): KPI;
+  set(key: 'tags', value: Array<string>): KPI;
   set(key: 'goal', value: any): KPI;
   set(key: 'measurements', value: any): KPI;
 }
