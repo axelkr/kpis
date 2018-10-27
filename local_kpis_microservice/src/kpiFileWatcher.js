@@ -10,12 +10,12 @@ type KPIStore = {
 
 class KPIFileWatcher {
   _setOnUpdate : Array<KPIStore>;
-  _timeOfLastUpdate : ?Date;
+  _timeOfLastUpdate : Date;
   _fileToWatch : string;
 
   constructor(kpiFile:string) {
     this._setOnUpdate = [];
-    this._timeOfLastUpdate = undefined;
+    this._timeOfLastUpdate = new Date();
     if (! path.isAbsolute(kpiFile)) {
       kpiFile = path.join(__dirname,"..",kpiFile);
     }
