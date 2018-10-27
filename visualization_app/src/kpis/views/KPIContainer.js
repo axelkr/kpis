@@ -52,19 +52,19 @@ class KPIContainer extends React.Component<KPIContainerProps,KPIContainerState> 
     }
 
     const KPI = KPILo.getValueEnforcing();
-    const KPIVisualization = kpiTypeToComponent.selectComponent(KPI);
+    const KPISummary = kpiTypeToComponent.selectSummaryComponent(KPI);
     var overlay = null;
     if (this.state.detailsVisible) {
-      var KPIVisualizationDetails = kpiTypeToComponent.selectDetailsComponent(KPI);
-      if (KPIVisualizationDetails) {
-        overlay = (<OverlayKPIDetails>{KPIVisualizationDetails}</OverlayKPIDetails> );
+      var KPIDetails = kpiTypeToComponent.selectDetailsComponent(KPI);
+      if (KPIDetails) {
+        overlay = (<OverlayKPIDetails>{KPIDetails}</OverlayKPIDetails> );
       }
     }
     return (
         <div className="kpi_card" onClick={this.handleClick}>
           <div className="kpi_card_title">{KPI.name}</div>
           <br/>
-          {KPIVisualization}
+          {KPISummary}
           {overlay}
         </div>
     );

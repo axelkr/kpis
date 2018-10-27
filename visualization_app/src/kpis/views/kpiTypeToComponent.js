@@ -12,7 +12,7 @@ import CumulativeNumberPerYearDetails from './CumulativeNumberPerYearDetails';
 
 const kpiTypeToComponent = {};
 
-kpiTypeToComponent.selectComponent = function(KPI:KPI) {
+kpiTypeToComponent.selectSummaryComponent = function(KPI:KPI) {
     if (KPI.type === "continuous_without_deadline") {
         return (<SingleNumberWithoutDeadline KPI={KPI}/>)
     }
