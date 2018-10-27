@@ -8,8 +8,8 @@
     "url": "https://github.com/axelkr/kpis.git"
   },
   "scripts": {
-    "build": "webpack ./src/root.js ./bundle.js",
-    "watch": "webpack ./src/root.js ./bundle.js --watch",
+    "build": "webpack",
+    "watch": "webpack --watch",
     "start": "node ./server/app.js",
     "test": "jest",
     "flow": "flow"
