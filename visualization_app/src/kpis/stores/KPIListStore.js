@@ -10,7 +10,7 @@ import {ReduceStore} from 'flux/utils';
 import KPIDataManager from '../data_managers/KPIDataManager';
 import AppDispatcher from '../../AppDispatcher';
 
-type State = LoadObjectState<Immutable.List<string>>;
+type State = LoadObjectState<Immutable.List<{_id:string,type:string}>>;
 
 class KPIListStore extends ReduceStore<KPIAction, State> {
   constructor() {
@@ -34,7 +34,7 @@ class KPIListStore extends ReduceStore<KPIAction, State> {
 
       case 'ids/loaded':
         return state.setLoadObject(LoadObject.withValue(
-          Immutable.List(action.ids.map(x => x._id))
+          Immutable.List(action.ids)
         ));
 
       case 'ids/load-error':

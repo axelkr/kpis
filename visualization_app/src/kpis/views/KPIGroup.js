@@ -38,8 +38,8 @@ class KPIGroup extends React.Component<KPIGroupProps> {
     list.forEach((id, i) => {
       listItems.push(
         <KPIContainer
-          key={id}
-          KPILo={KPIs.get(id)}
+          key={id._id}
+          KPILo={KPIs.get(id._id)}
         />
       );
     });
