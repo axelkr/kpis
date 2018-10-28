@@ -6,7 +6,7 @@ class CumulativeNumberOverYearValidator {
   }
 
   isValid(aKPI:{type:string,goal:any,measurements:any}) {
-    return type === 'cumulative_number_over_year';
+    return aKPI.type === 'cumulative_number_over_year';
   }
 }
 

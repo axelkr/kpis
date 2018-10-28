@@ -6,7 +6,7 @@ class ContinuousWithoutDeadlineValidator {
   }
 
   isValid(aKPI:{type:string,goal:any,measurements:any}) {
-    return type === 'continuous_without_deadline';
+    return aKPI.type === 'continuous_without_deadline';
   }
 }
 

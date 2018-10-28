@@ -1,4 +1,4 @@
-const KPIStore = require('../src/KPIStore');
+const ContinuousWithoutDeadlineValidator = require('../src/ContinuousWithoutDeadlineValidator');
 
 function minimalKPI(_id,name,type,goal,measurements) {
   return {
@@ -22,12 +22,10 @@ function randomContinuousWithoutDeadlineKPI() {
   return minimalKPI(123,'name','continuous_without_deadline',goal,measurements);
 }
 
-describe('Behaviour for KPIs of type continuous_without_deadline', () => {
-  test('read: accepts valid continuous_without_deadline KPI', () => {
-    var kpis = {kpis:[randomContinuousWithoutDeadlineKPI()]};
-    var kpiStore = new KPIStore();
-
-    kpiStore.read(kpis);
-    expect(kpiStore.availableKPIs().length).toBe(1);
+describe('Validation of KPIs of type continuous_without_deadline', () => {
+  test('isValid: accepts type "continuous_without_deadline KPI"', () => {
+    var aKPI = randomContinuousWithoutDeadlineKPI();
+    var aContinuousWithoutDeadlineValidator = new ContinuousWithoutDeadlineValidator();
+    expect(aContinuousWithoutDeadlineValidator.isValid(aKPI)).toBeTruthy();
   });
 });
