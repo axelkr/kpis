@@ -10,4 +10,4 @@ class ContinuousWithoutDeadlineValidator {
   }
 }
 
-module.exports = new ContinuousWithoutDeadlineValidator();
+module.exports = ContinuousWithoutDeadlineValidator;

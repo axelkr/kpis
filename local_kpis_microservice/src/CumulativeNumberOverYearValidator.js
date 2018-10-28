@@ -10,4 +10,4 @@ class CumulativeNumberOverYearValidator {
   }
 }
 
-module.exports = new CumulativeNumberOverYearValidator();
+module.exports = CumulativeNumberOverYearValidator;

@@ -16,7 +16,7 @@ const KPI_FILE = config.KPI_FILE;
 
 const app = express();
 
-const kpiStore = new KPIStore([ContinuousWithoutDeadlineValidator,CumulativeNumberOverYearValidator]);
+const kpiStore = new KPIStore([new ContinuousWithoutDeadlineValidator(),new CumulativeNumberOverYearValidator()]);
 const fileWatcher = new KPIFileWatcher(KPI_FILE);
 fileWatcher.startWatching();
 fileWatcher.callSetOnUpdate(kpiStore);
