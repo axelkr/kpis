@@ -5,7 +5,7 @@ class MockValidator {
   }
 
   isValid(aKPI:{type:string,goal:any,measurements:any}) {
-    return type === 'mockKPI';
+    return aKPI.type === 'mockKPI';
   }
 }
 

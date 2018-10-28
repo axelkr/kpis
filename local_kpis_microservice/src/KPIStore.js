@@ -83,15 +83,15 @@ class KPIStore {
       return false;
     }
 
-    if (!['continuous_without_deadline','cumulative_number_over_year'].includes(aKPI.type)) {
-      return false;
-    }
-
     if (aKPI.hasOwnProperty('tags') && !Array.isArray(aKPI.tags)) {
       return false;
     }
 
     if (aKPI.hasOwnProperty('tags') && ! aKPI.tags.every(isString)) {
+      return false;
+    }
+
+    if (!this._typeValidators.some(x=>x.isValid(aKPI))) {
       return false;
     }
 
