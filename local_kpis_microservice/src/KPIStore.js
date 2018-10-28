@@ -1,21 +1,19 @@
 // @flow
 'use strict';
 
-type SingleKPI = {
-  _id:string;
-  type:string;
-  }; 
+import type KPIValidator from './KPIValidator';
+import type SingleKPI from './SingleKPI';
 
 class KPIStore {
   _kpis : Array<SingleKPI>;
-  _typeValidators : Array<TypeValidator>;
+  _kpiValidators : Array<KPIValidator>;
   
-  constructor(validators) {
+  constructor(validators: Array<KPIValidator>) {
     this._kpis = [];
     if (validators === undefined) {
-      this._typeValidators = [];
+      this._kpiValidators = [];
     } else {
-      this._typeValidators = validators;
+      this._kpiValidators = validators;
     }
   }
 
@@ -48,17 +46,17 @@ class KPIStore {
     return kpiNames;
   }
 
-  getKPI(id:string) {
+  getKPI(id:number) {
     var kpi = {};
     this._kpis.forEach(function(element) {
-      if (element._id == id ) {
+      if (element._id === id ) {
         kpi = element;
       }
     });
     return kpi;
   }
 
-  _isValidKPI(aKPI:{}) {
+  _isValidKPI(aKPI:SingleKPI) {
     if (!aKPI.hasOwnProperty('_id')||!Number.isInteger(aKPI._id) || aKPI._id < 0) {
       return false;
     }
@@ -91,7 +89,7 @@ class KPIStore {
       return false;
     }
 
-    if (!this._typeValidators.some(x=>x.isValid(aKPI))) {
+    if (!this._kpiValidators.some(x=>x.isValid(aKPI))) {
       return false;
     }
 
@@ -117,11 +115,11 @@ class KPIStore {
   }
 }
 
-function propertyExistsAndIsString(anObject:{},aProperty:string) {
+function propertyExistsAndIsString(anObject:any,aProperty:string) {
   return anObject.hasOwnProperty(aProperty) && isString(anObject[aProperty]);
 }
 
-function isString(aValue) {
+function isString(aValue:mixed) {
    return (typeof aValue === 'string' || aValue instanceof String);
 }
 

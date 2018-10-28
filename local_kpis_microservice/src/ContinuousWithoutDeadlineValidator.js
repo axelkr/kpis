@@ -1,11 +1,15 @@
 // @flow
 'use strict';
 
-class ContinuousWithoutDeadlineValidator {
+const KPIValidator = require('./KPIValidator');
+import type SingleKPI from './SingleKPI';
+
+class ContinuousWithoutDeadlineValidator extends KPIValidator {
   constructor() {
+    super();
   }
 
-  isValid(aKPI:{type:string,goal:any,measurements:any}) {
+  isValid(aKPI:SingleKPI) {
     if (aKPI.type !== 'continuous_without_deadline') {
       return false;
     }

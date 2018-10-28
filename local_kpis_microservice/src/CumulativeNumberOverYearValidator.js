@@ -1,11 +1,15 @@
 // @flow
 'use strict';
 
-class CumulativeNumberOverYearValidator {
+const KPIValidator = require('./KPIValidator');
+import type SingleKPI from './SingleKPI';
+
+class CumulativeNumberOverYearValidator extends KPIValidator {
   constructor() {
+    super();
   }
 
-  isValid(aKPI:{type:string,goal:any,measurements:any}) {
+  isValid(aKPI:SingleKPI) {
     if (aKPI.type !== 'cumulative_number_over_year') {
       return false;
     }
