@@ -1,4 +1,4 @@
-const KPIStore = require('../src/KPIStore');
+const CumulativeNumberOverYearValidator = require('../src/CumulativeNumberOverYearValidator');
 
 function minimalKPI(_id,name,type,goal,measurements) {
   return {
@@ -22,12 +22,11 @@ function randomCumulativeNumberOverYearKPI() {
   return minimalKPI(123,'name','cumulative_number_over_year',goal,measurements);
 }
 
-describe('Behaviour for KPIs of type cumulative_number_over_year', () => {
-  test('read: accepts valid cumulative_number_over_year KPI', () => {
-    var kpis = {kpis:[randomCumulativeNumberOverYearKPI()]};
-    var kpiStore = new KPIStore();
-
-    kpiStore.read(kpis);
-    expect(kpiStore.availableKPIs().length).toBe(1);
+describe('Validation of KPIs of type cumulative_number_over_year', () => {
+  test('isValid: accepts type "cumulative_number_over_year" KPI', () => {
+    var aKPI = randomCumulativeNumberOverYearKPI();
+    var aCumulativeNumberOverYearValidator = new CumulativeNumberOverYearValidator();
+    expect(aCumulativeNumberOverYearValidator.isValid(aKPI)).toBeTruthy();
   });
 });
+
