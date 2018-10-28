@@ -47,7 +47,11 @@ class KPIFileWatcher {
         }
 
         this._setOnUpdate.forEach(function(element) {
+          try {
             element.read(asJSON);
+          } catch (e) {
+            console.log("file content cannot be read because of: "+e);
+          }
         });
         this._timeOfLastUpdate = new Date();
     });    
