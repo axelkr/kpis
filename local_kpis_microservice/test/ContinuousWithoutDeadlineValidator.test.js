@@ -23,7 +23,7 @@ function randomContinuousWithoutDeadlineKPI() {
 }
 
 describe('Validation of KPIs of type continuous_without_deadline', () => {
-  test('isValid: accepts type "continuous_without_deadline KPI"', () => {
+  test('isValid: accepts type "continuous_without_deadline" KPI', () => {
     var aKPI = randomContinuousWithoutDeadlineKPI();
     var aContinuousWithoutDeadlineValidator = new ContinuousWithoutDeadlineValidator();
     expect(aContinuousWithoutDeadlineValidator.isValid(aKPI)).toBeTruthy();
