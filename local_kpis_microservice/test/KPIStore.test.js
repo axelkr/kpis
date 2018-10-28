@@ -43,22 +43,6 @@ describe('Behaviour common to all types of KPIs', () => {
     expect(kpiStore.availableKPIs().length).toBe(0);
   });
 
-  test('read: accepts valid continous_without_deadline KPI', () => {
-    var kpis = {kpis:[randomContinuousWithoutDeadlineKPI()]};
-    var kpiStore = new KPIStore();
-
-    kpiStore.read(kpis);
-    expect(kpiStore.availableKPIs().length).toBe(1);
-  });
-
-  test('read: accepts valid cumulative_number_over_year KPI', () => {
-    var kpis = {kpis:[randomCumulativeNumberOverYearKPI()]};
-    var kpiStore = new KPIStore();
-
-    kpiStore.read(kpis);
-    expect(kpiStore.availableKPIs().length).toBe(1);
-  });
-
   test('read: adds optional field description as empty string', () => {
     const aKPI = randomCumulativeNumberOverYearKPI();
     if (aKPI.hasOwnProperty('description')) {
@@ -122,7 +106,7 @@ describe('Behaviour common to all types of KPIs', () => {
     kpiStore.read({kpis:[aKPI]});
     expect(kpiStore.availableKPIs().length).toBe(0);
   });
-  
+
   test.each(['name','type','description'])('read: ignores KPI where %s is not a string', (field) => {
     const aKPI = randomCumulativeNumberOverYearKPI();
     var kpiStore = new KPIStore();
@@ -138,5 +122,34 @@ describe('Behaviour common to all types of KPIs', () => {
     aKPI[field] = [];
     kpiStore.read({kpis:[aKPI]});
     expect(kpiStore.availableKPIs().length).toBe(0);
+  });
+
+  test('read: ignores KPI where type is not a know type description', () => {
+    const aKPI = randomCumulativeNumberOverYearKPI();
+    var kpiStore = new KPIStore();
+
+    aKPI.type = 'someRandomString';
+    kpiStore.read({kpis:[aKPI]});
+    expect(kpiStore.availableKPIs().length).toBe(0);
+  });
+});
+
+describe('Behaviour for KPIs of type continuous_without_deadline', () => {
+  test('read: accepts valid continuous_without_deadline KPI', () => {
+    var kpis = {kpis:[randomContinuousWithoutDeadlineKPI()]};
+    var kpiStore = new KPIStore();
+
+    kpiStore.read(kpis);
+    expect(kpiStore.availableKPIs().length).toBe(1);
+  });
+});
+
+describe('Behaviour for KPIs of type cumulative_number_over_year', () => {
+  test('read: accepts valid cumulative_number_over_year KPI', () => {
+    var kpis = {kpis:[randomCumulativeNumberOverYearKPI()]};
+    var kpiStore = new KPIStore();
+
+    kpiStore.read(kpis);
+    expect(kpiStore.availableKPIs().length).toBe(1);
   });
 });
