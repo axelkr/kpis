@@ -102,7 +102,7 @@ describe('Behaviour common to all types of KPIs', () => {
     expect(kpiStore.availableKPIs().length).toBe(0);
   });
 
-  test('read: ignores KPI where _id is not a number', () => {
+  test('read: ignores KPI where _id is not a positive number', () => {
     const aKPI = randomCumulativeNumberOverYearKPI();
     var kpiStore = new KPIStore();
 
@@ -117,64 +117,25 @@ describe('Behaviour common to all types of KPIs', () => {
     aKPI._id = [];
     kpiStore.read({kpis:[aKPI]});
     expect(kpiStore.availableKPIs().length).toBe(0);
-  });
-
-  test('read: ignores KPI where _id is not a positive number', () => {
-    const aKPI = randomCumulativeNumberOverYearKPI();
-    var kpiStore = new KPIStore();
 
     aKPI._id = -2;
     kpiStore.read({kpis:[aKPI]});
     expect(kpiStore.availableKPIs().length).toBe(0);
   });
-
-  test('read: ignores KPI where name is not a string', () => {
+  
+  test.each(['name','type','description'])('read: ignores KPI where %s is not a string', (field) => {
     const aKPI = randomCumulativeNumberOverYearKPI();
     var kpiStore = new KPIStore();
 
-    aKPI.name = undefined;
+    aKPI[field] = undefined;
     kpiStore.read({kpis:[aKPI]});
     expect(kpiStore.availableKPIs().length).toBe(0);
 
-    aKPI.name = 42;
+    aKPI[field] = 42;
     kpiStore.read({kpis:[aKPI]});
     expect(kpiStore.availableKPIs().length).toBe(0);
 
-    aKPI.name = [];
-    kpiStore.read({kpis:[aKPI]});
-    expect(kpiStore.availableKPIs().length).toBe(0);
-  });
-
-  test('read: ignores KPI where description is not a string', () => {
-    const aKPI = randomCumulativeNumberOverYearKPI();
-    var kpiStore = new KPIStore();
-
-    aKPI.description = undefined;
-    kpiStore.read({kpis:[aKPI]});
-    expect(kpiStore.availableKPIs().length).toBe(0);
-
-    aKPI.description = 42;
-    kpiStore.read({kpis:[aKPI]});
-    expect(kpiStore.availableKPIs().length).toBe(0);
-
-    aKPI.description = [];
-    kpiStore.read({kpis:[aKPI]});
-    expect(kpiStore.availableKPIs().length).toBe(0);
-  });
-
-  test('read: ignores KPI where type is not a string', () => {
-    const aKPI = randomCumulativeNumberOverYearKPI();
-    var kpiStore = new KPIStore();
-
-    aKPI.type = undefined;
-    kpiStore.read({kpis:[aKPI]});
-    expect(kpiStore.availableKPIs().length).toBe(0);
-
-    aKPI.type = 42;
-    kpiStore.read({kpis:[aKPI]});
-    expect(kpiStore.availableKPIs().length).toBe(0);
-
-    aKPI.type = [];
+    aKPI[field] = [];
     kpiStore.read({kpis:[aKPI]});
     expect(kpiStore.availableKPIs().length).toBe(0);
   });
