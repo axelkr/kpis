@@ -49,6 +49,14 @@ class KPIStore {
   }
 
   _isValidKPI(aKPI:{}) {
+    if(!aKPI.hasOwnProperty('_id')||!Number.isInteger(aKPI._id) || aKPI._id < 0) {
+      return false;
+    }
+    
+    if(!propertyExistsAndIsString(aKPI,'name')) {
+      return false;
+    }
+
     return true;
   }
 
@@ -63,5 +71,8 @@ class KPIStore {
   }
 }
 
+function propertyExistsAndIsString(anObject:{},aProperty:string) {
+  return anObject.hasOwnProperty(aProperty) && (typeof anObject[aProperty] === 'string' || anObject[aProperty] instanceof String);
+}
 
 module.exports = KPIStore;
