@@ -11,7 +11,7 @@
     "start": "node ./dist/main.js",
     "build": "babel src/ -d dist/",
     "flow": "flow",
-    "test": "jasmine"
+    "test": "jest"
   },
   "dependencies": {
     "express": "^4.16.4"
@@ -21,9 +21,12 @@
     "@babel/core": "^7.1.2",
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-flow": "^7.0.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.4",
     "flow-bin": "^0.84.0",
-    "webpack": "^4.23.1",
-    "jasmine": "^3.3.0"
+    "jest": "^23.6.0",
+    "regenerator-runtime": "^0.12.1",
+    "webpack": "^4.23.1"
   }
 }
