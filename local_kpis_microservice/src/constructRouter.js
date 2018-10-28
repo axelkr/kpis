@@ -25,7 +25,14 @@ function constructRouter(kpiStore:KPIStore,lastUpdateOn:()=>Date) {
   });
   
   router.get('/kpi/:id', (req, res) => {
-    var kpi = router._kpiStore.getKPI(req.params.id);
+    var id = undefined;
+    try {
+      id = Number.parseInt(req.params.id);
+    } catch(e) {
+      res.sendStatus(HTTP_STATUS_NOT_FOUND);
+      return;
+    }
+    var kpi = router._kpiStore.getKPI(id);
     const kpiFound = kpi.hasOwnProperty('_id');
     if (kpiFound) {
       res.status(HTTP_STATUS_OK).send(kpi);  
