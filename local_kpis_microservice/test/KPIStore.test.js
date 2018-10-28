@@ -141,5 +141,20 @@ describe('Behaviour common to all types of KPIs', () => {
     kpiStore.read({kpis:[aKPI]});
     expect(kpiStore.availableKPIs().length).toBe(0);
   });
+
+  test('read: rejects KPIs with identical _id', () => {
+    const aKPI = randomKPI();
+    const anotherKPI = randomKPI();
+    aKPI._id = 42;
+    anotherKPI._id = 42;
+
+    var kpiStore = new KPIStore();
+
+    function readDuplicateKPIs(){
+      kpiStore.read({kpis:[aKPI,anotherKPI]});
+    }
+
+    expect(readDuplicateKPIs).toThrow();
+  });
 });
 

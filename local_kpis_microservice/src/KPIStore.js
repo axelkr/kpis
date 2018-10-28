@@ -23,6 +23,10 @@ class KPIStore {
       aKPI = self._addDefaultsForOptionalFields(aKPI);
       updatedKPIs.push(aKPI);
     })
+
+    if (this._containsDuplicateIdentifers(updatedKPIs)) {
+     throw "duplicate identifiers";
+    }
     this._kpis = updatedKPIs; 
   }
 
@@ -96,6 +100,14 @@ class KPIStore {
       aKPI.tags = [];
     }
     return aKPI;
+  }
+
+  _containsDuplicateIdentifers(kpis:Array<SingleKPI>) : boolean {
+    var knownIds = kpis.map(x => x._id);
+    var duplicateFound = knownIds.some(function(anId){
+       return knownIds.filter(x=> x === anId).length !== 1;
+    });
+    return duplicateFound;
   }
 }
 
