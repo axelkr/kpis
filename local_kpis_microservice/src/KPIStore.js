@@ -57,6 +57,14 @@ class KPIStore {
       return false;
     }
 
+    if(!propertyExistsAndIsString(aKPI,'type')) {
+      return false;
+    }
+
+    if(aKPI.hasOwnProperty('description') && !propertyExistsAndIsString(aKPI,'description')) {
+      return false;
+    }
+
     return true;
   }
 
