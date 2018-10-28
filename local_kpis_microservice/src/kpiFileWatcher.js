@@ -4,7 +4,7 @@ const fs = require('fs');
 
 const path = require('path');
 
-import type KPIStore from './kpiStore';
+import type KPIStore from './KPIStore';
 
 class KPIFileWatcher {
   _setOnUpdate : Array<KPIStore>;
