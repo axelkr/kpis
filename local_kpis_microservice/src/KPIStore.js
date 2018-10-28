@@ -8,9 +8,15 @@ type SingleKPI = {
 
 class KPIStore {
   _kpis : Array<SingleKPI>;
+  _typeValidators : Array<TypeValidator>;
   
-  constructor() {
+  constructor(validators) {
     this._kpis = [];
+    if (validators === undefined) {
+      this._typeValidators = [];
+    } else {
+      this._typeValidators = validators;
+    }
   }
 
   read(rawJSONofKPIs:{kpis:Array<SingleKPI>}) {

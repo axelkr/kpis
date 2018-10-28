@@ -8,12 +8,15 @@ const constructRouter = require('./constructRouter');
 const KPIFileWatcher = require('./KPIFileWatcher');
 const KPIStore = require('./KPIStore');
 
+const ContinuousWithoutDeadlineValidator = require('./ContinuousWithoutDeadlineValidator');
+const CumulativeNumberOverYearValidator = require('./CumulativeNumberOverYearValidator');
+
 const PORT = config.PORT;
 const KPI_FILE = config.KPI_FILE;
 
 const app = express();
 
-const kpiStore = new KPIStore();
+const kpiStore = new KPIStore([ContinuousWithoutDeadlineValidator,CumulativeNumberOverYearValidator]);
 const fileWatcher = new KPIFileWatcher(KPI_FILE);
 fileWatcher.startWatching();
 fileWatcher.callSetOnUpdate(kpiStore);
