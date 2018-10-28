@@ -61,6 +61,14 @@ class KPIStore {
       return false;
     }
 
+    if(!aKPI.hasOwnProperty('goal') || aKPI.goal === null || typeof aKPI.goal !== 'object') {
+      return false;
+    }
+
+    if(!aKPI.hasOwnProperty('measurements') || aKPI.measurements === null || typeof aKPI.measurements !== 'object') {
+      return false;
+    }
+
     if(aKPI.hasOwnProperty('description') && !propertyExistsAndIsString(aKPI,'description')) {
       return false;
     }
