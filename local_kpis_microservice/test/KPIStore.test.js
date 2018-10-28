@@ -120,5 +120,26 @@ describe('Behaviour common to all types of KPIs', () => {
     kpiStore.read({kpis:[aKPI]});
     expect(kpiStore.availableKPIs().length).toBe(0);
   });
+
+  test('read: ignores KPI where tags is not an array of string', () => {
+    const aKPI = randomKPI();
+    var kpiStore = new KPIStore();
+
+    aKPI.tags = undefined;
+    kpiStore.read({kpis:[aKPI]});
+    expect(kpiStore.availableKPIs().length).toBe(0);
+
+    aKPI.tags = 42;
+    kpiStore.read({kpis:[aKPI]});
+    expect(kpiStore.availableKPIs().length).toBe(0);
+
+    aKPI.tags = 'aRandomString';
+    kpiStore.read({kpis:[aKPI]});
+    expect(kpiStore.availableKPIs().length).toBe(0);
+
+    aKPI.tags = ['aString',42];
+    kpiStore.read({kpis:[aKPI]});
+    expect(kpiStore.availableKPIs().length).toBe(0);
+  });
 });
 

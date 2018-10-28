@@ -49,31 +49,39 @@ class KPIStore {
   }
 
   _isValidKPI(aKPI:{}) {
-    if(!aKPI.hasOwnProperty('_id')||!Number.isInteger(aKPI._id) || aKPI._id < 0) {
+    if (!aKPI.hasOwnProperty('_id')||!Number.isInteger(aKPI._id) || aKPI._id < 0) {
       return false;
     }
     
-    if(!propertyExistsAndIsString(aKPI,'name')) {
+    if (!propertyExistsAndIsString(aKPI,'name')) {
       return false;
     }
 
-    if(!propertyExistsAndIsString(aKPI,'type')) {
+    if (!propertyExistsAndIsString(aKPI,'type')) {
       return false;
     }
 
-    if(!aKPI.hasOwnProperty('goal') || aKPI.goal === null || typeof aKPI.goal !== 'object') {
+    if (!aKPI.hasOwnProperty('goal') || aKPI.goal === null || typeof aKPI.goal !== 'object') {
       return false;
     }
 
-    if(!aKPI.hasOwnProperty('measurements') || aKPI.measurements === null || typeof aKPI.measurements !== 'object') {
+    if (!aKPI.hasOwnProperty('measurements') || aKPI.measurements === null || typeof aKPI.measurements !== 'object') {
       return false;
     }
 
-    if(aKPI.hasOwnProperty('description') && !propertyExistsAndIsString(aKPI,'description')) {
+    if (aKPI.hasOwnProperty('description') && !propertyExistsAndIsString(aKPI,'description')) {
       return false;
     }
 
     if (!['continuous_without_deadline','cumulative_number_over_year'].includes(aKPI.type)) {
+      return false;
+    }
+
+    if (aKPI.hasOwnProperty('tags') && !Array.isArray(aKPI.tags)) {
+      return false;
+    }
+
+    if (aKPI.hasOwnProperty('tags') && ! aKPI.tags.every(isString)) {
       return false;
     }
 
@@ -92,7 +100,11 @@ class KPIStore {
 }
 
 function propertyExistsAndIsString(anObject:{},aProperty:string) {
-  return anObject.hasOwnProperty(aProperty) && (typeof anObject[aProperty] === 'string' || anObject[aProperty] instanceof String);
+  return anObject.hasOwnProperty(aProperty) && isString(anObject[aProperty]);
+}
+
+function isString(aValue) {
+   return (typeof aValue === 'string' || aValue instanceof String);
 }
 
 module.exports = KPIStore;
