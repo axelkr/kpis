@@ -134,22 +134,3 @@ describe('Behaviour common to all types of KPIs', () => {
   });
 });
 
-describe('Behaviour for KPIs of type continuous_without_deadline', () => {
-  test('read: accepts valid continuous_without_deadline KPI', () => {
-    var kpis = {kpis:[randomContinuousWithoutDeadlineKPI()]};
-    var kpiStore = new KPIStore();
-
-    kpiStore.read(kpis);
-    expect(kpiStore.availableKPIs().length).toBe(1);
-  });
-});
-
-describe('Behaviour for KPIs of type cumulative_number_over_year', () => {
-  test('read: accepts valid cumulative_number_over_year KPI', () => {
-    var kpis = {kpis:[randomCumulativeNumberOverYearKPI()]};
-    var kpiStore = new KPIStore();
-
-    kpiStore.read(kpis);
-    expect(kpiStore.availableKPIs().length).toBe(1);
-  });
-});
