@@ -6,7 +6,15 @@ class ContinuousWithoutDeadlineValidator {
   }
 
   isValid(aKPI:{type:string,goal:any,measurements:any}) {
-    return aKPI.type === 'continuous_without_deadline';
+    if (aKPI.type !== 'continuous_without_deadline') {
+      return false;
+    }
+
+    if (!aKPI.goal.hasOwnProperty('target')||!Number.isFinite(aKPI.goal.target)) {
+      return false;
+    }
+
+    return true;
   }
 }
 
