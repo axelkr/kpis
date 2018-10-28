@@ -22,7 +22,7 @@ function minimalKPI(_id,name,type,goal,measurements) {
 }
 
 function randomKPI() {
-  return minimalKPI(123,'name','mockKPI',{},{});
+  return minimalKPI(123,'name','mockKPI',{},[]);
 }
 
 describe('Behaviour common to all types of KPIs', () => {

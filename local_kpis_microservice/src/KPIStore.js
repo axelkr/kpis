@@ -75,7 +75,7 @@ class KPIStore {
       return false;
     }
 
-    if (!aKPI.hasOwnProperty('measurements') || aKPI.measurements === null || typeof aKPI.measurements !== 'object') {
+    if (!aKPI.hasOwnProperty('measurements') || !Array.isArray(aKPI.measurements)) {
       return false;
     }
 
