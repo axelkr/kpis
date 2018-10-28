@@ -76,12 +76,12 @@ describe('Validation of KPIs of type cumulative_number_over_year', () => {
     expect(aCumulativeNumberOverYearValidator.isValid(aKPI)).not.toBeTruthy();
   });
 
- test('isValid: accepts KPI if goal.target is a number', () => {
+  test('isValid: accepts KPI if goal.target is a number', () => {
     var aKPI = randomCumulativeNumberOverYearKPI();
 
     aKPI.goal.target = 42;
     var aCumulativeNumberOverYearValidator = new CumulativeNumberOverYearValidator();
-    expect(aCumulativeNumberOverYearValidator.isValid(aKPI)).not.toBeTruthy();
+    expect(aCumulativeNumberOverYearValidator.isValid(aKPI)).toBeTruthy();
   });
 
   test.each([{},undefined,[],'aString'])('isValid: rejects KPI if goal.target is not a number', (objectNotANumber) => {

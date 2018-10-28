@@ -81,7 +81,7 @@ describe('Validation of KPIs of type continuous_without_deadline', () => {
 
     aKPI.goal.target = 42;
     var aContinuousWithoutDeadlineValidator = new ContinuousWithoutDeadlineValidator();
-    expect(aContinuousWithoutDeadlineValidator.isValid(aKPI)).not.toBeTruthy();
+    expect(aContinuousWithoutDeadlineValidator.isValid(aKPI)).toBeTruthy();
   });
 
   test.each([{},undefined,[],'aString'])('isValid: rejects KPI if goal.target is not a number', (objectNotANumber) => {
