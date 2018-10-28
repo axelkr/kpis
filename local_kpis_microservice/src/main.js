@@ -5,7 +5,7 @@ const express = require('express');
 
 const config = require('./config');
 const constructRouter = require('./constructRouter');
-const KPIFileWatcher = require('./kpiFileWatcher');
+const KPIFileWatcher = require('./KPIFileWatcher');
 const KPIStore = require('./KPIStore');
 
 const PORT = config.PORT;
