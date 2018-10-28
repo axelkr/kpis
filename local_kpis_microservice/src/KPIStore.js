@@ -14,7 +14,16 @@ class KPIStore {
   }
 
   read(rawJSONofKPIs:{kpis:Array<SingleKPI>}) {
-    this._kpis = rawJSONofKPIs.kpis; 
+    var updatedKPIs = [];
+    var self = this;
+    rawJSONofKPIs.kpis.forEach(function(aKPI){
+      if (!self._isValidKPI(aKPI)){
+        return;
+      }
+      aKPI = self._addDefaultsForOptionalFields(aKPI);
+      updatedKPIs.push(aKPI);
+    })
+    this._kpis = updatedKPIs; 
   }
 
   availableKPIs() {
@@ -37,6 +46,17 @@ class KPIStore {
       }
     });
     return kpi;
+  }
+
+  _isValidKPI(aKPI:{}) {
+    return true;
+  }
+
+  _addDefaultsForOptionalFields(aKPI:SingleKPI) : SingleKPI {
+    if(!aKPI.hasOwnProperty('description')) {
+      aKPI.description = '';
+    }
+    return aKPI;
   }
 }
 
