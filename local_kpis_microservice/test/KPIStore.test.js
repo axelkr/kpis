@@ -10,19 +10,7 @@ function minimalKPI(_id,name,type,goal,measurements) {
   }
 }
 
-function randomContinuousWithoutDeadlineKPI() {
-  const goal = {"target" : 0};
-
-  const measurements = [
-    {"date" : "2013-02-08" , "value" : 3},
-    {"date" : "2013-04-08" , "value" : 2},
-    {"date" : "2013-02-18" , "value" : 1}
-  ];
-
-  return minimalKPI(123,'name','continuous_without_deadline',goal,measurements);
-}
-
-function randomCumulativeNumberOverYearKPI() {
+function randomKPI() {
   const goal = {"target" : 0};
 
   const measurements = [
@@ -44,7 +32,7 @@ describe('Behaviour common to all types of KPIs', () => {
   });
 
   test('read: adds optional field description as empty string', () => {
-    const aKPI = randomCumulativeNumberOverYearKPI();
+    const aKPI = randomKPI();
     if (aKPI.hasOwnProperty('description')) {
       delete aKPI.description;
     }
@@ -61,7 +49,7 @@ describe('Behaviour common to all types of KPIs', () => {
   });
 
   test('read: adds optional field tags as empty string', () => {
-    const aKPI = randomCumulativeNumberOverYearKPI();
+    const aKPI = randomKPI();
     if (aKPI.hasOwnProperty('tags')) {
       delete aKPI.tags;
     }
@@ -78,7 +66,7 @@ describe('Behaviour common to all types of KPIs', () => {
   });
 
   test.each(['_id','name','type','measurements','goal'])('read: ignores KPI without mandatory field %s', (field) => {
-    const aKPI = randomCumulativeNumberOverYearKPI();
+    const aKPI = randomKPI();
     var kpiStore = new KPIStore();
 
     delete aKPI[field];
@@ -87,7 +75,7 @@ describe('Behaviour common to all types of KPIs', () => {
   });
 
   test('read: ignores KPI where _id is not a positive number', () => {
-    const aKPI = randomCumulativeNumberOverYearKPI();
+    const aKPI = randomKPI();
     var kpiStore = new KPIStore();
 
     aKPI._id = undefined;
@@ -108,7 +96,7 @@ describe('Behaviour common to all types of KPIs', () => {
   });
 
   test.each(['name','type','description'])('read: ignores KPI where %s is not a string', (field) => {
-    const aKPI = randomCumulativeNumberOverYearKPI();
+    const aKPI = randomKPI();
     var kpiStore = new KPIStore();
 
     aKPI[field] = undefined;
@@ -125,7 +113,7 @@ describe('Behaviour common to all types of KPIs', () => {
   });
 
   test('read: ignores KPI where type is not a know type description', () => {
-    const aKPI = randomCumulativeNumberOverYearKPI();
+    const aKPI = randomKPI();
     var kpiStore = new KPIStore();
 
     aKPI.type = 'someRandomString';
