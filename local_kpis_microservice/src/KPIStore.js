@@ -56,6 +56,9 @@ class KPIStore {
     if(!aKPI.hasOwnProperty('description')) {
       aKPI.description = '';
     }
+    if(!aKPI.hasOwnProperty('tags')) {
+      aKPI.tags = [];
+    }
     return aKPI;
   }
 }

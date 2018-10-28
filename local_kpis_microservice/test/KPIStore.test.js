@@ -74,3 +74,20 @@ test('read: adds optional field description as empty string', () => {
   expect(storedKPI.description).toBeDefined();
   expect(storedKPI.description).toEqual('');
 });
+
+test('read: adds optional field tags as empty string', () => {
+  const aKPI = randomCumulativeNumberOverYearKPI();
+  if (aKPI.hasOwnProperty('tags')) {
+    delete aKPI.tags;
+  }
+  var kpis = {kpis:[aKPI]};
+  
+  var kpiStore = new KPIStore();
+  kpiStore.read(kpis);
+
+  var storedKPI = kpiStore.getKPI(aKPI._id);
+
+  expect(storedKPI.hasOwnProperty('tags')).toBeTruthy();
+  expect(storedKPI.tags).toBeDefined();
+  expect(storedKPI.tags).toEqual([]);
+});
