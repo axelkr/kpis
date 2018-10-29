@@ -24,6 +24,19 @@ function constructRouter(kpiStore:KPIStore,lastUpdateOn:()=>Date) {
     res.status(HTTP_STATUS_OK).send(kpiNames);  
   });
   
+  router.post('/kpi/:id/measurements/', (req, res) => {
+    var id = undefined;
+    try {
+      id = Number.parseInt(req.params.id);
+    } catch(e) {
+      res.sendStatus(HTTP_STATUS_NOT_FOUND);
+      return;
+    }
+    console.log(req.query);
+
+    res.sendStatus(HTTP_STATUS_OK);
+  });
+
   router.get('/kpi/:id', (req, res) => {
     var id = undefined;
     try {
