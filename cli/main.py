@@ -2,5 +2,8 @@
 
 print("KPI ")
 
-text = input("> ")
-print(text)
+quit = False
+while not quit: 
+    text = input("> ")
+    if text == 'quit':
+        quit= True
