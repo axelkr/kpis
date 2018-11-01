@@ -56,6 +56,18 @@ class KPIStore {
     return kpi;
   }
 
+  idExists(id:number) {
+    return this._kpis.some( x => x._id == id);
+  }
+
+  addMeasurement(id:number,aMeasurement:mixed) {
+    console.log(aMeasurement);
+  }
+
+  isValidMeasurement(id:number,aMeasurement:mixed) {
+    return true;
+  }
+
   _isValidKPI(aKPI:SingleKPI) {
     if (!aKPI.hasOwnProperty('_id')||!Number.isInteger(aKPI._id) || aKPI._id < 0) {
       return false;

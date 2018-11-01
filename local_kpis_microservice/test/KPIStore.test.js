@@ -159,5 +159,33 @@ describe('Behaviour common to all types of KPIs', () => {
 
     expect(readDuplicateKPIs).toThrow();
   });
+
+  test('idExists: rejects unknown id', () => {
+    const aKPI = randomKPI();
+    aKPI._id = 42;
+
+    var kpiStore = new KPIStore([aValidator]);
+    kpiStore.read({kpis:[aKPI]});
+    
+    expect(kpiStore.idExists(5)).not.toBeTruthy();
+  });
+
+  test('idExists: accepts known id', () => {
+    const aKPI = randomKPI();
+    aKPI._id = 42;
+
+    var kpiStore = new KPIStore([aValidator]);
+    kpiStore.read({kpis:[aKPI]});
+    
+    expect(kpiStore.idExists(aKPI._id)).toBeTruthy();
+  });
+
+  test('isValidMeasurement: TODO', () => {
+    expect(false).toBeTruthy();  
+  });
+
+  test('addMeasurement: TODO', () => {
+    expect(false).toBeTruthy();  
+  });
 });
 

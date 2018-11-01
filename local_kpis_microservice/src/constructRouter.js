@@ -32,9 +32,12 @@ function constructRouter(kpiStore:KPIStore,lastUpdateOn:()=>Date) {
       res.sendStatus(HTTP_STATUS_NOT_FOUND);
       return;
     }
-    console.log(req.query);
-
-    res.sendStatus(HTTP_STATUS_OK);
+    if (router._kpiStore.idExists(id) && router._kpiStore.isValidMeasurement(id,req.query)) {
+      router._kpiStore.addMeasurement(id,req.query);
+      res.sendStatus(HTTP_STATUS_OK);
+    } else {
+      res.sendStatus(HTTP_STATUS_BAD_REQUEST);
+    }
   });
 
   router.get('/kpi/:id', (req, res) => {
