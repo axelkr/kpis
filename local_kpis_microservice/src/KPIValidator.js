@@ -4,9 +4,9 @@
 import type SingleKPI from './SingleKPI';
 
 class KPIValidator {
-  _validatorForType : boolean;
+  _validatorForType : string;
   
-  constructor(validatorForType) {
+  constructor(validatorForType:string) {
     this._validatorForType = validatorForType;
   }
 

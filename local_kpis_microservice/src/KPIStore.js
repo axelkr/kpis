@@ -46,8 +46,8 @@ class KPIStore {
     return kpiNames;
   }
 
-  getKPI(id:number) {
-    var kpi = {};
+  getKPI(id:number):?SingleKPI {
+    var kpi = null;
     this._kpis.forEach(function(element) {
       if (element._id === id ) {
         kpi = element;
@@ -76,6 +76,9 @@ class KPIStore {
       return false;
     }
     var aKPI = this.getKPI(id);
+    if (aKPI === null || aKPI === undefined) {
+      return false;
+    }
     return this._kpiValidators.some(x=> x.isApplicableFor(aKPI) && x.isValidMeasurement(aMeasurement));
   }
 
