@@ -183,9 +183,5 @@ describe('Behaviour common to all types of KPIs', () => {
     
     expect(kpiStore.idExists(aKPI._id)).toBeTruthy();
   });
-
-  test('addMeasurement: TODO', () => {
-    expect(false).toBeTruthy();  
-  });
 });
 

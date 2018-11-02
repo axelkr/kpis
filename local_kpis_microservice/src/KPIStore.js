@@ -61,7 +61,14 @@ class KPIStore {
   }
 
   addMeasurement(id:number,aMeasurement:mixed) {
-    console.log(aMeasurement);
+    if (!this.isValidMeasurement(id,aMeasurement)) {
+      return false;
+    }
+    this._kpis.forEach(function(element) {
+      if (element._id === id  ) {
+        element.measurements.push(aMeasurement);
+      }
+    });
   }
 
   isValidMeasurement(id:number,aMeasurement:mixed) {
