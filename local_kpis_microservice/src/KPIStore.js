@@ -65,7 +65,11 @@ class KPIStore {
   }
 
   isValidMeasurement(id:number,aMeasurement:mixed) {
-    return this._kpiValidators.some(x=>x.isValidMeasurement(aMeasurement));
+    if (!this.idExists(id)) {
+      return false;
+    }
+    var aKPI = this.getKPI(id);
+    return this._kpiValidators.some(x=> x.isApplicableFor(aKPI) && x.isValidMeasurement(aMeasurement));
   }
 
   _isValidKPI(aKPI:SingleKPI) {
