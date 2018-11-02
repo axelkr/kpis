@@ -6,11 +6,11 @@ import type SingleKPI from './SingleKPI';
 
 class CumulativeNumberOverYearValidator extends KPIValidator {
   constructor() {
-    super();
+    super('cumulative_number_over_year');
   }
 
   isValid(aKPI:SingleKPI) {
-    if (aKPI.type !== 'cumulative_number_over_year') {
+    if (!this.isApplicableFor(aKPI)) {
       return false;
     }
 

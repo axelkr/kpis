@@ -6,11 +6,11 @@ import type SingleKPI from './SingleKPI';
 
 class ContinuousWithoutDeadlineValidator extends KPIValidator {
   constructor() {
-    super();
+    super('continuous_without_deadline');
   }
 
   isValid(aKPI:SingleKPI) {
-    if (aKPI.type !== 'continuous_without_deadline') {
+    if (!this.isApplicableFor(aKPI)) {
       return false;
     }
 
