@@ -7,6 +7,10 @@ class MockValidator {
   isValid(aKPI:{type:string,goal:any,measurements:any}) {
     return aKPI.type === 'mockKPI';
   }
+
+  isValidMeasurement(aMeasurement:any) {
+    return true;
+  }
 }
 
 const aValidator = new MockValidator();
@@ -178,10 +182,6 @@ describe('Behaviour common to all types of KPIs', () => {
     kpiStore.read({kpis:[aKPI]});
     
     expect(kpiStore.idExists(aKPI._id)).toBeTruthy();
-  });
-
-  test('isValidMeasurement: TODO', () => {
-    expect(false).toBeTruthy();  
   });
 
   test('addMeasurement: TODO', () => {

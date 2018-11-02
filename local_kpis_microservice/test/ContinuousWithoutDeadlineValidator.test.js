@@ -91,4 +91,25 @@ describe('Validation of KPIs of type continuous_without_deadline', () => {
     var aContinuousWithoutDeadlineValidator = new ContinuousWithoutDeadlineValidator();
     expect(aContinuousWithoutDeadlineValidator.isValid(aKPI)).not.toBeTruthy();
   });
+
+  test('isValidMeasurement: accepts measurement with value and date', () => {
+    var aMeasurement = {"date" : "2013-04-08" , "value" : 2};
+    var aContinuousWithoutDeadlineValidator = new ContinuousWithoutDeadlineValidator();
+    expect(aContinuousWithoutDeadlineValidator.isValidMeasurement(aMeasurement)).toBeTruthy();
+  });
+
+  test.each([2,undefined,[],'aString'])('isValidMeasurement: rejects measurement with non-object types', (invalidObject) => {
+    var aContinuousWithoutDeadlineValidator = new ContinuousWithoutDeadlineValidator();
+    expect(aContinuousWithoutDeadlineValidator.isValidMeasurement(invalidObject)).not.toBeTruthy();
+  });
+
+  test.each([{"value" : 2},{"date" : "2013-04-08"}])('isValidMeasurement: rejects measurement without value or date', (incompleteMeasurement) => {
+    var aContinuousWithoutDeadlineValidator = new ContinuousWithoutDeadlineValidator();
+    expect(aContinuousWithoutDeadlineValidator.isValidMeasurement(incompleteMeasurement)).not.toBeTruthy();
+  });
+
+  test.each([{"date" : "2013-04-08" , "value" : "2"},{"date" : 2013, "value" : 2}])('isValid: rejects measurement with incorrect types for value or date', (wrongTypeOfMeasurement) => {
+    var aContinuousWithoutDeadlineValidator = new ContinuousWithoutDeadlineValidator();
+    expect(aContinuousWithoutDeadlineValidator.isValidMeasurement(wrongTypeOfMeasurement)).not.toBeTruthy();
+  });
 });

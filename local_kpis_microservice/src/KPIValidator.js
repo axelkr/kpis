@@ -10,6 +10,10 @@ class KPIValidator {
   isValid(aKPI:SingleKPI) {
     return true;
   }
+
+  isValidMeasurement(aMeasurement:any) {
+    return true;
+  }
 }
 
 module.exports = KPIValidator;

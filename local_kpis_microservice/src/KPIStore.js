@@ -65,7 +65,7 @@ class KPIStore {
   }
 
   isValidMeasurement(id:number,aMeasurement:mixed) {
-    return true;
+    return this._kpiValidators.some(x=>x.isValidMeasurement(aMeasurement));
   }
 
   _isValidKPI(aKPI:SingleKPI) {
