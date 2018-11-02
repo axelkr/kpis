@@ -8,6 +8,7 @@ import type KPI from '../records/KPI';
 import type LoadObject from '../../utils/LoadObject';
 
 import SingleNumberWithoutDeadline from './SingleNumberWithoutDeadline';
+import SingleNumberWithoutDeadlineDetails from './SingleNumberWithoutDeadlineDetails';
 import CumulativeNumberPerYear from './CumulativeNumberPerYear';
 import CumulativeNumberPerYearDetails from './CumulativeNumberPerYearDetails';
 
@@ -27,10 +28,14 @@ kpiTypeToComponent.selectSummaryComponent = function(type:string,KPILo:LoadObjec
 }
 
 kpiTypeToComponent.selectDetailsComponent = function(type:string,KPILo:LoadObject<KPI>) {
-    if (type === "cumulative_number_over_year") {
-      return (<CumulativeNumberPerYearDetails KPI={KPILo}/>)
+    if (type === "continuous_without_deadline") {
+        return (<SingleNumberWithoutDeadlineDetails KPI={KPILo}/>)
     }
     
+    if (type === "cumulative_number_over_year") {
+        return (<CumulativeNumberPerYearDetails KPI={KPILo}/>)
+    }
+
     return null;
 }
 
