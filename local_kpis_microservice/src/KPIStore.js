@@ -68,10 +68,11 @@ class KPIStore {
     if (!this.isValidMeasurement(id,aMeasurement)) {
       return false;
     }
-    this._kpis.forEach(function(element) {
+    this._kpis = this._kpis.map(function(element) {
       if (element._id === id  ) {
         element.measurements.push(aMeasurement);
       }
+      return element;
     });
   }
 
