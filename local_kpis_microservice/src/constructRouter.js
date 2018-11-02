@@ -9,10 +9,11 @@ const HTTP_STATUS_OK = 200;
 const HTTP_STATUS_BAD_REQUEST = 400;
 const HTTP_STATUS_NOT_FOUND = 404;
 
-function constructRouter(kpiStore:KPIStore,lastUpdateOn:()=>Date) {
+function constructRouter(kpiStore:KPIStore,lastUpdateOn:()=>Date,onKPIsUpdated:()=>void ) {
   const router = express.Router();
   router._kpiStore = kpiStore;
   router._getLastUpdateOn = lastUpdateOn;
+  router._onKPIsUpdated = onKPIsUpdated;
 
   router.get('/lastUpdateOn', (req, res) => {
     var lastUpdate = router._getLastUpdateOn();
@@ -34,6 +35,7 @@ function constructRouter(kpiStore:KPIStore,lastUpdateOn:()=>Date) {
     }
     if (router._kpiStore.idExists(id) && router._kpiStore.isValidMeasurement(id,req.query)) {
       router._kpiStore.addMeasurement(id,req.query);
+      router._onKPIsUpdated();
       res.sendStatus(HTTP_STATUS_OK);
     } else {
       res.sendStatus(HTTP_STATUS_BAD_REQUEST);

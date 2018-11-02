@@ -17,6 +17,10 @@ class KPIStore {
     }
   }
 
+  getAllKPIs() {
+    return this._kpis;
+  }
+
   read(rawJSONofKPIs:{kpis:Array<SingleKPI>}) {
     var updatedKPIs = [];
     var self = this;

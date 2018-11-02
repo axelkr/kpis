@@ -6,6 +6,7 @@ const express = require('express');
 const config = require('./config');
 const constructRouter = require('./constructRouter');
 const KPIFileWatcher = require('./KPIFileWatcher');
+const KPIFileWriter = require('./KPIFileWriter');
 const KPIStore = require('./KPIStore');
 
 const ContinuousWithoutDeadlineValidator = require('./ContinuousWithoutDeadlineValidator');
@@ -21,7 +22,8 @@ const fileWatcher = new KPIFileWatcher(KPI_FILE);
 fileWatcher.startWatching();
 fileWatcher.callSetOnUpdate(kpiStore);
 fileWatcher.updated();
-const router = constructRouter(kpiStore,()=>fileWatcher.lastUpdateOn());
+const fileWriter = new KPIFileWriter(KPI_FILE,kpiStore);
+const router = constructRouter(kpiStore,()=>fileWatcher.lastUpdateOn(), ()=> fileWriter.writeKPIs());
 
 app.use('/',router);
 
