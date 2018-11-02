@@ -1,7 +1,8 @@
 // @flow
 'use strict';
 
-const express = require('express');
+const express    = require('express');
+const bodyParser = require("body-parser");
 
 const config = require('./config');
 const constructRouter = require('./constructRouter');
@@ -25,6 +26,8 @@ fileWatcher.updated();
 const fileWriter = new KPIFileWriter(KPI_FILE,kpiStore);
 const router = constructRouter(kpiStore,()=>fileWatcher.lastUpdateOn(), ()=> fileWriter.writeKPIs());
 
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use('/',router);
 
 // fallback

@@ -33,8 +33,8 @@ function constructRouter(kpiStore:KPIStore,lastUpdateOn:()=>Date,onKPIsUpdated:(
       res.sendStatus(HTTP_STATUS_NOT_FOUND);
       return;
     }
-    if (router._kpiStore.idExists(id) && router._kpiStore.isValidMeasurement(id,req.query)) {
-      router._kpiStore.addMeasurement(id,req.query);
+    if (router._kpiStore.idExists(id) && router._kpiStore.isValidMeasurement(id,req.body)) {
+      router._kpiStore.addMeasurement(id,req.body);
       router._onKPIsUpdated();
       res.sendStatus(HTTP_STATUS_OK);
     } else {
