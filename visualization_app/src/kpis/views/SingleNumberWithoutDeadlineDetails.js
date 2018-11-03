@@ -98,6 +98,24 @@ class SingleNumberWithoutDeadlinePropsDetails extends React.Component<SingleNumb
       .attr("class", "line")
       .attr("d", function(d) { return line(d) })
       .style("stroke","red");
+
+    const goalLine = [
+      {
+        date: valueOverDate.map(x=>x.date).reduce((accum,currentValue)=> (accum < currentValue ? accum : currentValue)),
+        value: KPI.goal.target
+      },
+      {
+        date: valueOverDate.map(x=>x.date).reduce((accum,currentValue)=> (accum > currentValue ? accum : currentValue)),
+        value: KPI.goal.target
+      }
+    ]
+    g.append("g")
+      .datum(goalLine)
+      .append("path")
+      .attr("class", "line")
+      .attr("d", function(d) { return line(d) })
+      .style("stroke","red")
+      .style("stroke-dasharray","5,5");
   }  
 }
 
