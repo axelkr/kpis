@@ -1,6 +1,6 @@
 const path = require('path');
 
-module.exports = {
+const commonConfiguration = {
   entry: {
     root: './src/root.js'
   },
@@ -8,7 +8,6 @@ module.exports = {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist')
   },
-  mode: 'development',
   module: {
     rules: [
       { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" },
@@ -17,3 +16,16 @@ module.exports = {
     ]
   }
 };
+
+
+module.exports = env => {
+  var configuration = commonConfiguration;
+  const isProductionBuild = env instanceof Object && env.production;
+  var mode = 'development';
+  if (isProductionBuild) {
+    mode = 'production';
+  }
+  configuration.mode = mode;
+  return configuration;
+};
+

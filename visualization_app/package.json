@@ -8,10 +8,10 @@
     "url": "https://github.com/axelkr/kpis.git"
   },
   "scripts": {
-    "build": "webpack",
+    "build": "webpack --env.production",
     "watch": "webpack --watch",
     "start": "node ./server/app.js",
-    "profile-bundle": "webpack --profile --json > stats.json",
+    "profile-bundle": "webpack --env.production --profile --json > stats.json",
     "test": "jest",
     "flow": "flow"
   },
