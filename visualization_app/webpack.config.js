@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack'); //to access built-in plugins
 
 const commonConfiguration = {
   entry: {
@@ -14,7 +15,10 @@ const commonConfiguration = {
       { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'svg-url-loader'},
       { test: /\.css$/, use: [ 'style-loader', 'css-loader' ] }
     ]
-  }
+  },
+  plugins: [
+    new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /de|en/)
+  ]
 };
 
 
