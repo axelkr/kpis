@@ -7,7 +7,7 @@ import type LoadObjectMap from '../../utils/LoadObjectMap';
 import type LoadObjectState from '../../utils/LoadObjectState';
 import type KPI from '../records/KPI';
 import KPICard from './KPICard';
-import kpiTypeToComponent from './kpiTypeToComponent';
+import kpiTypeToComponent from '../visualizations/kpiTypeToComponent';
 
 import React from 'react';
 
