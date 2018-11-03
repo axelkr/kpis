@@ -1,0 +1,7 @@
+{
+    "PORT" : 3000,
+    "ROUTES": [
+        { "route":"/kpi*", "forwardTo" : "http://localhost:3001"},
+        { "route":"/", "forwardTo" : "http://localhost:3003"}
+    ]
+}
