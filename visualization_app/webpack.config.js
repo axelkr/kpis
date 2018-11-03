@@ -17,7 +17,7 @@ const commonConfiguration = {
     ]
   },
   plugins: [
-    new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /de|en/)
+    
   ]
 };
 
@@ -25,11 +25,10 @@ const commonConfiguration = {
 module.exports = env => {
   var configuration = commonConfiguration;
   const isProductionBuild = env instanceof Object && env.production;
-  var mode = 'development';
+   configuration.mode = (isProductionBuild ? 'production' : 'development');
   if (isProductionBuild) {
-    mode = 'production';
+    configuration.plugins.push(new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /de|en/));
   }
-  configuration.mode = mode;
   return configuration;
 };
 
