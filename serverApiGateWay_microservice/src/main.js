@@ -4,21 +4,15 @@
 const express = require('express');
 const request = require('request');
 const config = require('./config');
-const microService = require('./microService');
 
 const PORT = config.PORT;
 const routes = config.ROUTES;
 
 const app = express();
 
-var microServices : Array<microService>;
-var microServices = [];
-routes.forEach(configuredRoute => microServices.push(new microService(configuredRoute.route,configuredRoute.forwardTo)));
-
-for (var i=0;i<microServices.length ; i++) {
-  var aMicroService = microServices[i];
-  const route = aMicroService.route;
-  const targetUrl = aMicroService.url;
+routes.forEach(function(configuredRoute) {
+  const route = configuredRoute.route;
+  const targetUrl = configuredRoute.forwardTo;
   app.use(route, function (req,res){
     var newUrl = targetUrl+req.originalUrl;
     request({url: newUrl, method:req.method,headers: req.headers, body:req.body}, function(error, response, body){
@@ -30,7 +24,7 @@ for (var i=0;i<microServices.length ; i++) {
       res.status(response.statusCode).send(body);
     });
   });
-}
+});
 
 app.get('*',function (req, res) {
   res.sendStatus(404);
