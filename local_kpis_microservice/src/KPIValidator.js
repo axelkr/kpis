@@ -14,11 +14,11 @@ class KPIValidator {
     return aKPI.type === this._validatorForType;
   }
 
-  isValid(aKPI:SingleKPI) {
+  isValid(aKPI:SingleKPI) { // eslint-disable-line no-unused-vars
     return true;
   }
 
-  isValidMeasurement(aMeasurement:any) {
+  isValidMeasurement(aMeasurement:any) { // eslint-disable-line no-unused-vars
     return true;
   }
 }
