@@ -2,7 +2,6 @@
 'use strict';
 
 import type Immutable from 'immutable';
-import type LoadObject from '../../utils/LoadObject';
 import type LoadObjectMap from '../../utils/LoadObjectMap';
 import type LoadObjectState from '../../utils/LoadObjectState';
 import type KPI from '../records/KPI';
@@ -36,7 +35,7 @@ class KPIGroup extends React.Component<KPIGroupProps> {
     }
 
     const listItems = [];
-    list.forEach((id, i) => {
+    list.forEach((id,_) => {
       const KPISummary = kpiTypeToComponent.selectSummaryComponent(id.type,KPIs.get(id._id));
       const KPIDetails = kpiTypeToComponent.selectDetailsComponent(id.type,KPIs.get(id._id));
       listItems.push(

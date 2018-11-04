@@ -3,8 +3,6 @@
 
 import type {KPIAction} from '../KPIAction';
 
-import FakeID from '../../utils/FakeID';
-import Immutable from 'immutable';
 import LoadObject from '../../utils/LoadObject';
 import LoadObjectMap from '../../utils/LoadObjectMap';
 import {ReduceStore} from 'flux/utils';

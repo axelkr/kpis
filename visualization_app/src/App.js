@@ -10,6 +10,6 @@ function App(props){
       <KPIGroup {...props}/>
     </div>
   );
-};
+}
 
 export default App;
