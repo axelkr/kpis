@@ -1,4 +1,6 @@
 // @flow
+/* keep console.log to inform new users*/
+/* eslint no-console: 0 */
 'use strict';
 
 const fs = require('fs');

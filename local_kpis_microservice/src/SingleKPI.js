@@ -8,6 +8,6 @@ class SingleKPI {
   goal:any;
   measurements:any;
   tags:Array<string>
-}; 
+}
 
 module.exports = SingleKPI;
