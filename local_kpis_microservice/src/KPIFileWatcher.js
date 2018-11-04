@@ -30,7 +30,6 @@ class KPIFileWatcher {
 
   updated() {
     if (!fs.existsSync(this._fileToWatch)) {
-        console.log("file not available: "+this._fileToWatch);
         return;
     }
     fs.readFile(this._fileToWatch, (err,rawContent:any) => {
@@ -50,7 +49,7 @@ class KPIFileWatcher {
           try {
             element.read(asJSON);
           } catch (e) {
-            console.log("file content cannot be read because of: "+e);
+            return;
           }
         });
         this._timeOfLastUpdate = new Date();
@@ -59,7 +58,7 @@ class KPIFileWatcher {
 
   startWatching() {
     if (fs.existsSync(this._fileToWatch)) {
-      fs.watch(this._fileToWatch, { persistent: false}, (eventType, filename) => {
+      fs.watch(this._fileToWatch, { persistent: false}, () => {
         this.updated();
       });
     }
