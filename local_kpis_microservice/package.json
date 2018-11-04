@@ -11,7 +11,8 @@
     "start": "node ./dist/main.js",
     "build": "babel src/ -d dist/",
     "flow": "flow",
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint src"
   },
   "dependencies": {
     "express": "^4.16.4"
@@ -22,9 +23,12 @@
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-flow": "^7.0.0",
     "babel-core": "^7.0.0-bridge.0",
+    "babel-eslint": "^10.0.1",
     "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.4",
     "body-parser": "^1.18.3",
+    "eslint": "^5.8.0",
+    "eslint-plugin-import": "^2.14.0",
     "flow-bin": "^0.85.0",
     "jest": "^23.6.0",
     "regenerator-runtime": "^0.12.1",
