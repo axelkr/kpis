@@ -3,7 +3,6 @@
 
 import React from 'react';
 import * as d3 from 'd3';
-import moment from 'moment';
 
 import type KPI from '../records/KPI';
 import type LoadObject from '../../utils/LoadObject';
@@ -35,7 +34,6 @@ class SingleNumberWithoutDeadlinePropsDetails extends React.Component<SingleNumb
     if (!this.props.KPI.hasValue()) {
       return null;
     }
-    var KPI = this.props.KPI.getValueEnforcing();
     return (
       <svg ref={node => this.node = node}
         width={960} height={500}> 

@@ -2,7 +2,6 @@
 'use strict';
 
 import React from 'react';
-import classnames from 'classnames';
 
 import type LoadObject from '../../utils/LoadObject';
 import type KPI from '../records/KPI';

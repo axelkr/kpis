@@ -35,7 +35,6 @@ class KPIDetailsCumulativeNumberPerYearDetails extends React.Component<KPIDetail
     if (!this.props.KPI.hasValue()) {
       return null;
     }
-    var KPI = this.props.KPI.getValueEnforcing();
     return (
       <svg ref={node => this.node = node}
         width={960} height={500}> 
@@ -86,10 +85,10 @@ class KPIDetailsCumulativeNumberPerYearDetails extends React.Component<KPIDetail
         }
 
         if ( index == amountsPerDayPerYear.length ) {
-              for (var i=0;i<366;++i){
-              values[i] = {};
-              values[i].date = convertIndexToALeapYearDate(i);
-              values[i].total = 0;
+              for (var j=0;j<366;++j){
+              values[j] = {};
+              values[j].date = convertIndexToALeapYearDate(j);
+              values[j].total = 0;
           }
         }
 

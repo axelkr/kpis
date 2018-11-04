@@ -10,7 +10,6 @@ import kpiTypeToComponent from '../visualizations/kpiTypeToComponent';
 
 import React from 'react';
 
-import classnames from 'classnames';
 import '../../App.css';
 
 type KPIGroupProps = {
