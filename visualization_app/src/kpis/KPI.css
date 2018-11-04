@@ -1,23 +1,21 @@
 .kpi_card {
-    min-width : 320px;
-    max-width : 320px;
-    vertical-align: top;
-    width: 320px;
-    min-height : 210px;
-    max-height : 210px;
-    height: 210px;
-    border-top: 1px solid grey;
-    border-left: 1px solid grey;
-    border-right: 1px solid grey;
-    border-bottom: 1px solid grey;
+    min-width : 300px;
+    max-width : 300px;
+    width: 300px;
+    min-height : 185px;
+    max-height : 185px;
+    height: 185px;
+    border: 1px solid grey;
     display:inline-block;
-    text-align:center;
-    margin: 5px;
+    margin: 9px;
     background-color : #333333;
   }
 
   .kpi_card_title {
-    background-color: #990000
+    background-color: #990000;
+    height: 43px;
+    line-height: 43px; /* horizontally align text*/
+    text-align:center;
   }
 
   .kpi-details-overlay {
