@@ -61,7 +61,7 @@ class KPICard extends React.Component<KPICardProps,KPICardState> {
     }
 
     return (
-        <div className="kpi_card" onPointerDown={this.handleClick}>
+        <div className="kpi_card" onClick={this.handleClick}>
           <div className="kpi_card_title">{KPI.name}</div>
           <br/>
           {summary}
