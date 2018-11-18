@@ -7,11 +7,10 @@ import type KPI from '../records/KPI';
 
 import type LoadObject from '../../utils/LoadObject';
 
-import SingleNumberWithoutDeadline from './SingleNumberWithoutDeadline';
-import SingleNumberWithoutDeadlineDetails from './SingleNumberWithoutDeadlineDetails';
-import CumulativeNumberPerYear from './CumulativeNumberPerYear';
-import CumulativeNumberPerYearDetails from './CumulativeNumberPerYearDetails';
-
+const SingleNumberWithoutDeadline = React.lazy(() => import('./SingleNumberWithoutDeadline'));
+const SingleNumberWithoutDeadlineDetails = React.lazy(() => import('./SingleNumberWithoutDeadlineDetails'));
+const CumulativeNumberPerYear = React.lazy(() => import('./CumulativeNumberPerYear'));
+const CumulativeNumberPerYearDetails = React.lazy(() => import('./CumulativeNumberPerYearDetails'));
 
 const kpiTypeToComponent = {};
 
