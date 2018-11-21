@@ -37,7 +37,7 @@ class CumulativeNumberOverYearValidator extends KPIValidator {
       return false;
     }
 
-    if (!aMeasurement.hasOwnProperty('date')||!(typeof aMeasurement.date === 'string' || aMeasurement.date instanceof String)) {
+    if (!aMeasurement.hasOwnProperty('date')||!dataTypeValidator.isDate(aMeasurement.date)) {
       return false;
     }
 

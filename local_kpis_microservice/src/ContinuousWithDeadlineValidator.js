@@ -20,7 +20,7 @@ class ContinuousWithDeadlineValidator extends KPIValidator {
       return false;
     }
 
-    if (!aKPI.goal.hasOwnProperty('targetDate')||!(typeof aKPI.goal.targetDate === 'string' || aKPI.goal.targetDate instanceof String)) {
+    if (!aKPI.goal.hasOwnProperty('targetDate')||!dataTypeValidator.isDate(aKPI.goal.targetDate)) {
       return false;
     }
 
@@ -41,7 +41,7 @@ class ContinuousWithDeadlineValidator extends KPIValidator {
       return false;
     }
 
-    if (!aMeasurement.hasOwnProperty('date')||!(typeof aMeasurement.date === 'string' || aMeasurement.date instanceof String)) {
+    if (!aMeasurement.hasOwnProperty('date')||!dataTypeValidator.isDate(aMeasurement.date)) {
       return false;
     }
 
