@@ -1,6 +1,7 @@
 // @flow
 'use strict';
 
+const DataTypeValidator = require('./DataTypeValidator');
 const KPIValidator = require('./KPIValidator');
 import type SingleKPI from './SingleKPI';
 
@@ -10,11 +11,12 @@ class CumulativeNumberOverYearValidator extends KPIValidator {
   }
 
   isValid(aKPI:SingleKPI) {
+    const dataTypeValidator = new DataTypeValidator();
     if (!this.isApplicableFor(aKPI)) {
       return false;
     }
 
-    if (!aKPI.goal.hasOwnProperty('target')||!Number.isFinite(aKPI.goal.target)) {
+    if (!aKPI.goal.hasOwnProperty('target')||!dataTypeValidator.isFloat(aKPI.goal.target)) {
       return false;
     }
     
@@ -26,11 +28,12 @@ class CumulativeNumberOverYearValidator extends KPIValidator {
   }
 
   isValidMeasurement(aMeasurement:any) {
+    const dataTypeValidator = new DataTypeValidator();
     if (aMeasurement === null || typeof aMeasurement !== 'object' || aMeasurement === undefined) {
       return false;
     }
 
-    if (!aMeasurement.hasOwnProperty('value')||!Number.isFinite(aMeasurement.value)) {
+    if (!aMeasurement.hasOwnProperty('value')||!dataTypeValidator.isFloat(aMeasurement.value)) {
       return false;
     }
 
