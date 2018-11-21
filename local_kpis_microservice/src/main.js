@@ -11,6 +11,7 @@ const KPIFileWriter = require('./KPIFileWriter');
 const KPIStore = require('./KPIStore');
 
 const ContinuousWithoutDeadlineValidator = require('./ContinuousWithoutDeadlineValidator');
+const ContinuousWithDeadlineValidator = require('./ContinuousWithDeadlineValidator');
 const CumulativeNumberOverYearValidator = require('./CumulativeNumberOverYearValidator');
 
 const PORT = config.PORT;
@@ -18,7 +19,7 @@ const KPI_FILE = config.KPI_FILE;
 
 const app = express();
 
-const kpiStore = new KPIStore([new ContinuousWithoutDeadlineValidator(),new CumulativeNumberOverYearValidator()]);
+const kpiStore = new KPIStore([new ContinuousWithoutDeadlineValidator(),new CumulativeNumberOverYearValidator(),new ContinuousWithDeadlineValidator()]);
 const fileWatcher = new KPIFileWatcher(KPI_FILE);
 fileWatcher.startWatching();
 fileWatcher.callSetOnUpdate(kpiStore);
