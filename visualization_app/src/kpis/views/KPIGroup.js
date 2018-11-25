@@ -50,7 +50,7 @@ class KPIGroup extends React.Component<KPIGroupProps> {
       );
     });
     return (
-      <div>{listItems}</div>
+      <>{listItems}</>
     );
   }
 }

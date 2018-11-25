@@ -5,12 +5,8 @@ import React from 'react';
 
 import '../../App.css';
 
-class LoadingKPI extends React.Component {
-  render(){    
-    return (
-        <label>Loading...</label>
-    );
-  }
+function LoadingKPI(props) {
+  return <label>Loading...</label>;
 }
 
 export default LoadingKPI;
