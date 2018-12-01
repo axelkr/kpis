@@ -26,6 +26,6 @@
     "babel-loader": "^8.0.4",
     "eslint": "^5.9.0",
     "eslint-plugin-import": "^2.14.0",
-    "flow-bin": "^0.86.0"
+    "flow-bin": "^0.87.0"
   }
 }
