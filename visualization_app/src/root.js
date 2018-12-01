@@ -4,4 +4,4 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import AppContainer from './AppContainer';
 
-ReactDOM.render(<AppContainer />, document.getElementById('root'));
+ReactDOM.unstable_createRoot(document.getElementById('root')).render(<AppContainer />);
