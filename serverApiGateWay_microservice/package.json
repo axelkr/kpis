@@ -20,12 +20,12 @@
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.2.2",
-    "@babel/preset-env": "^7.2.3",
+    "@babel/preset-env": "^7.3.1",
     "@babel/preset-flow": "^7.0.0",
     "babel-eslint": "^10.0.1",
-    "babel-loader": "^8.0.4",
-    "eslint": "^5.11.0",
-    "eslint-plugin-import": "^2.14.0",
-    "flow-bin": "^0.89.0"
+    "babel-loader": "^8.0.5",
+    "eslint": "^5.13.0",
+    "eslint-plugin-import": "^2.16.0",
+    "flow-bin": "^0.92.1"
   }
 }
