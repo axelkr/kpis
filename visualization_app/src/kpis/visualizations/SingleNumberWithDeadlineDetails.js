@@ -26,9 +26,6 @@ class SingleNumberWithDeadlinePropsDetails extends React.Component<SingleNumberW
     }
     const goalData = this.readValueData();
 
-    var KPI = this.props.KPI.getValueEnforcing();
-    var targetValue = parseFloat(KPI.goal.target);
-
     return (
       <LineChart
         width={960}
@@ -38,7 +35,7 @@ class SingleNumberWithDeadlinePropsDetails extends React.Component<SingleNumberW
           top: 5, right: 30, left: 20, bottom: 5,
         }}
       > 
-        <YAxis domain={['auto', 'auto']} ticks={[targetValue]} stroke="#fff" axisLine={false}/>
+        <YAxis domain={['auto', 'auto']} ticks={[goalData[0].target]} stroke="#fff" axisLine={false}/>
         <Line type="monotone" dataKey="value" stroke="#ff0000" strokeWidth="2" dot={false} isAnimationActive={false}/>
         <Line type="monotone" dataKey="target" stroke="#ff0000" strokeWidth="2" strokeDasharray="5 5" dot={false} isAnimationActive={false}/>
       </LineChart>
@@ -63,9 +60,11 @@ class SingleNumberWithDeadlinePropsDetails extends React.Component<SingleNumberW
     valueOverDate.sort((x,y)=> x.date.getTime() - y.date.getTime());
 
     var targetDate = parseTime(KPI.goal.targetDate);
-    if(valueOverDate[valueOverDate.length -1].date < targetDate) {
+    while(valueOverDate[valueOverDate.length -1].date < targetDate) {
+      var nextDay = new Date(valueOverDate[valueOverDate.length -1].date);
+      nextDay.setDate(nextDay.getDate() + 1);
       var extendedValue = {
-        'date' : targetDate,
+        'date' : nextDay,
         'target': targetValue
       }
       valueOverDate.push(extendedValue);
