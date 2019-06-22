@@ -38,11 +38,12 @@ class SingleNumberWithDeadline extends React.Component<SingleNumberWithDeadlineP
       return "-";
     }
     
+    const dateTimeFormat = 'DD.MM.YYYY';
     var latestValue = measurements[0].value;
-    var latestDate  = moment(measurements[0].date);
+    var latestDate  = moment(measurements[0].date,dateTimeFormat);
     
     measurements.forEach(function(element) {
-      var dateElement = moment(element.date);
+      var dateElement = moment(element.date,dateTimeFormat);
       if (dateElement > latestDate) {
         latestDate = dateElement;
         latestValue = element.value;

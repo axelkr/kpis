@@ -2,7 +2,7 @@
 'use strict';
 
 import React from 'react';
-import {timeParse} from 'd3';
+import moment from 'moment';
 import {
   LineChart, Line, YAxis
 } from 'recharts';
@@ -43,26 +43,25 @@ class SingleNumberWithDeadlinePropsDetails extends React.Component<SingleNumberW
   }
 
   readValueData() {
+    const dateTimeFormat = 'DD.MM.YYYY';
     if (!this.props.KPI.hasValue()) {
       return [];
     }
     var KPI = this.props.KPI.getValueEnforcing();
-    var parseTime = timeParse("%Y-%m-%d");
     var valueOverDate = [];
     var targetValue = parseFloat(KPI.goal.target);
     KPI.measurements.forEach(x=>{
       valueOverDate.push({
-        'date' : parseTime(x.date),
+        'date' : moment(x.date,dateTimeFormat),
         'value' : parseFloat(x.value),
         'target' : targetValue
       });
     })
-    valueOverDate.sort((x,y)=> x.date.getTime() - y.date.getTime());
+    valueOverDate.sort((x,y)=> x.date - y.date);
 
-    var targetDate = parseTime(KPI.goal.targetDate);
+    var targetDate = moment(KPI.goal.targetDate,dateTimeFormat);
     while(valueOverDate[valueOverDate.length -1].date < targetDate) {
-      var nextDay = new Date(valueOverDate[valueOverDate.length -1].date);
-      nextDay.setDate(nextDay.getDate() + 1);
+      const nextDay = moment(valueOverDate[valueOverDate.length -1].date).add(1,'days');      
       var extendedValue = {
         'date' : nextDay,
         'target': targetValue
