@@ -2,7 +2,7 @@
 'use strict';
 
 import React from 'react';
-import * as d3 from 'd3';
+import {timeParse} from 'd3';
 import {
   LineChart, Line, YAxis
 } from 'recharts';
@@ -37,7 +37,8 @@ class SingleNumberWithDeadlinePropsDetails extends React.Component<SingleNumberW
         margin={{
           top: 5, right: 30, left: 20, bottom: 5,
         }}
-      > <YAxis domain={['auto', 'auto']} ticks={[targetValue]} stroke="#fff" axisLine={false}/>
+      > 
+        <YAxis domain={['auto', 'auto']} ticks={[targetValue]} stroke="#fff" axisLine={false}/>
         <Line type="monotone" dataKey="value" stroke="#ff0000" strokeWidth="2" dot={false} isAnimationActive={false}/>
         <Line type="monotone" dataKey="target" stroke="#ff0000" strokeWidth="2" strokeDasharray="5 5" dot={false} isAnimationActive={false}/>
       </LineChart>
@@ -49,7 +50,7 @@ class SingleNumberWithDeadlinePropsDetails extends React.Component<SingleNumberW
       return [];
     }
     var KPI = this.props.KPI.getValueEnforcing();
-    var parseTime = d3.timeParse("%Y-%m-%d");
+    var parseTime = timeParse("%Y-%m-%d");
     var valueOverDate = [];
     var targetValue = parseFloat(KPI.goal.target);
     KPI.measurements.forEach(x=>{
