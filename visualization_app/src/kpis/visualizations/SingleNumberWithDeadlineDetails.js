@@ -3,6 +3,9 @@
 
 import React from 'react';
 import * as d3 from 'd3';
+import {
+  LineChart, Line, YAxis
+} from 'recharts';
 
 import type KPI from '../records/KPI';
 import type LoadObject from '../../utils/LoadObject';
@@ -17,105 +20,57 @@ type SingleNumberWithDeadlinePropsDetailsState = {
 };
 
 class SingleNumberWithDeadlinePropsDetails extends React.Component<SingleNumberWithDeadlinePropsDetailsProps,SingleNumberWithDeadlinePropsDetailsState> {
-  constructor(props:SingleNumberWithDeadlinePropsDetailsProps){
-    super(props);
-    this.createChart = this.createChart.bind(this)
-  }
-
-  componentDidMount() {
-    this.createChart()
-  }
-
-  componentDidUpdate() {
-    this.createChart()
-  }
-
   render(){
     if (!this.props.KPI.hasValue()) {
       return null;
     }
+    const goalData = this.readValueData();
+
+    var KPI = this.props.KPI.getValueEnforcing();
+    var targetValue = parseFloat(KPI.goal.target);
+
     return (
-      <svg ref={node => this.node = node}
-        width={960} height={500}> 
-      </svg>
-    )
+      <LineChart
+        width={960}
+        height={500}
+        data={goalData}
+        margin={{
+          top: 5, right: 30, left: 20, bottom: 5,
+        }}
+      > <YAxis domain={['auto', 'auto']} ticks={[targetValue]} stroke="#fff" axisLine={false}/>
+        <Line type="monotone" dataKey="value" stroke="#ff0000" strokeWidth="2" dot={false} isAnimationActive={false}/>
+        <Line type="monotone" dataKey="target" stroke="#ff0000" strokeWidth="2" strokeDasharray="5 5" dot={false} isAnimationActive={false}/>
+      </LineChart>
+    );
   }
 
-  createChart() {
+  readValueData() {
     if (!this.props.KPI.hasValue()) {
-      return;
+      return [];
     }
     var KPI = this.props.KPI.getValueEnforcing();
-
-    var svg = d3.select("svg"),
-        margin = {top: 20, right: 80, bottom: 30, left: 50},
-        width = svg.attr("width") - margin.left - margin.right,
-        height = svg.attr("height") - margin.top - margin.bottom,
-        g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
     var parseTime = d3.timeParse("%Y-%m-%d");
-
-    var x = d3.scaleTime().range([0, width]),
-        y = d3.scaleLinear().range([height, 0]);
-
-    var line = d3.line()
-        .x(function(d) { return x(d.date); })
-        .y(function(d) { return y(d.value); });
-    
     var valueOverDate = [];
+    var targetValue = parseFloat(KPI.goal.target);
     KPI.measurements.forEach(x=>{
       valueOverDate.push({
         'date' : parseTime(x.date),
-        'value' : parseFloat(x.value)
+        'value' : parseFloat(x.value),
+        'target' : targetValue
       });
     })
     valueOverDate.sort((x,y)=> x.date.getTime() - y.date.getTime());
 
-    y.domain([
-      valueOverDate.map(x=>x.value).reduce((accum,currentValue)=> Math.min(accum,currentValue),KPI.goal.target),
-      valueOverDate.map(x=>x.value).reduce((accum,currentValue)=> Math.max(accum,currentValue),KPI.goal.target)
-    ]);
-
-    x.domain([
-      valueOverDate.map(x=>x.date).reduce((accum,currentValue)=> (accum < currentValue ? accum : currentValue)),
-      valueOverDate.map(x=>x.date).reduce((accum,currentValue)=> (accum > currentValue ? accum : currentValue))
-    ]);
-
-    g.append("g")
-        .attr("class", "axis axis--x")
-        .attr("transform", "translate(0," + height + ")")
-        .call(d3.axisBottom(x));
-
-    g.append("g")
-        .attr("class", "axis axis--y")
-        .call(d3.axisLeft(y));
-
-    g.append("g")
-      .datum(valueOverDate)
-      .append("path")
-      .attr("class", "line")
-      .attr("d", function(d) { return line(d) })
-      .style("stroke","red");
-
-    const goalLine = [
-      {
-        date: valueOverDate.map(x=>x.date).reduce((accum,currentValue)=> (accum < currentValue ? accum : currentValue)),
-        value: KPI.goal.target
-      },
-      {
-        date: valueOverDate.map(x=>x.date).reduce((accum,currentValue)=> (accum > currentValue ? accum : currentValue)),
-        value: KPI.goal.target
+    var targetDate = parseTime(KPI.goal.targetDate);
+    if(valueOverDate[valueOverDate.length -1].date < targetDate) {
+      var extendedValue = {
+        'date' : targetDate,
+        'target': targetValue
       }
-    ]
-    g.append("g")
-      .datum(goalLine)
-      .append("path")
-      .attr("class", "line")
-      .attr("d", function(d) { return line(d) })
-      .style("stroke","red")
-      .style("stroke-dasharray","5,5");
-  }  
+      valueOverDate.push(extendedValue);
+    }
+    return valueOverDate;
+  }
 }
 
 export default SingleNumberWithDeadlinePropsDetails;
-  
