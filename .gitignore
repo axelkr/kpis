@@ -12,7 +12,7 @@ visualization_app/dist
 # local configurations
 serverApiGateWay_microservice/config.json
 local_kpis_microservice/config.json
-local_kpis.json
+local*.json
 
 
 # Runtime data
