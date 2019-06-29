@@ -4,6 +4,10 @@
 import React from 'react';
 import * as d3 from 'd3';
 
+import {
+  LineChart, Line, YAxis
+} from 'recharts';
+
 import type KPI from '../records/KPI';
 import type LoadObject from '../../utils/LoadObject';
 
@@ -17,169 +21,131 @@ type KPIDetailsCumulativeNumberPerYearDetailsProps = {
 type KPIDetailsCumulativeNumberPerYearDetailsState = {
 };
 
-class KPIDetailsCumulativeNumberPerYearDetails extends React.Component<KPIDetailsCumulativeNumberPerYearDetailsProps,KPIDetailsCumulativeNumberPerYearDetailsState> {
-  constructor(props:KPIDetailsCumulativeNumberPerYearDetailsProps){
-    super(props);
-    this.createChart = this.createChart.bind(this)
-  }
-
-  componentDidMount() {
-    this.createChart()
-  }
-
-  componentDidUpdate() {
-    this.createChart()
-  }
-
-  render(){
+class KPIDetailsCumulativeNumberPerYearDetails extends React.Component<KPIDetailsCumulativeNumberPerYearDetailsProps, KPIDetailsCumulativeNumberPerYearDetailsState> {
+   render() {
     if (!this.props.KPI.hasValue()) {
       return null;
     }
-    return (
-      <svg ref={node => this.node = node}
-        width={960} height={500}> 
-      </svg>
-    )
-  }
-
-  createChart() {
-    if (!this.props.KPI.hasValue()) {
-      return;
-    }
     var KPI = this.props.KPI.getValueEnforcing();
-    var amountsPerDayPerYear = extractAmountPerDayPerYear(KPI.measurements);
-    var goalPerDay = createGoalPerDay(KPI.goal.target);
-    amountsPerDayPerYear.push(goalPerDay);
+    var [previousYears, amountsPerDayPerYear] = extractAmountPerDayPerYear(KPI.measurements);
+    var currentYear = previousYears.pop();
 
-    var svg = d3.select("svg"),
-        margin = {top: 20, right: 80, bottom: 30, left: 50},
-        width = svg.attr("width") - margin.left - margin.right,
-        height = svg.attr("height") - margin.top - margin.bottom,
-        g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    amountsPerDayPerYear.map((value) => {
+      value.goal = KPI.goal.target;
+      return value;
+    });
 
-    var x = d3.scaleTime().range([0, width]),
-        y = d3.scaleLinear().range([height, 0]),
-        z = d3.scaleOrdinal(d3.schemeCategory10);
+    const listItems = previousYears.map((aYear) =>
+      <Line key={aYear} type="monotone" dataKey={aYear} stroke="#880000" strokeWidth="1" dot={false} opacity={toOpacity(aYear, currentYear)} isAnimationActive={false} />
+    );
 
-    var line = d3.line()
-        .curve(d3.curveBasis)
-        .x(function(d) { return x(d.date); })
-        .y(function(d) { return y(d.total); });
-
-    x.domain([convertIndexToALeapYearDate(0), convertIndexToALeapYearDate(365)]);
-    y.domain([
-      d3.min(amountsPerDayPerYear, function(c) { return d3.min(c.values, function(d) { return d.total; }); }),
-      d3.max(amountsPerDayPerYear, function(c) { return d3.max(c.values, function(d) { return d.total; }); })
-    ]);
-
-    z.domain(amountsPerDayPerYear.map(function(c) { return c.id; }));
-
-    g.append("g")
-        .attr("class", "axis axis--x")
-        .attr("transform", "translate(0," + height + ")")
-        .call(d3.axisBottom(x));
-
-    g.append("g")
-        .attr("class", "axis axis--y")
-        .call(d3.axisLeft(y))
-      .append("text")
-        .attr("transform", "rotate(-90)")
-        .attr("y", 6)
-        .attr("dy", "0.71em")
-        .attr("fill", "#000")
-        .text("€");
-
-    var amountPerSingleYear = g.selectAll(".amountPerSingleYear")
-      .data(amountsPerDayPerYear)
-      .enter().append("g")
-        .attr("class", "amountPerSingleYear");
-
-    amountPerSingleYear.append("path")
-        .attr("class", "line")
-        .attr("d", function(d) { return line(d.values); })
-        .style("stroke", function(d) { return z(d.id); });
-
-    amountPerSingleYear.append("text")
-        .datum(function(d) { return {id: d.id, value: d.values[d.values.length - 1]}; })
-        .attr("transform", function(d) { return "translate(" + x(d.value.date) + "," + y(d.value.total) + ")"; })
-        .attr("x", 3)
-        .attr("dy", "0.35em")
-        .style("font", "10px sans-serif")
-        .text(function(d) { return d.id + " " + Math.round(d.value.total)+"€"; });
-  }  
+    return (
+      <LineChart
+        width={960}
+        height={500}
+        data={amountsPerDayPerYear}
+        margin={{
+          top: 5, right: 30, left: 20, bottom: 5,
+        }}
+      >
+        <YAxis domain={['auto', 'auto']} ticks={[KPI.goal.target]} stroke="#fff" axisLine={false} />
+        <Line key="goal" type="monotone" dataKey="goal" stroke="#ff0000" strokeWidth="2" strokeDasharray="5 5" dot={false} isAnimationActive={false} />
+        <Line key={currentYear} type="monotone" dataKey={currentYear} stroke="#ff0000" strokeWidth="2" dot={false} isAnimationActive={false} />
+        <Line key="restOfYear" type="monotone" dataKey="restOfYear" stroke="#ff0000" strokeWidth="2" strokeDasharray="5 5" dot={false} isAnimationActive={false} />
+        {listItems}
+      </LineChart>
+    );
+  }
 }
 
-function createGoalPerDay(goalThisYear:number){
-    var goalValues = new Array(366);
-    for (var i=0;i<366;++i){
-      goalValues[i] = {};
-      goalValues[i].date = convertIndexToALeapYearDate(i);
-      goalValues[i].total = goalThisYear;
-    }
-    
-    var goalPerDay = {};
-    goalPerDay.id = "Goal";
-    goalPerDay.values = goalValues;
-    return goalPerDay;
+function toOpacity(aYear, currentYear) {
+  switch (currentYear - aYear) {
+    case 1:
+      return 1.0;
+    case 2:
+      return 0.5
+    case 3:
+      return 0.25
+    default: 
+      return 0.1
   }
+}
 
 function extractAmountPerDayPerYear(measurements) {
   var amountsPerDayPerYear = [];
   var parseTime = d3.timeParse("%d.%m.%y");
-    measurements.forEach((anIncome) => {
-        var aDate = parseTime(anIncome.date);
-        var anAmount = parseFloat(anIncome.value);
-        var id = aDate.getFullYear().toString();
-        
-        var values = new Array(366);
+  measurements.forEach((anIncome) => {
+    var aDate = parseTime(anIncome.date);
+    var anAmount = parseFloat(anIncome.value);
+    var id = aDate.getFullYear().toString();
 
-        var index = amountsPerDayPerYear.length;
-        for(var i=0;i<amountsPerDayPerYear.length;++i) {
-          if (amountsPerDayPerYear[i].id === id) {
-              index = i;
-              values = amountsPerDayPerYear[i].values;
-          }
-        }
+    var values = new Array(366);
 
-        if ( index == amountsPerDayPerYear.length ) {
-              for (var j=0;j<366;++j){
-              values[j] = {};
-              values[j].date = convertIndexToALeapYearDate(j);
-              values[j].total = 0;
-          }
-        }
+    var index = amountsPerDayPerYear.length;
+    for (var i = 0; i < amountsPerDayPerYear.length; ++i) {
+      if (amountsPerDayPerYear[i].id === id) {
+        index = i;
+        values = amountsPerDayPerYear[i].values;
+      }
+    }
 
-        var asDay = convertDayMonthToIndex(aDate.getDate(),aDate.getMonth());
-        for (var day = asDay;day < 366;++day) {
-          values[day].total = anAmount + values[day].total;
-        }
+    if (index == amountsPerDayPerYear.length) {
+      for (var j = 0; j < 366; ++j) {
+        values[j] = {};
+        values[j].date = convertIndexToALeapYearDate(j);
+        values[j].total = 0;
+      }
+    }
 
-        amountsPerDayPerYear[index] = {};
-        amountsPerDayPerYear[index].id = id;
-        amountsPerDayPerYear[index].values = values;
+    var asDay = convertDayMonthToIndex(aDate.getDate(), aDate.getMonth());
+    for (var day = asDay; day < 366; ++day) {
+      values[day].total = anAmount + values[day].total;
+    }
+
+    amountsPerDayPerYear[index] = {};
+    amountsPerDayPerYear[index].id = id;
+    amountsPerDayPerYear[index].values = values;
+  });
+  var nowCorrectAmountsPerDayPerYear = [];
+  amountsPerDayPerYear[0].values.forEach((value) => {
+    nowCorrectAmountsPerDayPerYear.push({
+      'date': value.date
     });
-    return amountsPerDayPerYear;
+  })
+  amountsPerDayPerYear.forEach((value) => {
+    nowCorrectAmountsPerDayPerYear.map((completeData, indexDay) => {
+      completeData[value.id] = value.values[indexDay].total;
+      return completeData;
+    })
+  })
+
+  var years = [];
+  amountsPerDayPerYear.forEach((value) => {
+    years.push(value.id);
+  })
+  years.sort();
+  return [years, nowCorrectAmountsPerDayPerYear];
 }
 
-function convertDayMonthToIndex(day,month) {
-    var daysInMonth = [31,29,31,30,31,30,31,31,30,31,30,31];
-    var result = day;
-    for (var previousMonth=0;previousMonth<month;++previousMonth) {
-        result = result + daysInMonth[previousMonth];
-    }
-    return result-1;
+function convertDayMonthToIndex(day, month) {
+  var daysInMonth = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+  var result = day;
+  for (var previousMonth = 0; previousMonth < month; ++previousMonth) {
+    result = result + daysInMonth[previousMonth];
+  }
+  return result - 1;
 }
 
 function convertIndexToALeapYearDate(index) {
-    var daysInMonth = [31,29,31,30,31,30,31,31,30,31,30,31];
-    var day = index+1;
-    var month =0;
-    while(day>daysInMonth[month]) {
-        day = day - daysInMonth[month];
-        month = 1+month;
-    }
-    var leapYearDate = new Date(2016,month,day,8);
-    return leapYearDate;
+  var daysInMonth = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+  var day = index + 1;
+  var month = 0;
+  while (day > daysInMonth[month]) {
+    day = day - daysInMonth[month];
+    month = 1 + month;
+  }
+  var leapYearDate = new Date(2016, month, day, 8);
+  return leapYearDate;
 }
 
 export default KPIDetailsCumulativeNumberPerYearDetails;
