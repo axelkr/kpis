@@ -27,16 +27,22 @@ class KPIDetailsCumulativeNumberPerYearDetails extends React.Component<KPIDetail
       return null;
     }
     var KPI = this.props.KPI.getValueEnforcing();
-    var [previousYears, amountsPerDayPerYear] = extractAmountPerDayPerYear(KPI.measurements);
-    var currentYear = previousYears.pop();
+    var [previousPeriods, amountsPerDayPerYear] = extractAmountPerDayPerYear(KPI.measurements);
+    var currentPeriod = previousPeriods.pop();
 
+    const maxNumberpreviousPeriods = 3;
+    if (previousPeriods.length > maxNumberpreviousPeriods) {
+      previousPeriods = previousPeriods.slice(-maxNumberpreviousPeriods);
+    }
+   
     amountsPerDayPerYear.map((value) => {
       value.goal = KPI.goal.target;
       return value;
     });
 
-    const listItems = previousYears.map((aYear) =>
-      <Line key={aYear} type="monotone" dataKey={aYear} stroke="#880000" strokeWidth="1" dot={false} opacity={toOpacity(aYear, currentYear)} isAnimationActive={false} />
+
+    const linesOfpreviousPeriods = previousPeriods.map((aPeriod) =>
+      <Line key={aPeriod} type="monotone" dataKey={aPeriod} stroke="#880000" strokeWidth="1" dot={false} opacity={toOpacity(aPeriod, currentPeriod)} isAnimationActive={false} />
     );
 
     return (
@@ -50,16 +56,15 @@ class KPIDetailsCumulativeNumberPerYearDetails extends React.Component<KPIDetail
       >
         <YAxis domain={['auto', 'auto']} ticks={[KPI.goal.target]} stroke="#fff" axisLine={false} />
         <Line key="goal" type="monotone" dataKey="goal" stroke="#ff0000" strokeWidth="2" strokeDasharray="5 5" dot={false} isAnimationActive={false} />
-        <Line key={currentYear} type="monotone" dataKey={currentYear} stroke="#ff0000" strokeWidth="2" dot={false} isAnimationActive={false} />
-        <Line key="restOfYear" type="monotone" dataKey="restOfYear" stroke="#ff0000" strokeWidth="2" strokeDasharray="5 5" dot={false} isAnimationActive={false} />
-        {listItems}
+        <Line key={currentPeriod} type="monotone" dataKey={currentPeriod} stroke="#ff0000" strokeWidth="2" dot={false} isAnimationActive={false} />
+        {linesOfpreviousPeriods}
       </LineChart>
     );
   }
 }
 
-function toOpacity(aYear, currentYear) {
-  switch (currentYear - aYear) {
+function toOpacity(aPeriod, currentPeriod) {
+  switch (currentPeriod - aPeriod) {
     case 1:
       return 1.0;
     case 2:
@@ -124,6 +129,19 @@ function extractAmountPerDayPerYear(measurements) {
     years.push(value.id);
   })
   years.sort();
+
+  const currentMonth = new Date().getMonth();
+  const currentDay = new Date().getDay();
+  const currentPeriod = years[years.length-1];
+ 
+  nowCorrectAmountsPerDayPerYear.map((value) => {
+    const beforeCurrentDate= value.date.getMonth() < currentMonth || (value.date.getMonth() == currentMonth && value.date.getDay() <= currentDay) 
+    if (!beforeCurrentDate) {
+      delete value[currentPeriod];
+    }
+    return value;
+  });
+
   return [years, nowCorrectAmountsPerDayPerYear];
 }
 
