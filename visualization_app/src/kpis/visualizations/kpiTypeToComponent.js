@@ -14,6 +14,9 @@ const SingleNumberWithDeadlineDetails = React.lazy(() => import('./SingleNumberW
 const CumulativeNumberPerYear = React.lazy(() => import('./CumulativeNumberPerYear'));
 const CumulativeNumberPerYearDetails = React.lazy(() => import('./CumulativeNumberPerYearDetails'));
 
+const SprintBurndown = React.lazy(() => import('./SprintBurndown'));
+const SprintBurndownDetails = React.lazy(() => import('./SprintBurndown'));
+
 const kpiTypeToComponent = {};
 
 kpiTypeToComponent.selectSummaryComponent = function(type:string,KPILo:LoadObject<KPI>) {
@@ -27,6 +30,10 @@ kpiTypeToComponent.selectSummaryComponent = function(type:string,KPILo:LoadObjec
 
     if (type === "cumulative_number_over_year") {
         return (<CumulativeNumberPerYear KPI={KPILo}/>)
+    }
+
+    if (type === "sprint_burndown") {
+        return (<SprintBurndown KPI={KPILo}/>)
     }
 
     return null;
@@ -43,6 +50,10 @@ kpiTypeToComponent.selectDetailsComponent = function(type:string,KPILo:LoadObjec
     
     if (type === "cumulative_number_over_year") {
         return (<CumulativeNumberPerYearDetails KPI={KPILo}/>)
+    }
+
+    if (type === "sprint_burndown") {
+        return (<SprintBurndownDetails KPI={KPILo}/>)
     }
 
     return null;
