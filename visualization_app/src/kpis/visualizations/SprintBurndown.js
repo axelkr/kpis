@@ -22,13 +22,8 @@ class SprintBurndown extends React.Component<SprintBurndownProps,SprintBurndownS
       return null;
     }
     var KPI = this.props.KPI.getValueEnforcing();
-    /*var currentValue = this.cumulativeValueThisYear(KPI.measurements);
-    currentValue = Math.round(100*currentValue)/100;
     return (
-      <div>{currentValue} (goal {KPI.goal.target})</div>
-    )*/
-    return (
-      <div>SprintBurndown</div>
+      <div>Summary TBD</div>
     )
   }
 }
