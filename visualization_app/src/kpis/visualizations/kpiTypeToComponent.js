@@ -15,7 +15,7 @@ const CumulativeNumberPerYear = React.lazy(() => import('./CumulativeNumberPerYe
 const CumulativeNumberPerYearDetails = React.lazy(() => import('./CumulativeNumberPerYearDetails'));
 
 const SprintBurndown = React.lazy(() => import('./SprintBurndown'));
-const SprintBurndownDetails = React.lazy(() => import('./SprintBurndown'));
+const SprintBurndownDetails = React.lazy(() => import('./SprintBurndownDetails'));
 
 const kpiTypeToComponent = {};
 
