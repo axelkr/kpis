@@ -5,7 +5,7 @@ import React from 'react';
 import moment from 'moment';
 
 import {
-    LineChart, Line, ReferenceLine
+    LineChart, Line, ReferenceLine,XAxis
 } from 'recharts';
 
 function ImprovedSprintBurndown(props) {
@@ -18,6 +18,8 @@ function ImprovedSprintBurndown(props) {
         <Line key={aSprint} stroke="#880000" type="monotone" dataKey={aSprint} dot={false} isAnimationActive={false} />
     );
 
+    const dayOneWeekBeforeFinalDay = inRechartsLayout[inRechartsLayout.length-7-1].dateFormated;
+
     return (
         <LineChart
             width={960}
@@ -28,8 +30,10 @@ function ImprovedSprintBurndown(props) {
             }}
         >
             {linesOfpreviousSprints}
-            <ReferenceLine y={0} stroke="b" stroke="white"/>
             <Line key={currentSprint} type="monotone" dataKey={currentSprint} stroke="#ff0000" strokeWidth="2" dot={false} isAnimationActive={false} />
+            <XAxis dataKey="dateFormated" />
+            <ReferenceLine x={dayOneWeekBeforeFinalDay} stroke="white" strokeDasharray="5 5" label="a week before" />
+    
         </LineChart>
     );
 }
@@ -56,7 +60,8 @@ function initialRechartsSetup(lastSprint) {
     var finalEntry = lastSprint.endsOn;
     while (nextEntry <= finalEntry) {
         var anEntry = {
-            'date': nextEntry
+            'date': nextEntry,
+            'dateFormated' : new moment(nextEntry).format('DD.MM')
         }
         inRecharts.push(anEntry);
         nextEntry = new moment(nextEntry).add(1, 'days').toDate();
