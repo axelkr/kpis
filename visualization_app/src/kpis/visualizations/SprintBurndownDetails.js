@@ -3,6 +3,7 @@
 
 import React from 'react';
 import moment from 'moment';
+import ImprovedSprintBurndown from './ImprovedSprintBurndown';
 
 import type KPI from '../records/KPI';
 import type LoadObject from '../../utils/LoadObject';
@@ -27,7 +28,7 @@ class SprintBurndownDetails extends React.Component<SprintBurndownDetailsProps, 
     sprints = convertToProperJSObjects(sprints);
     sprints = normalizeMeasurements(sprints);
     sprints.sort((a,b)=>a.startedOn-b.startedOn);
-    return null;
+    return <ImprovedSprintBurndown sprints={sprints} />
   }
 }
 
