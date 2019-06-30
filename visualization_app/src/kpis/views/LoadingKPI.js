@@ -5,7 +5,7 @@ import React from 'react';
 
 import '../../App.css';
 
-function LoadingKPI(props) {
+function LoadingKPI() {
   return <label>Loading...</label>;
 }
 
