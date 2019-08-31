@@ -1,15 +1,10 @@
-// @flow
-/* keep console.log to inform new users*/
-/* eslint no-console: 0 */
-'use strict';
-
 const fs = require('fs');
 
 const configFile = 'config.json';
 const default_PORT = 3001;
 const default_KPI_FILE = "local_kpis.json";
 
-var config = {};
+let config:any = {};
 
 if (fs.existsSync(configFile)) {
     var rawConfig = fs.readFileSync(configFile, 'utf8');
@@ -29,4 +24,5 @@ if (!config.hasOwnProperty('KPI_FILE')) {
     console.log("no KPI_FILE configured. Use default "+default_KPI_FILE);
     config.KPI_FILE = default_KPI_FILE;
 }
-module.exports = config;
+
+export default config;
