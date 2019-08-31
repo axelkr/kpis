@@ -1,11 +1,11 @@
-import KPIValidator from './KPIValidator';
+import IKPIValidator from './IKPIValidator';
 import ISingleKPI from './ISingleKPI';
 
 export default class KPIStore {
-  _kpis : Array<ISingleKPI>;
-  _kpiValidators : Array<KPIValidator>;
+  private _kpis : Array<ISingleKPI>;
+  private _kpiValidators : Array<IKPIValidator>;
   
-  constructor(validators: Array<KPIValidator>) {
+  constructor(validators: Array<IKPIValidator>) {
     this._kpis = [];
     if (validators === undefined) {
       this._kpiValidators = [];

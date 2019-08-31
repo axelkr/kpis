@@ -1,4 +1,4 @@
-const DataTypeValidator = require('../src/DataTypeValidator');
+import DataTypeValidator from '../src/DataTypeValidator';
 
 describe('Validation of data types', () => {
   test('isFloat: accepts a number', () => {

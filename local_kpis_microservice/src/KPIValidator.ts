@@ -1,7 +1,8 @@
 import ISingleKPI from './ISingleKPI';
+import IKPIValidator from './IKPIValidator';
 
-export default class KPIValidator {
-  _validatorForType : string;
+export default class KPIValidator implements IKPIValidator {
+  private _validatorForType : string;
   
   constructor(validatorForType:string) {
     this._validatorForType = validatorForType;
