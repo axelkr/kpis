@@ -30,9 +30,10 @@ app.use(bodyParser.json());
 app.use('/',router);
 
 // fallback
-app.get('*',function (req, res) {
+app.get('*', (req, res) => {
   res.sendStatus(404);
 });
 
 app.listen(PORT, () => {
+  // ignore
 });

@@ -4,5 +4,5 @@ export default interface ISingleKPI {
   description:string;
   goal:any;
   measurements:any;
-  tags: string[]
+  tags: string[];
 }

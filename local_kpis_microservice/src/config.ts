@@ -1,4 +1,4 @@
-const fs = require('fs');
+import { existsSync , readFileSync} from 'fs';
 
 const configFile = 'config.json';
 const default_PORT = 3001;
@@ -6,8 +6,8 @@ const default_KPI_FILE = "local_kpis.json";
 
 let config:any = {};
 
-if (fs.existsSync(configFile)) {
-    const rawConfig = fs.readFileSync(configFile, 'utf8');
+if (existsSync(configFile)) {
+    const rawConfig = readFileSync(configFile, 'utf8');
     config = JSON.parse(rawConfig);
 } else {
     // tslint:disable-next-line: no-console

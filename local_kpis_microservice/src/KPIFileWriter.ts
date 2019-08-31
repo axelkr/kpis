@@ -1,26 +1,26 @@
-const fs = require('fs');
-
-const path = require('path');
-
+import { writeFile } from 'fs';
+import {isAbsolute as isAbsolutePath, join as joinPaths, normalize as normalizePath} from 'path';
 import KPIStore from './KPIStore';
 
 export default class KPIFileWriter {
-  _fileToWrite : string;
-  _kpiStore : KPIStore;
+  private _fileToWrite : string;
+  private _kpiStore : KPIStore;
 
   constructor(kpiFile:string,aKPIStore:KPIStore) {
     this._kpiStore = aKPIStore;
-    if (! path.isAbsolute(kpiFile)) {
-      kpiFile = path.join(__dirname,"..",kpiFile);
+    if (! isAbsolutePath(kpiFile)) {
+      kpiFile = joinPaths(__dirname,"..",kpiFile);
     }
-    this._fileToWrite = path.normalize(kpiFile);
+    this._fileToWrite = normalizePath(kpiFile);
   }
 
-  writeKPIs() {
-    var allKPIs = this._kpiStore.getAllKPIs();
-    var state = JSON.stringify({kpis:allKPIs});
-    fs.writeFile(this._fileToWrite, state, (err:any) => {
-      if (err) throw err;
-    }); 
+  public writeKPIs() {
+    const allKPIs = this._kpiStore.getAllKPIs();
+    const state = JSON.stringify({kpis:allKPIs});
+    writeFile(this._fileToWrite, state, (err:any) => {
+      if (err) {
+        throw err;
+      }
+    });
   }
 }
