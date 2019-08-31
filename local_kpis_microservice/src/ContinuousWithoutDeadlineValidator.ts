@@ -7,7 +7,7 @@ export default class ContinuousWithoutDeadlineValidator extends KPIValidator {
     super('continuous_without_deadline');
   }
 
-  isValid(aKPI:ISingleKPI) {
+  public isValid(aKPI:ISingleKPI) {
     const dataTypeValidator = new DataTypeValidator();
     if (!this.isApplicableFor(aKPI)) {
       return false;
@@ -17,14 +17,14 @@ export default class ContinuousWithoutDeadlineValidator extends KPIValidator {
       return false;
     }
 
-    if (!aKPI.measurements.every(this.isValidMeasurement)){
+    if (!aKPI.measurements.every(this.isValidMeasurement)) {
       return false;
     }
 
     return true;
   }
 
-  isValidMeasurement(aMeasurement:any) {
+  public isValidMeasurement(aMeasurement:any) {
     const dataTypeValidator = new DataTypeValidator();
     if (aMeasurement === null || typeof aMeasurement !== 'object' || aMeasurement === undefined) {
       return false;

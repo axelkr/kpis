@@ -13,18 +13,19 @@ export default function constructRouter(kpiStore:KPIStore,lastUpdateOn:()=>Date,
   router._onKPIsUpdated = onKPIsUpdated;
 
   router.get('/lastUpdateOn', (req:any, res:any) => {
-    var lastUpdate = router._getLastUpdateOn();
-    res.status(HTTP_STATUS_OK).send(lastUpdate);  
+    const lastUpdate = router._getLastUpdateOn();
+    res.status(HTTP_STATUS_OK).send(lastUpdate);
   });
-  
+
   router.get('/kpi', (req:any, res:any) => {
-    var kpiNames = router._kpiStore.availableKPIs();
-    res.status(HTTP_STATUS_OK).send(kpiNames);  
+    const kpiNames = router._kpiStore.availableKPIs();
+    res.status(HTTP_STATUS_OK).send(kpiNames);
   });
-  
+
   router.post('/kpi/:id/measurements/', (req:any, res:any) => {
-    var id = undefined;
+    let id;
     try {
+      // tslint:disable-next-line: radix
       id = Number.parseInt(req.params.id);
     } catch(e) {
       res.sendStatus(HTTP_STATUS_NOT_FOUND);
@@ -40,17 +41,18 @@ export default function constructRouter(kpiStore:KPIStore,lastUpdateOn:()=>Date,
   });
 
   router.get('/kpi/:id', (req:any, res:any) => {
-    var id = undefined;
+    let id;
     try {
+      // tslint:disable-next-line: radix
       id = Number.parseInt(req.params.id);
     } catch(e) {
       res.sendStatus(HTTP_STATUS_NOT_FOUND);
       return;
     }
-    var kpi = router._kpiStore.getKPI(id);
+    const kpi = router._kpiStore.getKPI(id);
     const kpiFound = kpi.hasOwnProperty('_id');
     if (kpiFound) {
-      res.status(HTTP_STATUS_OK).send(kpi);  
+      res.status(HTTP_STATUS_OK).send(kpi);
     } else {
       res.sendStatus(HTTP_STATUS_NOT_FOUND);
     }

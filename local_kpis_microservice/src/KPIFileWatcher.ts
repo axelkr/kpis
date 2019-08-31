@@ -1,61 +1,59 @@
-const fs = require('fs');
-const path = require('path');
+import { existsSync, readFileSync, watch } from 'fs';
+import {isAbsolute as isAbsolutePath, join as joinPaths, normalize as normalizePath} from 'path';
 
 import KPIStore from './KPIStore';
 
 export default class KPIFileWatcher {
-  _setOnUpdate : Array<KPIStore>;
-  _timeOfLastUpdate : Date;
-  _fileToWatch : string;
+  private _setOnUpdate: KPIStore[];
+  private _timeOfLastUpdate: Date;
+  private _fileToWatch: string;
 
-  constructor(kpiFile:string) {
+  constructor(kpiFile: string) {
     this._setOnUpdate = [];
     this._timeOfLastUpdate = new Date();
-    if (! path.isAbsolute(kpiFile)) {
-      kpiFile = path.join(__dirname,"..",kpiFile);
+    if (!isAbsolutePath(kpiFile)) {
+      kpiFile = joinPaths(__dirname, "..", kpiFile);
     }
-    this._fileToWatch = path.normalize(kpiFile);
+    this._fileToWatch = normalizePath(kpiFile);
   }
 
-  callSetOnUpdate(aKPIStore:KPIStore) {
-    this._setOnUpdate.push(aKPIStore); 
+  public callSetOnUpdate(aKPIStore: KPIStore) {
+    this._setOnUpdate.push(aKPIStore);
   }
 
-  lastUpdateOn() {
+  public lastUpdateOn() {
     return this._timeOfLastUpdate;
   }
 
-  updated() {
-    if (!fs.existsSync(this._fileToWatch)) {
-        return;
+  public updated() {
+    if (!existsSync(this._fileToWatch)) {
+      return;
     }
-    fs.readFile(this._fileToWatch, (err:any,rawContent:any) => {
-      var writeOngoing = (rawContent.length == 0);
-        if (writeOngoing) {
-          return;
-        }
-        var asJSON : any = undefined;
-        try {
-          asJSON = JSON.parse(rawContent);
-        }
-        catch (e) {
-          return;
-        }
+    const rawContent = readFileSync(this._fileToWatch,'utf8');
+    const writeOngoing = (rawContent.length === 0);
+    if (writeOngoing) {
+      return;
+    }
+    let asJSON: any;
+    try {
+      asJSON = JSON.parse(rawContent);
+    } catch (e) {
+      return;
+    }
 
-        this._setOnUpdate.forEach(function(element) {
-          try {
-            element.read(asJSON);
-          } catch (e) {
-            return;
-          }
-        });
-        this._timeOfLastUpdate = new Date();
-    });    
+    this._setOnUpdate.forEach((element) => {
+      try {
+        element.read(asJSON);
+      } catch (e) {
+        return;
+      }
+    });
+    this._timeOfLastUpdate = new Date();
   }
 
-  startWatching() {
-    if (fs.existsSync(this._fileToWatch)) {
-      fs.watch(this._fileToWatch, { persistent: false}, () => {
+  public startWatching() {
+    if (existsSync(this._fileToWatch)) {
+      watch(this._fileToWatch, { persistent: false }, () => {
         this.updated();
       });
     }
