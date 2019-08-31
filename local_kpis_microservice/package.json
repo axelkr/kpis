@@ -13,7 +13,7 @@
     "buildDebug": "webpack",
     "watch": "webpack --watch",
     "test": "jest",
-    "lint": "tslint -c ../tslint.json './src/**/*.ts[x]*'"
+    "lint": "tslint -c tslint.json './src/**.ts[x]*'"
   },
   "dependencies": {
     "express": "^4.17.1"

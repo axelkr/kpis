@@ -1,19 +1,16 @@
-import KPIStore from '../src/KPIStore';
-import IKPIValidator from '../src/IKPIValidator';
+import KPIStore from './KPIStore';
+import IKPIValidator from './IKPIValidator';
 
 class MockValidator implements IKPIValidator {
-  constructor() {
-  }
-
-  isValid(aKPI:{type:string,goal:any,measurements:any}) {
+  public isValid(aKPI:{type:string,goal:any,measurements:any}) {
     return aKPI.type === 'mockKPI';
   }
 
-  isValidMeasurement(aMeasurement:any) {
+  public isValidMeasurement(aMeasurement:any) {
     return true;
   }
 
-  isApplicableFor(aMeasurement:any) {
+  public isApplicableFor(aMeasurement:any) {
     return true;
   }
 }
@@ -28,7 +25,7 @@ function minimalKPI(_id:any,name:any,type:any,goal:any,measurements:any) {
     type,
     goal,
     measurements,
-    'description': '',
+    description: '',
     tags
   }
 }
@@ -39,8 +36,8 @@ function randomKPI() {
 
 describe('Behaviour common to all types of KPIs', () => {
   test('read: accepts empty list of KPIs', () => {
-    var kpis : any= {kpis:[]};
-    var kpiStore = new KPIStore([aValidator]);
+    const kpis : any= {kpis:[]};
+    const kpiStore = new KPIStore([aValidator]);
 
     kpiStore.read(kpis);
     expect(kpiStore.availableKPIs().length).toBe(0);
@@ -51,12 +48,12 @@ describe('Behaviour common to all types of KPIs', () => {
     if (aKPI.hasOwnProperty('description')) {
       delete aKPI.description;
     }
-    var kpis = {kpis:[aKPI]};
-    
-    var kpiStore = new KPIStore([aValidator]);
+    const kpis = {kpis:[aKPI]};
+
+    const kpiStore = new KPIStore([aValidator]);
     kpiStore.read(kpis);
 
-    var storedKPI = kpiStore.getKPI(aKPI._id);
+    const storedKPI = kpiStore.getKPI(aKPI._id);
 
     expect(storedKPI.hasOwnProperty('description')).toBeTruthy();
     expect(storedKPI.description).toBeDefined();
@@ -69,7 +66,7 @@ describe('Behaviour common to all types of KPIs', () => {
       delete aKPI.tags;
     }
     var kpis = {kpis:[aKPI]};
-    
+
     var kpiStore = new KPIStore([aValidator]);
     kpiStore.read(kpis);
 
@@ -178,7 +175,7 @@ describe('Behaviour common to all types of KPIs', () => {
 
     var kpiStore = new KPIStore([aValidator]);
     kpiStore.read({kpis:[aKPI]});
-    
+
     expect(kpiStore.idExists(5)).not.toBeTruthy();
   });
 
@@ -188,7 +185,7 @@ describe('Behaviour common to all types of KPIs', () => {
 
     var kpiStore = new KPIStore([aValidator]);
     kpiStore.read({kpis:[aKPI]});
-    
+
     expect(kpiStore.idExists(aKPI._id)).toBeTruthy();
   });
 });

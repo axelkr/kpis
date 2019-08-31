@@ -1,5 +1,5 @@
-import CumulativeNumberOverYearValidator from '../src/CumulativeNumberOverYearValidator';
-import ISingleKPI from '../src/ISingleKPI';
+import CumulativeNumberOverYearValidator from './CumulativeNumberOverYearValidator';
+import ISingleKPI from './ISingleKPI';
 
 function minimalKPI(_id:any,name:any,type:any,goal:any,measurements:any) {
   const tags : string[] = [];
@@ -9,18 +9,18 @@ function minimalKPI(_id:any,name:any,type:any,goal:any,measurements:any) {
     type,
     goal,
     measurements,
-    'description': '',
+    description: '',
     tags
-  }
+  };
 }
 
 function randomCumulativeNumberOverYearKPI() : ISingleKPI{
-  const goal = {"target" : 0};
+  const goal = {target : 0};
 
   const measurements = [
-    {"date" : "15.10.18" , "value" : 13.4},
-    {"date" : "13.10.18" , "value" : 1.24},
-    {"date" : "04.10.18" , "value" : 2.17}
+    {date : "15.10.18" , value : 13.4},
+    {date : "13.10.18" , value : 1.24},
+    {date : "04.10.18" , value : 2.17}
   ];
 
   return minimalKPI(123,'name','cumulative_number_over_year',goal,measurements);
@@ -42,12 +42,12 @@ describe('Validation of KPIs of type cumulative_number_over_year', () => {
 
   test('isValid: accepts list of measurement with value and date', () => {
     var aKPI = randomCumulativeNumberOverYearKPI();
-    aKPI.measurements = [{"date" : "15.10.18" , "value" : 2}];
+    aKPI.measurements = [{date : "15.10.18" , value : 2}];
     var aCumulativeNumberOverYearValidator = new CumulativeNumberOverYearValidator();
     expect(aCumulativeNumberOverYearValidator.isValid(aKPI)).toBeTruthy();
   });
 
-  test.each([{"value" : 2},{"date" : "15.10.18"}])('isValid: rejects measurement without value or date', (incompleteMeasurement) => {
+  test.each([{value : 2},{date : "15.10.18"}])('isValid: rejects measurement without value or date', (incompleteMeasurement) => {
     var aKPI = randomCumulativeNumberOverYearKPI();
   
     aKPI.measurements = [incompleteMeasurement];
@@ -55,7 +55,7 @@ describe('Validation of KPIs of type cumulative_number_over_year', () => {
     expect(aCumulativeNumberOverYearValidator.isValid(aKPI)).not.toBeTruthy();
   });
 
-  test.each([{"date" : "15.10.18" , "value" : "2"},{"date" : 2013, "value" : 2}])('isValid: rejects measurement with incorrect types for value or date', (wrongTypeOfMeasurement) => {
+  test.each([{date : "15.10.18" , value : "2"},{date : 2013, value : 2}])('isValid: rejects measurement with incorrect types for value or date', (wrongTypeOfMeasurement) => {
     var aKPI = randomCumulativeNumberOverYearKPI();
   
     aKPI.measurements = [wrongTypeOfMeasurement];
@@ -97,7 +97,7 @@ describe('Validation of KPIs of type cumulative_number_over_year', () => {
   });
 
   test('isValidMeasurement: accepts measurement with value and date', () => {
-    var aMeasurement = {"date" : "15.10.18" , "value" : 2};
+    var aMeasurement = {date : "15.10.18" , value : 2};
     var aCumulativeNumberOverYearValidator = new CumulativeNumberOverYearValidator();
     expect(aCumulativeNumberOverYearValidator.isValidMeasurement(aMeasurement)).toBeTruthy();
   });
@@ -107,12 +107,12 @@ describe('Validation of KPIs of type cumulative_number_over_year', () => {
     expect(aCumulativeNumberOverYearValidator.isValidMeasurement(invalidObject)).not.toBeTruthy();
   });
 
-  test.each([{"value" : 2},{"date" : "15.10.18"}])('isValidMeasurement: rejects measurement without value or date', (incompleteMeasurement) => {
+  test.each([{value : 2},{date : "15.10.18"}])('isValidMeasurement: rejects measurement without value or date', (incompleteMeasurement) => {
     var aCumulativeNumberOverYearValidator = new CumulativeNumberOverYearValidator();
     expect(aCumulativeNumberOverYearValidator.isValidMeasurement(incompleteMeasurement)).not.toBeTruthy();
   });
 
-  test.each([{"date" : "15.10.18" , "value" : "2"},{"date" : 2013, "value" : 2}])('isValid: rejects measurement with incorrect types for value or date', (wrongTypeOfMeasurement) => {
+  test.each([{date : "15.10.18" , value : "2"},{date : 2013, value : 2}])('isValid: rejects measurement with incorrect types for value or date', (wrongTypeOfMeasurement) => {
     var aCumulativeNumberOverYearValidator = new CumulativeNumberOverYearValidator();
     expect(aCumulativeNumberOverYearValidator.isValidMeasurement(wrongTypeOfMeasurement)).not.toBeTruthy();
   });

@@ -1,5 +1,5 @@
-import ContinuousWithDeadlineValidator from '../src/ContinuousWithDeadlineValidator';
-import ISingleKPI from '../src/ISingleKPI';
+import ContinuousWithDeadlineValidator from './ContinuousWithDeadlineValidator';
+import ISingleKPI from './ISingleKPI';
 
 function minimalKPI(_id:any,name:any,type:any,goal:any,measurements:any) {
   const tags : string[] = [];
