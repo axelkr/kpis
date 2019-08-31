@@ -1,5 +1,5 @@
-const DataTypeValidator = require('./DataTypeValidator');
-const KPIValidator = require('./KPIValidator');
+import DataTypeValidator from './DataTypeValidator';
+import KPIValidator from './KPIValidator';
 import ISingleKPI from './ISingleKPI';
 
 export default class CumulativeNumberOverYearValidator extends KPIValidator {

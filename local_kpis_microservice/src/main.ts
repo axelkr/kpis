@@ -2,15 +2,15 @@ import config from './config';
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 
-const constructRouter = require('./constructRouter');
-const KPIFileWatcher = require('./KPIFileWatcher');
-const KPIFileWriter = require('./KPIFileWriter');
-const KPIStore = require('./KPIStore');
+import constructRouter from './constructRouter';
+import KPIFileWatcher from './KPIFileWatcher';
+import KPIFileWriter from './KPIFileWriter';
+import KPIStore from './KPIStore';
 
-const ContinuousWithoutDeadlineValidator = require('./ContinuousWithoutDeadlineValidator');
-const ContinuousWithDeadlineValidator = require('./ContinuousWithDeadlineValidator');
-const CumulativeNumberOverYearValidator = require('./CumulativeNumberOverYearValidator');
-const SprintBurndownValidator = require('./SprintBurndownValidator');
+import ContinuousWithoutDeadlineValidator from './ContinuousWithoutDeadlineValidator';
+import ContinuousWithDeadlineValidator from './ContinuousWithDeadlineValidator';
+import CumulativeNumberOverYearValidator from './CumulativeNumberOverYearValidator';
+import SprintBurndownValidator from './SprintBurndownValidator';
 
 const PORT = config.PORT;
 const KPI_FILE = config.KPI_FILE;
