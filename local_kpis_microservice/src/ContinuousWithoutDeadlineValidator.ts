@@ -1,16 +1,13 @@
-// @flow
-'use strict';
-
 const DataTypeValidator = require('./DataTypeValidator');
 const KPIValidator = require('./KPIValidator');
-import type SingleKPI from './SingleKPI';
+import ISingleKPI from './ISingleKPI';
 
-class ContinuousWithoutDeadlineValidator extends KPIValidator {
+export default class ContinuousWithoutDeadlineValidator extends KPIValidator {
   constructor() {
     super('continuous_without_deadline');
   }
 
-  isValid(aKPI:SingleKPI) {
+  isValid(aKPI:ISingleKPI) {
     const dataTypeValidator = new DataTypeValidator();
     if (!this.isApplicableFor(aKPI)) {
       return false;
@@ -44,5 +41,3 @@ class ContinuousWithoutDeadlineValidator extends KPIValidator {
     return true;
   }
 }
-
-module.exports = ContinuousWithoutDeadlineValidator;

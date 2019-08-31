@@ -1,12 +1,9 @@
-// @flow
-'use strict';
 const fs = require('fs');
-
 const path = require('path');
 
-import type KPIStore from './KPIStore';
+import KPIStore from './KPIStore';
 
-class KPIFileWatcher {
+export default class KPIFileWatcher {
   _setOnUpdate : Array<KPIStore>;
   _timeOfLastUpdate : Date;
   _fileToWatch : string;
@@ -32,7 +29,7 @@ class KPIFileWatcher {
     if (!fs.existsSync(this._fileToWatch)) {
         return;
     }
-    fs.readFile(this._fileToWatch, (err,rawContent:any) => {
+    fs.readFile(this._fileToWatch, (err:any,rawContent:any) => {
       var writeOngoing = (rawContent.length == 0);
         if (writeOngoing) {
           return;
@@ -64,6 +61,3 @@ class KPIFileWatcher {
     }
   }
 }
-
-
-module.exports = KPIFileWatcher;

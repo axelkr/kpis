@@ -1,9 +1,6 @@
-// @flow
-'use strict';
+import * as express from 'express';
 
-const express = require('express');
-
-import type KPIStore from './KPIStore';
+import KPIStore from './KPIStore';
 
 const HTTP_STATUS_OK = 200;
 const HTTP_STATUS_BAD_REQUEST = 400;

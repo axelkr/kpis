@@ -1,16 +1,20 @@
-const CumulativeNumberOverYearValidator = require('../src/CumulativeNumberOverYearValidator');
+import CumulativeNumberOverYearValidator from '../src/CumulativeNumberOverYearValidator';
+import ISingleKPI from '../src/ISingleKPI';
 
-function minimalKPI(_id,name,type,goal,measurements) {
+function minimalKPI(_id:any,name:any,type:any,goal:any,measurements:any) {
+  const tags : string[] = [];
   return {
-    '_id' : _id,
-    'name' : name,
-    'type' : type,
-    'goal' : goal,
-    'measurements' : measurements
+    _id,
+    name,
+    type,
+    goal,
+    measurements,
+    'description': '',
+    tags
   }
 }
 
-function randomCumulativeNumberOverYearKPI() {
+function randomCumulativeNumberOverYearKPI() : ISingleKPI{
   const goal = {"target" : 0};
 
   const measurements = [

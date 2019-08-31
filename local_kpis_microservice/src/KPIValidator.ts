@@ -1,26 +1,21 @@
-// @flow
-'use strict';
+import ISingleKPI from './ISingleKPI';
 
-import type SingleKPI from './SingleKPI';
-
-class KPIValidator {
+export default class KPIValidator {
   _validatorForType : string;
   
   constructor(validatorForType:string) {
     this._validatorForType = validatorForType;
   }
 
-  isApplicableFor(aKPI:SingleKPI) {
+  isApplicableFor(aKPI:ISingleKPI) {
     return aKPI.type === this._validatorForType;
   }
 
-  isValid(aKPI:SingleKPI) { // eslint-disable-line no-unused-vars
+  isValid(aKPI:ISingleKPI) {
     return true;
   }
 
-  isValidMeasurement(aMeasurement:any) { // eslint-disable-line no-unused-vars
+  isValidMeasurement(aMeasurement:any) {
     return true;
   }
 }
-
-module.exports = KPIValidator;

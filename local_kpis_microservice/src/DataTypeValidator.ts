@@ -1,7 +1,4 @@
-// @flow
-'use strict';
-
-class DataTypeValidator {
+export default class DataTypeValidator {
   isFloat(aValue:any) {
     return Number.isFinite(aValue);
   }
@@ -10,5 +7,3 @@ class DataTypeValidator {
     return (typeof aValue === 'string' || aValue instanceof String);
   }
 }
-
-module.exports = DataTypeValidator;

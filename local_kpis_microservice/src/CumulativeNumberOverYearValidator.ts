@@ -1,16 +1,13 @@
-// @flow
-'use strict';
-
 const DataTypeValidator = require('./DataTypeValidator');
 const KPIValidator = require('./KPIValidator');
-import type SingleKPI from './SingleKPI';
+import ISingleKPI from './ISingleKPI';
 
-class CumulativeNumberOverYearValidator extends KPIValidator {
+export default class CumulativeNumberOverYearValidator extends KPIValidator {
   constructor() {
     super('cumulative_number_over_year');
   }
 
-  isValid(aKPI:SingleKPI) {
+  isValid(aKPI:ISingleKPI) {
     const dataTypeValidator = new DataTypeValidator();
     if (!this.isApplicableFor(aKPI)) {
       return false;
@@ -44,5 +41,3 @@ class CumulativeNumberOverYearValidator extends KPIValidator {
     return true;
   }
 }
-
-module.exports = CumulativeNumberOverYearValidator;

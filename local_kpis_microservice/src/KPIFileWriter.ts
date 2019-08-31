@@ -1,12 +1,10 @@
-// @flow
-'use strict';
 const fs = require('fs');
 
 const path = require('path');
 
-import type KPIStore from './KPIStore';
+import KPIStore from './KPIStore';
 
-class KPIFileWriter {
+export default class KPIFileWriter {
   _fileToWrite : string;
   _kpiStore : KPIStore;
 
@@ -21,11 +19,8 @@ class KPIFileWriter {
   writeKPIs() {
     var allKPIs = this._kpiStore.getAllKPIs();
     var state = JSON.stringify({kpis:allKPIs});
-    fs.writeFile(this._fileToWrite, state, (err) => {
+    fs.writeFile(this._fileToWrite, state, (err:any) => {
       if (err) throw err;
     }); 
   }
 }
-
-
-module.exports = KPIFileWriter;

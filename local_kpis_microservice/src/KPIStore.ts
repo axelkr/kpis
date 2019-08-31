@@ -1,11 +1,8 @@
-// @flow
-'use strict';
+import KPIValidator from './KPIValidator';
+import ISingleKPI from './ISingleKPI';
 
-import type KPIValidator from './KPIValidator';
-import type SingleKPI from './SingleKPI';
-
-class KPIStore {
-  _kpis : Array<SingleKPI>;
+export default class KPIStore {
+  _kpis : Array<ISingleKPI>;
   _kpiValidators : Array<KPIValidator>;
   
   constructor(validators: Array<KPIValidator>) {
@@ -21,8 +18,8 @@ class KPIStore {
     return this._kpis;
   }
 
-  read(rawJSONofKPIs:{kpis:Array<SingleKPI>}) {
-    var updatedKPIs = [];
+  read(rawJSONofKPIs:{kpis:Array<ISingleKPI>}) {
+    var updatedKPIs :any = [];
     var self = this;
     rawJSONofKPIs.kpis.forEach(function(aKPI){
       if (!self._isValidKPI(aKPI)){
@@ -39,7 +36,7 @@ class KPIStore {
   }
 
   availableKPIs() {
-    var kpiNames = [];
+    let kpiNames:any = [];
     this._kpis.forEach(function(element) {
       var aKPI = {
         "_id" : element._id,
@@ -50,7 +47,7 @@ class KPIStore {
     return kpiNames;
   }
 
-  getKPI(id:number):?SingleKPI {
+  getKPI(id:number): ISingleKPI {
     var kpi = null;
     this._kpis.forEach(function(element) {
       if (element._id === id ) {
@@ -64,7 +61,7 @@ class KPIStore {
     return this._kpis.some( x => x._id == id);
   }
 
-  addMeasurement(id:number,aMeasurement:mixed) {
+  addMeasurement(id:number,aMeasurement:any) {
     if (!this.isValidMeasurement(id,aMeasurement)) {
       return false;
     }
@@ -76,7 +73,7 @@ class KPIStore {
     });
   }
 
-  isValidMeasurement(id:number,aMeasurement:mixed) {
+  isValidMeasurement(id:number,aMeasurement:any) {
     if (!this.idExists(id)) {
       return false;
     }
@@ -87,7 +84,7 @@ class KPIStore {
     return this._kpiValidators.some(x=> x.isApplicableFor(aKPI) && x.isValidMeasurement(aMeasurement));
   }
 
-  _isValidKPI(aKPI:SingleKPI) {
+  _isValidKPI(aKPI:ISingleKPI) {
     if (!aKPI.hasOwnProperty('_id')||!Number.isInteger(aKPI._id) || aKPI._id < 0) {
       return false;
     }
@@ -127,7 +124,7 @@ class KPIStore {
     return true;
   }
 
-  _addDefaultsForOptionalFields(aKPI:SingleKPI) : SingleKPI {
+  _addDefaultsForOptionalFields(aKPI:ISingleKPI) : ISingleKPI {
     if(!aKPI.hasOwnProperty('description')) {
       aKPI.description = '';
     }
@@ -137,7 +134,7 @@ class KPIStore {
     return aKPI;
   }
 
-  _containsDuplicateIdentifers(kpis:Array<SingleKPI>) : boolean {
+  _containsDuplicateIdentifers(kpis:Array<ISingleKPI>) : boolean {
     var knownIds = kpis.map(x => x._id);
     var duplicateFound = knownIds.some(function(anId){
        return knownIds.filter(x=> x === anId).length !== 1;
@@ -150,8 +147,6 @@ function propertyExistsAndIsString(anObject:any,aProperty:string) {
   return anObject.hasOwnProperty(aProperty) && isString(anObject[aProperty]);
 }
 
-function isString(aValue:mixed) {
+function isString(aValue:any) {
    return (typeof aValue === 'string' || aValue instanceof String);
 }
-
-module.exports = KPIStore;

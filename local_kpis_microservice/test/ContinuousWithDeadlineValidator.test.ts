@@ -1,16 +1,20 @@
-const ContinuousWithDeadlineValidator = require('../src/ContinuousWithDeadlineValidator');
+import ContinuousWithDeadlineValidator from '../src/ContinuousWithDeadlineValidator';
+import ISingleKPI from '../src/ISingleKPI';
 
-function minimalKPI(_id,name,type,goal,measurements) {
+function minimalKPI(_id:any,name:any,type:any,goal:any,measurements:any) {
+  const tags : string[] = [];
   return {
-    '_id' : _id,
-    'name' : name,
-    'type' : type,
-    'goal' : goal,
-    'measurements' : measurements
+    _id,
+    name,
+    type,
+    goal,
+    measurements,
+    'description': '',
+    tags
   }
 }
 
-function randomContinuousWithDeadlineKPI() {
+function randomContinuousWithDeadlineKPI() : ISingleKPI {
   const goal = {"target" : 0,'targetDate':'2011-08-08'};
 
   const measurements = [
