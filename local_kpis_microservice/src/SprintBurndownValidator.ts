@@ -1,4 +1,3 @@
-import DataTypeValidator from './DataTypeValidator';
 import KPIValidator from './KPIValidator';
 import ISingleKPI from './ISingleKPI';
 
@@ -7,7 +6,7 @@ export default class SprintBurndownValidator extends KPIValidator {
     super('sprint_burndown');
   }
 
-  isValid(aKPI:ISingleKPI) {
+  public isValid(aKPI:ISingleKPI) {
     if (!this.isApplicableFor(aKPI)) {
       return false;
     }
@@ -15,7 +14,7 @@ export default class SprintBurndownValidator extends KPIValidator {
     return true;
   }
 
-  isValidMeasurement(aMeasurement:any) {
+  public isValidMeasurement(aMeasurement:any) {
     return true;
   }
 }

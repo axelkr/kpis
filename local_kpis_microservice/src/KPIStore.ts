@@ -2,10 +2,10 @@ import IKPIValidator from './IKPIValidator';
 import ISingleKPI from './ISingleKPI';
 
 export default class KPIStore {
-  private _kpis : Array<ISingleKPI>;
-  private _kpiValidators : Array<IKPIValidator>;
-  
-  constructor(validators: Array<IKPIValidator>) {
+  private _kpis : ISingleKPI[];
+  private _kpiValidators : IKPIValidator[];
+
+  constructor(validators: IKPIValidator[]) {
     this._kpis = [];
     if (validators === undefined) {
       this._kpiValidators = [];
@@ -14,42 +14,42 @@ export default class KPIStore {
     }
   }
 
-  getAllKPIs() {
+  public getAllKPIs() {
     return this._kpis;
   }
 
-  read(rawJSONofKPIs:{kpis:Array<ISingleKPI>}) {
-    var updatedKPIs :any = [];
-    var self = this;
-    rawJSONofKPIs.kpis.forEach(function(aKPI){
-      if (!self._isValidKPI(aKPI)){
+  public read(rawJSONofKPIs:{kpis:ISingleKPI[]}) {
+    const updatedKPIs :any = [];
+    const self = this;
+    rawJSONofKPIs.kpis.forEach((aKPI) => {
+      if (!self._isValidKPI(aKPI)) {
         return;
       }
       aKPI = self._addDefaultsForOptionalFields(aKPI);
       updatedKPIs.push(aKPI);
-    })
+    });
 
     if (this._containsDuplicateIdentifers(updatedKPIs)) {
-     throw "duplicate identifiers";
+     throw new Error("duplicate identifiers");
     }
-    this._kpis = updatedKPIs; 
+    this._kpis = updatedKPIs;
   }
 
-  availableKPIs() {
-    let kpiNames:any = [];
-    this._kpis.forEach(function(element) {
-      var aKPI = {
-        "_id" : element._id,
-        "type" : element.type
+  public availableKPIs() {
+    const kpiNames:any = [];
+    this._kpis.forEach( (element) => {
+      const aKPI = {
+        _id : element._id,
+        type : element.type
       };
       kpiNames.push(aKPI);
     });
     return kpiNames;
   }
 
-  getKPI(id:number): ISingleKPI {
-    var kpi = null;
-    this._kpis.forEach(function(element) {
+  public getKPI(id:number): ISingleKPI {
+    let kpi = null;
+    this._kpis.forEach((element) => {
       if (element._id === id ) {
         kpi = element;
       }
@@ -57,15 +57,15 @@ export default class KPIStore {
     return kpi;
   }
 
-  idExists(id:number) {
-    return this._kpis.some( x => x._id == id);
+  public idExists(id:number) {
+    return this._kpis.some( (x) => x._id === id);
   }
 
-  addMeasurement(id:number,aMeasurement:any) {
+  public addMeasurement(id:number,aMeasurement:any) {
     if (!this.isValidMeasurement(id,aMeasurement)) {
       return false;
     }
-    this._kpis = this._kpis.map(function(element) {
+    this._kpis = this._kpis.map((element) => {
       if (element._id === id  ) {
         element.measurements.push(aMeasurement);
       }
@@ -73,22 +73,22 @@ export default class KPIStore {
     });
   }
 
-  isValidMeasurement(id:number,aMeasurement:any) {
+  public isValidMeasurement(id:number,aMeasurement:any) {
     if (!this.idExists(id)) {
       return false;
     }
-    var aKPI = this.getKPI(id);
+    const aKPI = this.getKPI(id);
     if (aKPI === null || aKPI === undefined) {
       return false;
     }
-    return this._kpiValidators.some(x=> x.isApplicableFor(aKPI) && x.isValidMeasurement(aMeasurement));
+    return this._kpiValidators.some((x)=> x.isApplicableFor(aKPI) && x.isValidMeasurement(aMeasurement));
   }
 
-  _isValidKPI(aKPI:ISingleKPI) {
+  private _isValidKPI(aKPI:ISingleKPI) {
     if (!aKPI.hasOwnProperty('_id')||!Number.isInteger(aKPI._id) || aKPI._id < 0) {
       return false;
     }
-    
+
     if (!propertyExistsAndIsString(aKPI,'name')) {
       return false;
     }
@@ -117,14 +117,14 @@ export default class KPIStore {
       return false;
     }
 
-    if (!this._kpiValidators.some(x=>x.isValid(aKPI))) {
+    if (!this._kpiValidators.some((x)=>x.isValid(aKPI))) {
       return false;
     }
 
     return true;
   }
 
-  _addDefaultsForOptionalFields(aKPI:ISingleKPI) : ISingleKPI {
+  private _addDefaultsForOptionalFields(aKPI:ISingleKPI) : ISingleKPI {
     if(!aKPI.hasOwnProperty('description')) {
       aKPI.description = '';
     }
@@ -134,10 +134,10 @@ export default class KPIStore {
     return aKPI;
   }
 
-  _containsDuplicateIdentifers(kpis:Array<ISingleKPI>) : boolean {
-    var knownIds = kpis.map(x => x._id);
-    var duplicateFound = knownIds.some(function(anId){
-       return knownIds.filter(x=> x === anId).length !== 1;
+  private _containsDuplicateIdentifers(kpis:ISingleKPI[]) : boolean {
+    const knownIds = kpis.map((x:ISingleKPI) => x._id);
+    const duplicateFound = knownIds.some((anId) => {
+       return knownIds.filter((x)=> x === anId).length !== 1;
     });
     return duplicateFound;
   }
