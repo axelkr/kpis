@@ -13,7 +13,7 @@
     "buildDebug": "webpack",
     "watch": "webpack --watch",
     "test": "jest",
-    "lint": "tslint -c tslint.json './src/**.ts[x]*'"
+    "lint": "tslint -c tslint.json './src/**/*.ts*'"
   },
   "dependencies": {
     "express": "^4.17.1"
@@ -33,7 +33,6 @@
     "ts-loader": "^6.0.4",
     "tslint": "^5.19.0",
     "jest": "^24.9.0",
-    "regenerator-runtime": "^0.13.3",
     "typescript": "^3.6.2",
     "webpack": "^4.39.3",
     "webpack-cli": "^3.3.7"
