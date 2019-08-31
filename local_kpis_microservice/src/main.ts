@@ -1,10 +1,7 @@
-// @flow
-'use strict';
+import config from './config';
+import * as express from 'express';
+import * as bodyParser from 'body-parser';
 
-const express    = require('express');
-const bodyParser = require("body-parser");
-
-const config = require('./config');
 const constructRouter = require('./constructRouter');
 const KPIFileWatcher = require('./KPIFileWatcher');
 const KPIFileWriter = require('./KPIFileWriter');

@@ -1,7 +1,4 @@
-// @flow
-'use strict';
-
-class SingleKPI {
+export default interface ISingleKPI {
   _id:number;
   type:string;
   description:string;
@@ -9,5 +6,3 @@ class SingleKPI {
   measurements:any;
   tags:Array<string>
 }
-
-module.exports = SingleKPI;
