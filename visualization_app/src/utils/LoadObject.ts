@@ -6,19 +6,15 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @flow
  */
-
-'use strict';
-
-/*type LoadObjectOperation =
+type LoadObjectOperation =
   | 'NONE'
   | 'CREATING'
   | 'LOADING'
   | 'UPDATING'
   | 'DELETING'
   ;
-*/
+
 /**
  * A secret key that is used to prevent direct construction of these objects,
  * this is effectively used to ensure that the constructor is private.
@@ -48,21 +44,21 @@ const SECRET = 'SECRET_' + Math.random();
  *   return <div>{loadObject.getValue().text}</div>;
  *
  */
-class LoadObject{//<V> {
-  _operation;//: LoadObjectOperation;
-  _value;//: ?V;
-  _error;//: ?Error;
-  _hasValue;//: boolean;
+class LoadObject<V> {
+  private _operation: LoadObjectOperation;
+  private _value: V;
+  private _error: Error;
+  private _hasValue: boolean;
 
   /**
    * Private construtor, never call this outside of this class.
    */
   constructor(
-    secret,//: string,
-    operation,//: LoadObjectOperation,
-    value,//: ?V,
-    error,//: ?Error,
-    hasValue//: boolean,
+    secret: string,
+    operation: LoadObjectOperation,
+    value: V,
+    error: Error,
+    hasValue: boolean,
   ) {
     if (secret !== SECRET) {
       throw new Error(
@@ -78,53 +74,52 @@ class LoadObject{//<V> {
 
   // Convenient getters
 
-  getOperation(){//}): LoadObjectOperation {
+  public getOperation(): LoadObjectOperation {
     return this._operation;
   }
 
-  getValue(){//): ?V {
+  public getValue(): V {
     return this._value;
   }
 
-  getValueEnforcing(){//): V {
+  public getValueEnforcing(): V {
     if (!this.hasValue()) {
       throw new Error('Expected load object to have a value set.');
     }
     // We check hasValue and cast rather than checking if value is null so that
     // it's possible to have "null" values that are set.
-    return (this._value);//: any);
+    return (this._value);
   }
 
-  getError(){//): ?Error {
+  public getError(): Error {
     return this._error;
   }
 
-  getErrorEnforcing(){//): Error {
+  public getErrorEnforcing(): Error {
     if (!this._error) {
       throw new Error('Expected load object to have an error set.');
     }
     return this._error;
   }
 
-  hasOperation(){//): boolean {
+  public hasOperation(): boolean {
     return this._operation !== 'NONE';
   }
 
-  hasValue(){//): boolean {
+  public hasValue(): boolean {
     return this._hasValue;
   }
 
-  hasError(){//): boolean {
+  public hasError(): boolean {
     return !!this._error;
   }
 
-  isEmpty(){//): boolean {
+  public isEmpty(): boolean {
     return !this.hasValue() && !this.hasOperation() && !this.hasError();
   }
 
   // Convenient setters
-
-  setOperation(operation){//: LoadObjectOperation): LoadObject<V> {
+  public setOperation(operation: LoadObjectOperation): LoadObject<V> {
     if (this._operation === operation) {
       return this;
     }
@@ -137,7 +132,7 @@ class LoadObject{//<V> {
     );
   }
 
-  setValue(value){//: V): LoadObject<V> {
+  public setValue(value: V): LoadObject<V> {
     if (this._value === value && this._hasValue === true) {
       return this;
     }
@@ -150,7 +145,7 @@ class LoadObject{//<V> {
     );
   }
 
-  setError(error){//: Error): LoadObject<V> {
+  public setError(error: Error): LoadObject<V> {
     if (this._error === error) {
       return this;
     }
@@ -163,7 +158,7 @@ class LoadObject{//<V> {
     );
   }
 
-  removeOperation(){//): LoadObject<V> {
+  public removeOperation(): LoadObject<V> {
     if (this._operation === 'NONE') {
       return this;
     }
@@ -176,7 +171,7 @@ class LoadObject{//<V> {
     );
   }
 
-  removeValue(){//): LoadObject<V> {
+  public removeValue(): LoadObject<V> {
     if (this._value === undefined && this._hasValue === false) {
       return this;
     }
@@ -189,7 +184,7 @@ class LoadObject{//<V> {
     );
   }
 
-  removeError(){//): LoadObject<V> {
+  public removeError(): LoadObject<V> {
     if (this._error === undefined) {
       return this;
     }
@@ -202,7 +197,7 @@ class LoadObject{//<V> {
     );
   }
 
-  map(fn){//: (value: V) => V): LoadObject<V> {
+  public map(fn: (value: V) => V): LoadObject<V> {
     if (!this.hasValue()) {
       return this;
     }
@@ -210,52 +205,52 @@ class LoadObject{//<V> {
   }
 
   // Provide some helper methods to check specific operations
-
-  isDone(){//): boolean {
+  public isDone(): boolean {
     return !this.hasOperation();
   }
 
-  isCreating(){//): boolean {
+  public isCreating(): boolean {
     return this.getOperation() === 'CREATING';
   }
 
-  isLoading(){//): boolean {
+  public isLoading(): boolean {
     return this.getOperation() === 'LOADING';
   }
 
-  isUpdating(){//): boolean {
+  public isUpdating(): boolean {
     return this.getOperation() === 'UPDATING';
   }
 
-  isDeleting(){//): boolean {
+  public isDeleting(): boolean {
     return this.getOperation() === 'DELETING';
   }
 
   // Provide some helpers for mutating the operations
 
-  done(){//): LoadObject<V> {
+  public done(): LoadObject<V> {
     return this.removeOperation();
   }
 
-  creating(){//): LoadObject<V> {
+  public creating(): LoadObject<V> {
     return this.setOperation('CREATING');
   }
 
-  loading(){//): LoadObject<V> {
+  public loading(): LoadObject<V> {
     return this.setOperation('LOADING');
   }
 
-  updating(){//): LoadObject<V> {
+  public updating(): LoadObject<V> {
     return this.setOperation('UPDATING');
   }
 
-  deleting(){//): LoadObject<V> {
+  public deleting(): LoadObject<V> {
     return this.setOperation('DELETING');
   }
 
   // Static helpers for creating LoadObjects
 
-  static empty(){//<V>(): LoadObject<V> {
+  // tslint:disable-next-line: member-ordering
+  public static empty<V>(): LoadObject<V> {
     return new LoadObject(
       SECRET,
       'NONE',
@@ -265,7 +260,8 @@ class LoadObject{//<V> {
     );
   }
 
-  static creating(){//<V>(): LoadObject<V> {
+  // tslint:disable-next-line: member-ordering
+  public static creating<V>(): LoadObject<V> {
     return new LoadObject(
       SECRET,
       'CREATING',
@@ -275,7 +271,8 @@ class LoadObject{//<V> {
     );
   }
 
-  static loading(){//<V>(): LoadObject<V> {
+  // tslint:disable-next-line: member-ordering
+  public static loading<V>(): LoadObject<V> {
     return new LoadObject(
       SECRET,
       'LOADING',
@@ -285,7 +282,8 @@ class LoadObject{//<V> {
     );
   }
 
-  static updating(){//<V>(): LoadObject<V> {
+  // tslint:disable-next-line: member-ordering
+  public static updating<V>(): LoadObject<V> {
     return new LoadObject(
       SECRET,
       'UPDATING',
@@ -295,7 +293,8 @@ class LoadObject{//<V> {
     );
   }
 
-  static deleting(){//<V>(): LoadObject<V> {
+  // tslint:disable-next-line: member-ordering
+  public static deleting<V>(): LoadObject<V> {
     return new LoadObject(
       SECRET,
       'DELETING',
@@ -305,7 +304,8 @@ class LoadObject{//<V> {
     );
   }
 
-  static withError(error){//<V>(error: Error): LoadObject<V> {
+  // tslint:disable-next-line: member-ordering
+  public static withError<V>(error: Error): LoadObject<V> {
     return new LoadObject(
       SECRET,
       'NONE',
@@ -315,7 +315,8 @@ class LoadObject{//<V> {
     );
   }
 
-  static withValue(value){//<V>(value: V): LoadObject<V> {
+  // tslint:disable-next-line: member-ordering
+  public static withValue<V>(value: V): LoadObject<V> {
     return new LoadObject(
       SECRET,
       'NONE',

@@ -4,8 +4,8 @@ export default class KPI {
   private description:any;
   private type:any;
   private tags:any;
-  private goal:any;
-  private measurements:any;
+  private _goal:any;
+  private _measurements:any;
 
   constructor(data:any) {
     this._id = data._id;
@@ -13,7 +13,15 @@ export default class KPI {
     this.description = data.description;
     this.type = data.type;
     this.tags = data.tags;
-    this.goal = data.goal;
-    this.measurements = data.measurements;
+    this._goal = data.goal;
+    this._measurements = data.measurements;
+  }
+
+  public get goal(): any {
+    return this._goal;
+  }
+
+  public get measurements(): any {
+    return this._measurements;
   }
 }
