@@ -1,6 +1,3 @@
-// @flow
-'use strict';
-
 import React from 'react';
 
 //import type LoadObject from '../../utils/LoadObject';
