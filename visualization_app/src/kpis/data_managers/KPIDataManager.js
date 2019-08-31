@@ -14,11 +14,6 @@ const KPIDataManager = {
           type: 'ids/loaded',
           ids,
         });
-        const justIds = ids.map((x)=>x._id);
-        AppDispatcher.dispatch({
-          type: 'KPI/start-load',
-          ids:justIds,
-        })
       })
       .catch(error => {
         AppDispatcher.dispatch({
@@ -33,6 +28,8 @@ const KPIDataManager = {
       ServerAPI
       .get('/kpi/'+element)
       .then(rawKPI => {
+        console.log(rawKPI);
+        console.log(new KPI(rawKPI));
         AppDispatcher.dispatch({
           type: 'KPI/loaded',
           KPI: new KPI(rawKPI),
