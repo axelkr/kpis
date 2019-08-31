@@ -1,9 +1,9 @@
 export default class DataTypeValidator {
-  isFloat(aValue:any) {
+  public isFloat(aValue:any) {
     return Number.isFinite(aValue);
   }
 
-  isDate(aValue:any) {
+  public isDate(aValue:any) {
     return (typeof aValue === 'string' || aValue instanceof String);
   }
 }
