@@ -6,23 +6,23 @@ const HTTP_STATUS_OK = 200;
 const HTTP_STATUS_BAD_REQUEST = 400;
 const HTTP_STATUS_NOT_FOUND = 404;
 
-function constructRouter(kpiStore:KPIStore,lastUpdateOn:()=>Date,onKPIsUpdated:()=>void ) {
-  const router = express.Router();
+export default function constructRouter(kpiStore:KPIStore,lastUpdateOn:()=>Date,onKPIsUpdated:()=>void ) {
+  const router :any = express.Router();
   router._kpiStore = kpiStore;
   router._getLastUpdateOn = lastUpdateOn;
   router._onKPIsUpdated = onKPIsUpdated;
 
-  router.get('/lastUpdateOn', (req, res) => {
+  router.get('/lastUpdateOn', (req:any, res:any) => {
     var lastUpdate = router._getLastUpdateOn();
     res.status(HTTP_STATUS_OK).send(lastUpdate);  
   });
   
-  router.get('/kpi', (req, res) => {
+  router.get('/kpi', (req:any, res:any) => {
     var kpiNames = router._kpiStore.availableKPIs();
     res.status(HTTP_STATUS_OK).send(kpiNames);  
   });
   
-  router.post('/kpi/:id/measurements/', (req, res) => {
+  router.post('/kpi/:id/measurements/', (req:any, res:any) => {
     var id = undefined;
     try {
       id = Number.parseInt(req.params.id);
@@ -39,7 +39,7 @@ function constructRouter(kpiStore:KPIStore,lastUpdateOn:()=>Date,onKPIsUpdated:(
     }
   });
 
-  router.get('/kpi/:id', (req, res) => {
+  router.get('/kpi/:id', (req:any, res:any) => {
     var id = undefined;
     try {
       id = Number.parseInt(req.params.id);
@@ -58,5 +58,3 @@ function constructRouter(kpiStore:KPIStore,lastUpdateOn:()=>Date,onKPIsUpdated:(
 
   return router;
 }
-
-module.exports = constructRouter;
