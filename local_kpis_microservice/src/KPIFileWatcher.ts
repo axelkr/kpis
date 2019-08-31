@@ -1,5 +1,5 @@
 import { existsSync, readFileSync, watch } from 'fs';
-import {isAbsolute as isAbsolutePath, join as joinPaths, normalize as normalizePath} from 'path';
+import {normalize as normalizePath} from 'path';
 
 import KPIStore from './KPIStore';
 
@@ -11,9 +11,6 @@ export default class KPIFileWatcher {
   constructor(kpiFile: string) {
     this._setOnUpdate = [];
     this._timeOfLastUpdate = new Date();
-    if (!isAbsolutePath(kpiFile)) {
-      kpiFile = joinPaths(__dirname, "..", kpiFile);
-    }
     this._fileToWatch = normalizePath(kpiFile);
   }
 
