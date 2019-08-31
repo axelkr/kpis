@@ -1,13 +1,13 @@
 export default class KPI {
-  _id;
-  name;
-  description;
-  type;
-  tags;
-  goal;
-  measurements;
+  private _id : string;
+  private name: string;
+  private description:any;
+  private type:any;
+  private tags:any;
+  private goal:any;
+  private measurements:any;
 
-  constructor(data) {
+  constructor(data:any) {
     this._id = data._id;
     this.name = data.name;
     this.description = data.description;
