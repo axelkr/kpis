@@ -1,7 +1,7 @@
 // @flow
 'use strict';
 
-import type {KPIAction} from '../KPIAction';
+//import type {KPIAction} from '../KPIAction';
 
 import Immutable from 'immutable';
 import LoadObject from '../../utils/LoadObject';
@@ -10,20 +10,20 @@ import {ReduceStore} from 'flux/utils';
 import KPIDataManager from '../data_managers/KPIDataManager';
 import AppDispatcher from '../../AppDispatcher';
 
-type State = LoadObjectState<Immutable.List<{_id:string,type:string}>>;
+//type State = LoadObjectState<Immutable.List<{_id:string,type:string}>>;
 
-class KPIListStore extends ReduceStore<KPIAction, State> {
+class KPIListStore extends ReduceStore{//<KPIAction, State> {
   constructor() {
     super(AppDispatcher);
   }
 
-  getInitialState(): State {
+  getInitialState(){//}: State {
     return new LoadObjectState(() => AppDispatcher.dispatch({
       type: 'ids/start-load',
     }));
   }
 
-  reduce(state: State, action: KPIAction): State {
+  reduce(state,action){//: State, action: KPIAction): State {
     switch (action.type) {
 
       ///// Loading /////

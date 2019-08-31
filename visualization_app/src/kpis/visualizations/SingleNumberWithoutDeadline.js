@@ -4,20 +4,20 @@
 import React from 'react';
 import moment from 'moment';
 
-import type KPI from '../records/KPI';
-import type LoadObject from '../../utils/LoadObject';
+//import type KPI from '../records/KPI';
+//import type LoadObject from '../../utils/LoadObject';
 
 import '../../App.css';
-
+/*
 type SingleNumberWithoutDeadlineProps = {
   KPI: LoadObject<KPI>
 };
 
 type SingleNumberWithoutDeadlineState = {
 };
-
-class SingleNumberWithoutDeadline extends React.Component<SingleNumberWithoutDeadlineProps,SingleNumberWithoutDeadlineState> {
-  constructor(props:SingleNumberWithoutDeadlineProps){
+*/
+class SingleNumberWithoutDeadline extends React.Component{//<SingleNumberWithoutDeadlineProps,SingleNumberWithoutDeadlineState> {
+  constructor(props){//}:SingleNumberWithoutDeadlineProps){
     super(props);
   }
 

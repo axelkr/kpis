@@ -4,20 +4,21 @@
 import React from 'react';
 import * as d3 from 'd3';
 
-import type KPI from '../records/KPI';
-import type LoadObject from '../../utils/LoadObject';
+// import type KPI from '../records/KPI';
+// import type LoadObject from '../../utils/LoadObject';
 
 import '../../App.css';
 
+/*
 type SingleNumberWithoutDeadlinePropsDetailsProps = {
   KPI: LoadObject<KPI>
 };
 
 type SingleNumberWithoutDeadlinePropsDetailsState = {
 };
-
-class SingleNumberWithoutDeadlinePropsDetails extends React.Component<SingleNumberWithoutDeadlinePropsDetailsProps,SingleNumberWithoutDeadlinePropsDetailsState> {
-  constructor(props:SingleNumberWithoutDeadlinePropsDetailsProps){
+*/
+class SingleNumberWithoutDeadlinePropsDetails extends React.Component{// <SingleNumberWithoutDeadlinePropsDetailsProps,SingleNumberWithoutDeadlinePropsDetailsState> {
+  constructor(props){//}:SingleNumberWithoutDeadlinePropsDetailsProps){
     super(props);
     this.createChart = this.createChart.bind(this)
   }

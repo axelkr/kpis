@@ -3,9 +3,9 @@
 
 import React from 'react';
 
-import type KPI from '../records/KPI';
+//import type KPI from '../records/KPI';
 
-import type LoadObject from '../../utils/LoadObject';
+//import type LoadObject from '../../utils/LoadObject';
 
 const SingleNumberWithoutDeadline = React.lazy(() => import('./SingleNumberWithoutDeadline'));
 const SingleNumberWithoutDeadlineDetails = React.lazy(() => import('./SingleNumberWithoutDeadlineDetails'));
@@ -19,7 +19,7 @@ const SprintBurndownDetails = React.lazy(() => import('./SprintBurndownDetails')
 
 const kpiTypeToComponent = {};
 
-kpiTypeToComponent.selectSummaryComponent = function(type:string,KPILo:LoadObject<KPI>) {
+kpiTypeToComponent.selectSummaryComponent = (type,KPILo) => {//function(type:string,KPILo:LoadObject<KPI>) {
     if (type === "continuous_without_deadline") {
         return (<SingleNumberWithoutDeadline KPI={KPILo}/>)
     }
@@ -39,7 +39,7 @@ kpiTypeToComponent.selectSummaryComponent = function(type:string,KPILo:LoadObjec
     return null;
 }
 
-kpiTypeToComponent.selectDetailsComponent = function(type:string,KPILo:LoadObject<KPI>) {
+kpiTypeToComponent.selectDetailsComponent = (type,KPILo)=> { //function(type:string,KPILo:LoadObject<KPI>) {
     if (type === "continuous_without_deadline") {
         return (<SingleNumberWithoutDeadlineDetails KPI={KPILo}/>)
     }

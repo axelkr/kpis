@@ -3,15 +3,15 @@
 
 import React from 'react';
 
-import type LoadObject from '../../utils/LoadObject';
-import type KPI from '../records/KPI';
+//import type LoadObject from '../../utils/LoadObject';
+//import type KPI from '../records/KPI';
 
 import LoadingKPI from './LoadingKPI';
 import OverlayKPIDetails from './OverlayKPIDetails';
 
 import '../../App.css';
 import '../KPI.css';
-
+/*
 type KPICardProps = {
   KPILo: LoadObject<KPI>;
   summary: React.Component;
@@ -21,9 +21,9 @@ type KPICardProps = {
 type KPICardState = {
   detailsVisible : boolean
 };
-
-class KPICard extends React.Component<KPICardProps,KPICardState> {
-  constructor(props:KPICardProps){
+*/
+class KPICard extends React.Component { //<KPICardProps,KPICardState> {
+  constructor(props){//}:KPICardProps){
     super(props);
     this.state = {
       detailsVisible : false

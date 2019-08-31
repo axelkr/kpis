@@ -3,20 +3,22 @@
 
 import React from 'react';
 
-import type KPI from '../records/KPI';
-import type LoadObject from '../../utils/LoadObject';
+//import type KPI from '../records/KPI';
+//import type LoadObject from '../../utils/LoadObject';
 
 import '../../App.css';
 import './SprintBurndown.css';
 
+/*
 type SprintBurndownProps = {
   KPI: LoadObject<KPI>
 };
 
 type SprintBurndownState = {
 };
+*/
 
-class SprintBurndown extends React.Component<SprintBurndownProps,SprintBurndownState> {
+class SprintBurndown extends React.Component{//<SprintBurndownProps,SprintBurndownState> {
   render(){
     if (!this.props.KPI.hasValue()) {
       return null;

@@ -1,30 +1,31 @@
 // @flow
 'use strict';
 
-import type {KPIAction} from '../KPIAction';
+//import type {KPIAction} from '../KPIAction';
 
 import LoadObject from '../../utils/LoadObject';
 import LoadObjectMap from '../../utils/LoadObjectMap';
 import {ReduceStore} from 'flux/utils';
 import KPIDataManager from '../data_managers/KPIDataManager';
 import AppDispatcher from '../../AppDispatcher';
-import KPI from '../records/KPI';
+//import KPI from '../records/KPI';
 
-type State = LoadObjectMap<string, KPI>;
 
-class KPIStore extends ReduceStore<KPIAction, State> {
+//type State = LoadObjectMap<string, KPI>;
+
+class KPIStore extends ReduceStore{//<KPIAction, State> {
   constructor() {
     super(AppDispatcher);
   }
 
-  getInitialState(): State {
+  getInitialState(){//}: State {
     return new LoadObjectMap(keys => AppDispatcher.dispatch({
       type: 'KPI/start-load',
       ids: Array.from(keys),
     }));
   }
 
-  reduce(state: State, action: KPIAction): State {
+  reduce(state,action){//}: State, action: KPIAction): State {
     switch (action.type) {
 
       ///// Loading /////

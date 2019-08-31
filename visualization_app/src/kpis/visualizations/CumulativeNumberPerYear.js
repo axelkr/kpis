@@ -4,21 +4,23 @@
 import React from 'react';
 import * as d3 from 'd3';
 
-import type KPI from '../records/KPI';
-import type LoadObject from '../../utils/LoadObject';
+//import type KPI from '../records/KPI';
+//import type LoadObject from '../../utils/LoadObject';
 
 import '../../App.css';
 import './CumulativeNumberPerYear.css';
 
+/*
 type CumulativeNumberPerYearProps = {
   KPI: LoadObject<KPI>
 };
 
 type CumulativeNumberPerYearState = {
 };
+*/
 
-class CumulativeNumberPerYear extends React.Component<CumulativeNumberPerYearProps,CumulativeNumberPerYearState> {
-  constructor(props:CumulativeNumberPerYearProps){
+class CumulativeNumberPerYear extends React.Component{//<CumulativeNumberPerYearProps,CumulativeNumberPerYearState> {
+  constructor(props){//:CumulativeNumberPerYearProps){
     super(props);
   }
 

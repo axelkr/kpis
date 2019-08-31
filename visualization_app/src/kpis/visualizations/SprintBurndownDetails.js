@@ -5,20 +5,20 @@ import React from 'react';
 import moment from 'moment';
 import ImprovedSprintBurndown from './ImprovedSprintBurndown';
 
-import type KPI from '../records/KPI';
-import type LoadObject from '../../utils/LoadObject';
+//import type KPI from '../records/KPI';
+//import type LoadObject from '../../utils/LoadObject';
 
 import '../../App.css';
 import './SprintBurndown.css';
-
+/*
 type SprintBurndownDetailsProps = {
   KPI: LoadObject<KPI>
 };
 
 type SprintBurndownDetailsState = {
 };
-
-class SprintBurndownDetails extends React.Component<SprintBurndownDetailsProps, SprintBurndownDetailsState> {
+*/
+class SprintBurndownDetails extends React.Component{//<SprintBurndownDetailsProps, SprintBurndownDetailsState> {
    render() {
     if (!this.props.KPI.hasValue()) {
       return null;

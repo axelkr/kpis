@@ -12,8 +12,13 @@ const KPIDataManager = {
       .then(ids => {
         AppDispatcher.dispatch({
           type: 'ids/loaded',
-          ids:ids,
+          ids,
         });
+        const justIds = ids.map((x)=>x._id);
+        AppDispatcher.dispatch({
+          type: 'KPI/start-load',
+          ids:justIds,
+        })
       })
       .catch(error => {
         AppDispatcher.dispatch({
@@ -23,7 +28,7 @@ const KPIDataManager = {
       });
   },
 
-  loadKPIs(ids: Array<string>) {
+  loadKPIs(ids){//}: Array<string>) {
     ids.forEach(function(element) {
       ServerAPI
       .get('/kpi/'+element)

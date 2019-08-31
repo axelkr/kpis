@@ -3,11 +3,11 @@ import xhr from 'xhr';
 const PREFIX = 'http://localhost:3000';
 
 const ServerAPI = {
-  get(uri:string, data:mixed) {
+  get(uri,data){//}:string, data:mixed) {
     return promiseXHR('get', uri, data);
   },
 
-  post(uri:string, data:mixed) {
+  post(uri,data){//:string, data:mixed) {
     return promiseXHR('post', uri, data);
   },
 };
@@ -16,7 +16,7 @@ const ServerAPI = {
  * This is a simple wrapper around XHR that let's us use promises. Not very
  * advanced but works with our server's API.
  */
-function promiseXHR(method: 'get' | 'post', uri:string, data:any) {
+function promiseXHR(method,uri,data){//}: 'get' | 'post', uri:string, data:any) {
   const query = [];
   if (data) {
     Object.keys(data).forEach(key => {

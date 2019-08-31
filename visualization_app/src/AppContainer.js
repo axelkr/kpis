@@ -12,12 +12,12 @@ function getStores() {
   ];
 }
 
-type AppContainerState = {
+/*type AppContainerState = {
   ids:any,
   kpis:any,
-}
+}*/
 
-function getState():AppContainerState {
+function getState(){ //:AppContainerState {
   const KPIs = KPIStore.getState();
   const ids = KPIListStore.getState();
 

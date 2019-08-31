@@ -3,6 +3,16 @@
 
 import Immutable from 'immutable';
 
+class KPI {
+  _id;
+  name;
+  description;
+  type;
+  tags;
+  goal;
+  measurements;
+}
+/*
 declare class KPI {
   _id: string;
   name: string;
@@ -30,16 +40,6 @@ declare class KPI {
   set(key: 'goal', value: any): KPI;
   set(key: 'measurements', value: any): KPI;
 }
-
-// $FlowExpectedError: Intentional rebinding for flow.
-const KPI = Immutable.Record({
-  _id: '',
-  name: '',
-  description: '',
-  type:'',
-  tags:[],
-  goal:{},
-  measurements:{}
-});
+*/
 
 export default KPI;

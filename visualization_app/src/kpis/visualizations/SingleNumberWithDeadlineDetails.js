@@ -7,19 +7,19 @@ import {
   LineChart, Line, YAxis
 } from 'recharts';
 
-import type KPI from '../records/KPI';
-import type LoadObject from '../../utils/LoadObject';
+//import type KPI from '../records/KPI';
+//import type LoadObject from '../../utils/LoadObject';
 
 import '../../App.css';
-
+/*
 type SingleNumberWithDeadlinePropsDetailsProps = {
   KPI: LoadObject<KPI>
 };
 
 type SingleNumberWithDeadlinePropsDetailsState = {
 };
-
-class SingleNumberWithDeadlinePropsDetails extends React.Component<SingleNumberWithDeadlinePropsDetailsProps,SingleNumberWithDeadlinePropsDetailsState> {
+*/
+class SingleNumberWithDeadlinePropsDetails extends React.Component{//<SingleNumberWithDeadlinePropsDetailsProps,SingleNumberWithDeadlinePropsDetailsState> {
   render(){
     if (!this.props.KPI.hasValue()) {
       return null;

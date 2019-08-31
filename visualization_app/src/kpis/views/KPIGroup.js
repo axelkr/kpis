@@ -1,10 +1,10 @@
 // @flow
 'use strict';
 
-import type Immutable from 'immutable';
-import type LoadObjectMap from '../../utils/LoadObjectMap';
-import type LoadObjectState from '../../utils/LoadObjectState';
-import type KPI from '../records/KPI';
+// import type Immutable from 'immutable';
+// import type LoadObjectMap from '../../utils/LoadObjectMap';
+// import type LoadObjectState from '../../utils/LoadObjectState';
+// import type KPI from '../records/KPI';
 import KPICard from './KPICard';
 import LoadingKPI from './LoadingKPI';
 import kpiTypeToComponent from '../visualizations/kpiTypeToComponent';
@@ -12,13 +12,13 @@ import kpiTypeToComponent from '../visualizations/kpiTypeToComponent';
 import React, {Suspense} from 'react';
 
 import '../../App.css';
-
+/*
 type KPIGroupProps = {
   ids: LoadObjectState<Immutable.List<string>>,
   KPIs: LoadObjectMap<string, KPI>,
 };
-
-class KPIGroup extends React.Component<KPIGroupProps> {
+*/
+class KPIGroup extends React.Component{ //<KPIGroupProps> {
   render(){
     const {
       ids,

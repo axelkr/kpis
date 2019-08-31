@@ -8,20 +8,21 @@ import {
   LineChart, Line, YAxis
 } from 'recharts';
 
-import type KPI from '../records/KPI';
-import type LoadObject from '../../utils/LoadObject';
+//import type KPI from '../records/KPI';
+//import type LoadObject from '../../utils/LoadObject';
 
 import '../../App.css';
 import './CumulativeNumberPerYear.css';
 
+/*
 type KPIDetailsCumulativeNumberPerYearDetailsProps = {
   KPI: LoadObject<KPI>
 };
 
 type KPIDetailsCumulativeNumberPerYearDetailsState = {
 };
-
-class KPIDetailsCumulativeNumberPerYearDetails extends React.Component<KPIDetailsCumulativeNumberPerYearDetailsProps, KPIDetailsCumulativeNumberPerYearDetailsState> {
+*/
+class KPIDetailsCumulativeNumberPerYearDetails extends React.Component{//<KPIDetailsCumulativeNumberPerYearDetailsProps, KPIDetailsCumulativeNumberPerYearDetailsState> {
    render() {
     if (!this.props.KPI.hasValue()) {
       return null;
