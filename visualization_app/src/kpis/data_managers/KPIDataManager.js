@@ -1,6 +1,3 @@
-// @flow
-'use strict';
-
 import KPI from '../records/KPI';
 import ServerAPI from '../../ServerAPI';
 import AppDispatcher from '../../AppDispatcher';
