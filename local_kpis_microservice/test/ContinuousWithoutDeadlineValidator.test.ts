@@ -13,6 +13,7 @@ function minimalKPI(_id:any,name:any,type:any,goal:any,measurements:any) {
     tags
   }
 }
+
 function randomContinuousWithoutDeadlineKPI() {
   const goal = {"target" : 0};
 

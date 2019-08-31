@@ -1,6 +1,7 @@
-const KPIStore = require('../src/KPIStore');
+import KPIStore from '../src/KPIStore';
+import IKPIValidator from '../src/IKPIValidator';
 
-class MockValidator {
+class MockValidator implements IKPIValidator {
   constructor() {
   }
 
@@ -11,17 +12,24 @@ class MockValidator {
   isValidMeasurement(aMeasurement:any) {
     return true;
   }
+
+  isApplicableFor(aMeasurement:any) {
+    return true;
+  }
 }
 
 const aValidator = new MockValidator();
 
-function minimalKPI(_id,name,type,goal,measurements) {
+function minimalKPI(_id:any,name:any,type:any,goal:any,measurements:any) {
+  const tags : string[] = [];
   return {
-    '_id' : _id,
-    'name' : name,
-    'type' : type,
-    'goal' : goal,
-    'measurements' : measurements
+    _id,
+    name,
+    type,
+    goal,
+    measurements,
+    'description': '',
+    tags
   }
 }
 
@@ -31,7 +39,7 @@ function randomKPI() {
 
 describe('Behaviour common to all types of KPIs', () => {
   test('read: accepts empty list of KPIs', () => {
-    var kpis = {kpis:[]};
+    var kpis : any= {kpis:[]};
     var kpiStore = new KPIStore([aValidator]);
 
     kpiStore.read(kpis);
@@ -73,7 +81,7 @@ describe('Behaviour common to all types of KPIs', () => {
   });
 
   test.each(['_id','name','type','measurements','goal'])('read: ignores KPI without mandatory field %s', (field) => {
-    const aKPI = randomKPI();
+    const aKPI : any = randomKPI();
     var kpiStore = new KPIStore([aValidator]);
 
     delete aKPI[field];
@@ -103,7 +111,7 @@ describe('Behaviour common to all types of KPIs', () => {
   });
 
   test.each(['name','type','description'])('read: ignores KPI where %s is not a string', (field) => {
-    const aKPI = randomKPI();
+    const aKPI : any = randomKPI();
     var kpiStore = new KPIStore([aValidator]);
 
     aKPI[field] = undefined;
@@ -129,7 +137,7 @@ describe('Behaviour common to all types of KPIs', () => {
   });
 
   test('read: ignores KPI where tags is not an array of string', () => {
-    const aKPI = randomKPI();
+    const aKPI : any = randomKPI();
     var kpiStore = new KPIStore([aValidator]);
 
     aKPI.tags = undefined;
