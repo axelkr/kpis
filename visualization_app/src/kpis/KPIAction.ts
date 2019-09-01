@@ -1,7 +1,4 @@
-// @flow
-'use strict';
-
-import type KPI from './records/KPI';
+import KPI from './records/KPI';
 
 export type KPIAction =
 
@@ -11,7 +8,7 @@ export type KPIAction =
   }
   | {
     type: 'ids/loaded',
-    ids: Array<string>,
+    ids: string[],
   }
   | {
     type: 'ids/load-error',
@@ -21,7 +18,7 @@ export type KPIAction =
   // Reading KPI.
   | {
     type: 'KPI/start-load',
-    ids: Array<string>,
+    ids: string[],
   }
   | {
     type: 'KPI/loaded',

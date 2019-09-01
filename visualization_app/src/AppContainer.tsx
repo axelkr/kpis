@@ -1,5 +1,3 @@
-// @flow
-
 import App from './App';
 import {Container} from 'flux/utils';
 import KPIListStore from './kpis/stores/KPIListStore';
@@ -12,21 +10,19 @@ function getStores() {
   ];
 }
 
-/*type AppContainerState = {
-  ids:any,
-  kpis:any,
-}*/
+interface IAppContainerState {
+  ids:any;
+  KPIs:any;
+}
 
-function getState(){ //:AppContainerState {
+function getState():IAppContainerState {
   const KPIs = KPIStore.getState();
   const ids = KPIListStore.getState();
 
-  var state = {
-    ids: ids,
-    KPIs: KPIs
+  return {
+    ids,
+    KPIs
   };
-  
-  return state;
 }
 
 export default Container.createFunctional(App, getStores, getState);
