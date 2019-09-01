@@ -6,15 +6,15 @@ const KPIDataManager = {
   loadIDs() {
     ServerAPI
       .get('/kpi')
-      .then((ids) => {
+      .then((ids:any[]) => {
         appStore.dispatch({
           type: 'ids/loaded',
           ids,
         });
-        /*appStore.dispatch({
+        appStore.dispatch({
           type: 'KPI/start-load',
-          ids
-        });*/
+          ids: ids.map( (x)=> x._id),
+        });
       })
       .catch((error) => {
         appStore.dispatch({
