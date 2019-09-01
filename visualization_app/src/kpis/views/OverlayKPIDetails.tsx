@@ -1,12 +1,9 @@
-// @flow
-'use strict';
-
-import React from 'react';
+import * as React from 'react';
 
 import '../../App.css';
 import '../KPI.css';
 
-function OverlayKPIDetails(props) {
+function OverlayKPIDetails(props:any) {
   return (
     <div className="kpi-details-overlay">
       <div className="kpi-details">
