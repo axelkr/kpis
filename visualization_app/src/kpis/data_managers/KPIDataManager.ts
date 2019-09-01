@@ -2,8 +2,8 @@ import KPI from '../records/KPI';
 import ServerAPI from '../../ServerAPI';
 import appStore from '../../appStore';
 
-const KPIDataManager = {
-  loadIDs() {
+class KPIDataManager {
+  public loadIDs() {
     ServerAPI
       .get('/kpi')
       .then((ids:any[]) => {
@@ -22,9 +22,9 @@ const KPIDataManager = {
           error,
         });
       });
-  },
+  }
 
-  loadKPIs(ids: string[]) {
+  public loadKPIs(ids: string[]) {
     ids.forEach((element) => {
       ServerAPI
       .get('/kpi/'+element)
@@ -42,8 +42,7 @@ const KPIDataManager = {
         });
       });
     });
+  }
+}
 
-  },
-};
-
-export default KPIDataManager;
+export default new KPIDataManager();
