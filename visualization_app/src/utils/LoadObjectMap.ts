@@ -7,9 +7,7 @@
  * of patent rights can be found in the PATENTS file in the same directory.
  */
 
-'use strict';
-
-import Immutable from 'immutable';
+import * as Immutable from 'immutable';
 import LoadObject from './LoadObject';
 
 /**
@@ -31,30 +29,30 @@ import LoadObject from './LoadObject';
  *     Generally this means setting them to loading. Dispatching an action is
  *     synchronous and generally what should be done in `loadAll()`.
  */
-class LoadObjectMap {//<K, V> {
-  _data;//: Immutable.Map<K, LoadObject<V>>;
-  _loadAll;//: (key: Set<K>) => void;
-  _shouldLoad;//: (lo: LoadObject<V>) => boolean;
+class LoadObjectMap<K, V> {
+  private _data: Immutable.Map<K, LoadObject<V>>;
+  private _loadAll: (key: Set<K>) => void;
+  private _shouldLoad: (lo: LoadObject<V>) => boolean;
 
   // Mutable state on this map so we don't accidently load something many times.
-  _preventLoadsForThisFrame;//: Set<K>;
-  _clearPreventLoadsForThisFrame;//: mixed;
+  private _preventLoadsForThisFrame: Set<K>;
+  private _clearPreventLoadsForThisFrame: any;
 
   constructor(
-    loadAll,//: (keys: Set<K>) => void,
-    shouldLoad//?: (lo: LoadObject<V>) => boolean,
+    loadAll: (keys: Set<K>) => void,
+    shouldLoad?: (lo: LoadObject<V>) => boolean,
   ) {
     this._data = Immutable.Map();
     this._loadAll = loadAll;
-    this._shouldLoad = shouldLoad || (lo => lo.isEmpty());
+    this._shouldLoad = shouldLoad || ( (lo) => lo.isEmpty());
     this._preventLoadsForThisFrame = new Set();
     this._clearPreventLoadsForThisFrame = null;
   }
 
   // Some trickery so that we always return a load object, and call the provided
   // load function when appropriate.
-  get(key){//}: K): LoadObject<V> {
-    const lo = this._data.has(key)
+  public get(key: K): LoadObject<V> {
+    const lo : LoadObject<V> = this._data.has(key)
       ? this._data.get(key)
       : LoadObject.empty();
     if (!this._preventLoadsForThisFrame.has(key) && this._shouldLoad(lo)) {
@@ -74,56 +72,56 @@ class LoadObjectMap {//<K, V> {
     return lo;
   }
 
-  getKeys(){//): Array<K> {
-    return Array.from(this._data.keys());
+  // Modified, as well as getValues
+  public getKeys(): K[] {
+    const keys : any = this._data.keys();
+    return Array.from(keys);
   }
 
-  getValues(){//): Array<LoadObject<V>> {
-    return Array.from(this._data.values());
+  public getValues(): Array<LoadObject<V>> {
+    const values : any = this._data.values();
+    return Array.from(values);
   }
 
-  every(fn){//: (lo: LoadObject<V>, key: K) => boolean): boolean {
+  public every(fn: (lo: LoadObject<V>, key: K) => boolean): boolean {
     return this._data.every(fn);
   }
 
-  some(fn){//: (lo: LoadObject<V>, key: K) => boolean): boolean {
+  public some(fn: (lo: LoadObject<V>, key: K) => boolean): boolean {
     return this._data.some(fn);
   }
 
-  forEach(fn){//: (lo: LoadObject<V>, key: K) => any): void {
+  public forEach(fn: (lo: LoadObject<V>, key: K) => any): void {
     this._data.forEach(fn);
   }
 
-  get size(){//): number {
+  public get size(): number {
     return this._data.size;
   }
 
   ////////// A selection of mutation functions found on Immutable.Map //////////
 
-  delete(key){//: K): LoadObjectMap<K, V> {
+  public delete(key: K): LoadObjectMap<K, V> {
     return this._mutate(() => this._data.delete(key));
   }
 
-  set(key,lo){//: K, lo: LoadObject<V>): LoadObjectMap<K, V> {
+  public set(key: K, lo: LoadObject<V>): LoadObjectMap<K, V> {
     return this._mutate(() => this._data.set(key, lo));
   }
 
-  merge(map){//: Iterable<[K, LoadObject<V>]>): LoadObjectMap<K, V> {
+  /*public merge(map: Iterable<[K, LoadObject<V>]>): LoadObjectMap<K, V> {
     return this._mutate(() => this._data.merge(map));
-  }
+  }*/
 
-  filter(fn){//: (lo: LoadObject<V>, key: K) => boolean): LoadObjectMap<K, V> {
+  /*public filter(fn: (lo: LoadObject<V>, key: K) => boolean): LoadObjectMap<K, V> {
     return this._mutate(() => this._data.filter(fn));
-  }
+  }*/
 
-  update(
-    key,//: K,
-    fn//: (lo: LoadObject<V>) => LoadObject<V>,
-  ){//: LoadObjectMap<K, V> {
+  public update(key: K,fn: (lo: LoadObject<V>) => LoadObject<V>) : LoadObjectMap<K, V> {
     return this._mutate(() => this._data.update(key, fn));
   }
 
-  _mutate(fn){//: () => Immutable.Map<K, LoadObject<V>>): LoadObjectMap<K, V> {
+  private _mutate(fn: () => Immutable.Map<K, LoadObject<V>>): LoadObjectMap<K, V> {
     const nextData = fn();
     if (nextData === this._data) {
       return this;

@@ -1,11 +1,7 @@
-// @flow
-'use strict';
+import * as React from 'react';
 
-import React from 'react';
-
-//import type KPI from '../records/KPI';
-
-//import type LoadObject from '../../utils/LoadObject';
+import KPI from '../records/KPI';
+import LoadObject from '../../utils/LoadObject';
 
 const SingleNumberWithoutDeadline = React.lazy(() => import('./SingleNumberWithoutDeadline'));
 const SingleNumberWithoutDeadlineDetails = React.lazy(() => import('./SingleNumberWithoutDeadlineDetails'));
@@ -17,46 +13,46 @@ const CumulativeNumberPerYearDetails = React.lazy(() => import('./CumulativeNumb
 const SprintBurndown = React.lazy(() => import('./SprintBurndown'));
 const SprintBurndownDetails = React.lazy(() => import('./SprintBurndownDetails'));
 
-const kpiTypeToComponent = {};
+const kpiTypeToComponent : any = {};
 
-kpiTypeToComponent.selectSummaryComponent = (type,KPILo) => {//function(type:string,KPILo:LoadObject<KPI>) {
+kpiTypeToComponent.selectSummaryComponent = (type:string,KPILo:LoadObject<KPI>) => {
     if (type === "continuous_without_deadline") {
-        return (<SingleNumberWithoutDeadline KPI={KPILo}/>)
+        return (<SingleNumberWithoutDeadline KPI={KPILo}/>);
     }
 
     if (type === "continuous_with_deadline") {
-        return (<SingleNumberWithDeadline KPI={KPILo}/>)
+        return (<SingleNumberWithDeadline KPI={KPILo}/>);
     }
 
     if (type === "cumulative_number_over_year") {
-        return (<CumulativeNumberPerYear KPI={KPILo}/>)
+        return (<CumulativeNumberPerYear KPI={KPILo}/>);
     }
 
     if (type === "sprint_burndown") {
-        return (<SprintBurndown KPI={KPILo}/>)
+        return (<SprintBurndown KPI={KPILo}/>);
     }
 
     return null;
-}
+};
 
-kpiTypeToComponent.selectDetailsComponent = (type,KPILo)=> { //function(type:string,KPILo:LoadObject<KPI>) {
+kpiTypeToComponent.selectDetailsComponent = (type:string,KPILo:LoadObject<KPI>) => {
     if (type === "continuous_without_deadline") {
-        return (<SingleNumberWithoutDeadlineDetails KPI={KPILo}/>)
+        return (<SingleNumberWithoutDeadlineDetails KPI={KPILo}/>);
     }
 
     if (type === "continuous_with_deadline") {
-        return (<SingleNumberWithDeadlineDetails KPI={KPILo}/>)
+        return (<SingleNumberWithDeadlineDetails KPI={KPILo}/>);
     }
-    
+
     if (type === "cumulative_number_over_year") {
-        return (<CumulativeNumberPerYearDetails KPI={KPILo}/>)
+        return (<CumulativeNumberPerYearDetails KPI={KPILo}/>);
     }
 
     if (type === "sprint_burndown") {
-        return (<SprintBurndownDetails KPI={KPILo}/>)
+        return (<SprintBurndownDetails KPI={KPILo}/>);
     }
 
     return null;
-}
+};
 
 export default kpiTypeToComponent;
