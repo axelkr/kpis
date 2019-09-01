@@ -11,6 +11,8 @@ interface ISingleNumberWithoutDeadlinePropsDetailsProps {
 }
 
 export default class SingleNumberWithoutDeadlinePropsDetails extends React.Component<ISingleNumberWithoutDeadlinePropsDetailsProps, {}> {
+  private node:any;
+
   constructor(props: ISingleNumberWithoutDeadlinePropsDetailsProps) {
     super(props);
     this.createChart = this.createChart.bind(this);
