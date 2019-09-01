@@ -3,7 +3,7 @@ const webpack = require('webpack'); //to access built-in plugins
 
 const commonConfiguration = {
   entry: {
-    root: './src/root.js'
+    root: './src/root.tsx'
   },
   resolve: {
     extensions: ['.ts', '.tsx','.js','.jsx']

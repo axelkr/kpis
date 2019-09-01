@@ -1,19 +1,23 @@
 import KPI from '../records/KPI';
 import ServerAPI from '../../ServerAPI';
-import AppDispatcher from '../../AppDispatcher';
+import appStore from '../../appStore';
 
 const KPIDataManager = {
   loadIDs() {
     ServerAPI
       .get('/kpi')
       .then((ids) => {
-        AppDispatcher.dispatch({
+        appStore.dispatch({
           type: 'ids/loaded',
           ids,
         });
+        /*appStore.dispatch({
+          type: 'KPI/start-load',
+          ids
+        });*/
       })
       .catch((error) => {
-        AppDispatcher.dispatch({
+        appStore.dispatch({
           type: 'ids/load-error',
           error,
         });
@@ -25,13 +29,13 @@ const KPIDataManager = {
       ServerAPI
       .get('/kpi/'+element)
       .then((rawKPI) => {
-        AppDispatcher.dispatch({
+        appStore.dispatch({
           type: 'KPI/loaded',
           KPI: new KPI(rawKPI),
         });
       })
       .catch((error) => {
-        AppDispatcher.dispatch({
+        appStore.dispatch({
           type: 'KPI/load-error',
           id:element,
           error,
