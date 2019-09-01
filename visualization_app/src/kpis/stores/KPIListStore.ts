@@ -1,26 +1,25 @@
-//import type {KPIAction} from '../KPIAction';
-
-import Immutable from 'immutable';
+import {KPIAction} from '../KPIAction';
+import * as Immutable from 'immutable';
 import LoadObject from '../../utils/LoadObject';
 import LoadObjectState from '../../utils/LoadObjectState';
 import {ReduceStore} from 'flux/utils';
 import KPIDataManager from '../data_managers/KPIDataManager';
 import AppDispatcher from '../../AppDispatcher';
 
-//type State = LoadObjectState<Immutable.List<{_id:string,type:string}>>;
+type State = LoadObjectState<Immutable.List<{_id:string,type:string}>>;
 
-class KPIListStore extends ReduceStore{//<KPIAction, State> {
+class KPIListStore extends ReduceStore<State,KPIAction> {
   constructor() {
     super(AppDispatcher);
   }
 
-  getInitialState(){//}: State {
+  public getInitialState(): State {
     return new LoadObjectState(() => AppDispatcher.dispatch({
       type: 'ids/start-load',
     }));
   }
 
-  reduce(state,action){//: State, action: KPIAction): State {
+  public reduce(state: State, action: KPIAction): State {
     switch (action.type) {
 
       ///// Loading /////
@@ -30,9 +29,8 @@ class KPIListStore extends ReduceStore{//<KPIAction, State> {
         return state.setLoadObject(LoadObject.loading());
 
       case 'ids/loaded':
-        return state.setLoadObject(LoadObject.withValue(
-          Immutable.List(action.ids)
-        ));
+        const listed :any = Immutable.List(action.ids);
+        return state.setLoadObject(LoadObject.withValue(listed));
 
       case 'ids/load-error':
         return state.setLoadObject(LoadObject.withError(action.error));

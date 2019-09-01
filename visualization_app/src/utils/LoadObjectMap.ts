@@ -109,9 +109,11 @@ class LoadObjectMap<K, V> {
     return this._mutate(() => this._data.set(key, lo));
   }
 
-  /*public merge(map: Iterable<[K, LoadObject<V>]>): LoadObjectMap<K, V> {
+  // Modified, was before:
+  // public merge(map: Iterable<[K, LoadObject<V>]>): LoadObjectMap<K, V> {
+  public merge(map: any): LoadObjectMap<K, V> {
     return this._mutate(() => this._data.merge(map));
-  }*/
+  }
 
   /*public filter(fn: (lo: LoadObject<V>, key: K) => boolean): LoadObjectMap<K, V> {
     return this._mutate(() => this._data.filter(fn));
