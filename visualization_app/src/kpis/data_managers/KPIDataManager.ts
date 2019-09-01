@@ -6,41 +6,39 @@ const KPIDataManager = {
   loadIDs() {
     ServerAPI
       .get('/kpi')
-      .then(ids => {
+      .then((ids) => {
         AppDispatcher.dispatch({
           type: 'ids/loaded',
           ids,
         });
       })
-      .catch(error => {
+      .catch((error) => {
         AppDispatcher.dispatch({
           type: 'ids/load-error',
-          error: error,
+          error,
         });
       });
   },
 
-  loadKPIs(ids){//}: Array<string>) {
-    ids.forEach(function(element) {
+  loadKPIs(ids: string[]) {
+    ids.forEach((element) => {
       ServerAPI
       .get('/kpi/'+element)
-      .then(rawKPI => {
-        console.log(rawKPI);
-        console.log(new KPI(rawKPI));
+      .then((rawKPI) => {
         AppDispatcher.dispatch({
           type: 'KPI/loaded',
           KPI: new KPI(rawKPI),
         });
       })
-      .catch(error => {
+      .catch((error) => {
         AppDispatcher.dispatch({
           type: 'KPI/load-error',
           id:element,
-          error:error,
+          error,
         });
       });
-    })
-    
+    });
+
   },
 };
 

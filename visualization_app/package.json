@@ -37,6 +37,8 @@
     "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-react": "^7.0.0",
+    "@types/d3": "^5.7.2",
+    "@types/flux": "^3.1.9",
     "@types/jest": "^24.0.18",
     "@types/node": "^12.7.2",
     "@types/react": "^16.9.2",
