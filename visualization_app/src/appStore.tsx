@@ -5,7 +5,7 @@ import kpiLists from './kpis/stores/kpiLists';
 
 function createAppStore() {
   const reducers:any = {kpis,kpiLists};
-  const rootReducer = combineReducers(reducers);
+  const rootReducer:any = combineReducers(reducers);
   return createStore(rootReducer);
 }
 
