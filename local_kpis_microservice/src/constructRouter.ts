@@ -25,7 +25,6 @@ export default function constructRouter(kpiStore:KPIStore,lastUpdateOn:()=>Date,
   router.post('/kpi/:id/measurements/', (req:any, res:any) => {
     let id;
     try {
-      // tslint:disable-next-line: radix
       id = Number.parseInt(req.params.id);
     } catch(e) {
       res.sendStatus(HTTP_STATUS_NOT_FOUND);
@@ -43,7 +42,6 @@ export default function constructRouter(kpiStore:KPIStore,lastUpdateOn:()=>Date,
   router.get('/kpi/:id', (req:any, res:any) => {
     let id;
     try {
-      // tslint:disable-next-line: radix
       id = Number.parseInt(req.params.id);
     } catch(e) {
       res.sendStatus(HTTP_STATUS_NOT_FOUND);
