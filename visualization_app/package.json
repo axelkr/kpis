@@ -19,7 +19,7 @@
   "dependencies": {
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "d3": "^7.4.2",
-    "express": "4.17.3",
+    "express": "4.19.2",
     "immutable": "^4.0.0",
     "moment": "^2.29.2",
     "react": "^18.0.0",
